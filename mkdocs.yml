@@ -1,0 +1,9 @@
+site_name: ixo Protocol Documentation
+pages:
+ - Home: index.md
+ - Documentation: documentation.md
+ - API: api.md
+theme: 
+  name: null
+  custom_dir: custom_theme
+

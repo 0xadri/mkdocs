@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title></title>
+
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href='//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/cinder.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            
+            <a class="navbar-brand" href="..">ixo Protocol Documentation</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="active">
+                        <a href="./">Documentation</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../api/">API</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fa fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="next" href="..">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../api/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#documentation">Documentation</a></li>
+            <li class="second-level"><a href="#schema">Schema</a></li>
+                
+                <li class="third-level"><a href="#folder-structure">Folder Structure</a></li>
+                <li class="third-level"><a href="#template-schemas">Template Schemas</a></li>
+                <li class="third-level"><a href="#templates">Templates</a></li>
+            <li class="second-level"><a href="#ixo-node">ixo-Node</a></li>
+                
+            <li class="second-level"><a href="#ixo-module">ixo-Module</a></li>
+                
+            <li class="second-level"><a href="#ixo-web">ixo-Web</a></li>
+                
+            <li class="second-level"><a href="#mkdocs">mkdocs</a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="documentation">Documentation</h1>
+<p>The ixo project is made up of five key repositories namely:</p>
+<ul>
+<li><a href="#schema">schema</a> </li>
+<li><a href="#ixo-node">ixo-node</a></li>
+<li><a href="#ixo-module">ixo-module</a> </li>
+<li><a href="#ixo-web">ixo-web</a> </li>
+<li><a href="#mkdocs">mkdocs</a> <a href="https://github.com/ixofoundation/mkdocs">github</a></li>
+</ul>
+<h2 id="schema">Schema</h2>
+<p><a href="https://github.com/ixofoundation/schema">github</a></p>
+<p>A repository for holding schema templates for the ixo Protocol</p>
+<h3 id="folder-structure">Folder Structure</h3>
+<p><code>/projects</code> - Project Templates</p>
+<p><code>/agents</code> - Agent Templates</p>
+<p><code>/claims</code> - Claim Templates</p>
+<p><code>/evaluations</code> - Evaluation Templates</p>
+<h3 id="template-schemas">Template Schemas</h3>
+<p>All Templates follow the <a href="https://developers.google.com/search/docs/guides/intro-structured-data">JSON-LD</a> structure examples can be found at <a href="http://schema.org">Schema.org</a></p>
+<p>Example:</p>
+<pre><code>{
+  &quot;@context&quot;: &quot;http://schema.org&quot;,
+  &quot;@type&quot;: &quot;Organization&quot;,
+  &quot;url&quot;: &quot;http://www.example.com&quot;,
+  &quot;name&quot;: &quot;Unlimited Ball Bearings Corp.&quot;,
+  &quot;contactPoint&quot;: {
+    &quot;@type&quot;: &quot;ContactPoint&quot;,
+    &quot;telephone&quot;: &quot;+1-401-555-1212&quot;,
+    &quot;contactType&quot;: &quot;Customer service&quot;
+  }
+}
+</code></pre>
+
+<h3 id="templates">Templates</h3>
+<p>Templates describe the labels, input type and the optionality of fields.  These are used on the client side for rendering schemas.</p>
+<p>Templates consist of a single data element called <code>entities</code> which is an array of the fields/entities that need to be rendered on screen. Each entity has three mandatory values:</p>
+<p><code>label</code> - The label for the input</p>
+<p><code>name</code> - The name of the input which must be present in the schema and uses dot notation for complex types</p>
+<p><code>type</code> - The which describes how the input should be captured</p>
+<p><code>optional</code> - Determines whether the entity is required or optional (Defaults to <code>false</code>)</p>
+<p><code>options</code> - Only used if the type is <code>select</code> and contains a list of <code>labels</code> and <code>values</code>.</p>
+<p>Example:</p>
+<pre><code>&quot;options&quot;: [
+  {
+    &quot;label&quot;: &quot;Identity Document&quot;, 
+    &quot;value&quot;: &quot;id&quot;
+  },
+  {
+    &quot;label&quot;: &quot;Passport&quot;,
+    &quot;value&quot;: &quot;passport&quot;
+  }
+]
+</code></pre>
+
+<h4 id="template-types">Template Types</h4>
+<p><code>text</code> - Renders a text input</p>
+<p><code>textarea</code> - Renders a multiline text input</p>
+<p><code>country</code> - Renders a selection box containing a list of country names and returns the (ISO 3166-2)[https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2]</p>
+<p><code>select</code> - Generic selection box containing a list of options.  If this type is selected the <code>option</code> value must also be set.</p>
+<p><code>image</code> - Renders an image or allows one to be uploaded</p>
+<h2 id="ixo-node">ixo-Node</h2>
+<p><a href="https://github.com/ixofoundation/ixo-node">github</a></p>
+<p>The backend of the ixo protocol which defines the nodes that run the network
+<em>TODO</em></p>
+<h2 id="ixo-module">ixo-Module</h2>
+<p><a href="https://github.com/ixofoundation/ixo-module">github</a></p>
+<p>An npm package that wrappers the communication to the ixo-node and provides usable services to a Javascript application.
+<em>TODO</em></p>
+<h2 id="ixo-web">ixo-Web</h2>
+<p><a href="https://github.com/ixofoundation/ixo-web">github</a></p>
+<p>A reference implemenation of a web frontend for the ixo protocol
+<em>TODO</em></p>
+<h2 id="mkdocs">mkdocs</h2>
+<p><a href="https://github.com/ixofoundation/mkdocs">github</a></p>
+<p>The repository contains the documentaion for the ixo system and is build using mkdocs.  It builds the content for this site.</p></div>
+        
+    </div>
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p></small>
+    </footer>
+
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+    var base_url = '..';
+    </script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    <script src="../js/base.js"></script>
+    <script src="../search/require.js"></script>
+    <script src="../search/search.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </body>
+
+</html>
