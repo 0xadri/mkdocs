@@ -1,0 +1,94 @@
+{
+    "docs": [
+        {
+            "location": "/",
+            "text": "Welcome to the ixo Protocol\n\n\nPlease have a look at the \nixo Foundation website\n for more information on what we do.\n\n\nAmply\n\n\nAmply is a MVP project that we have built to prove the utility of the ixo protocol.  The code for this project can be found on our \nAmply github repository\n.",
+            "title": "Home"
+        },
+        {
+            "location": "/#welcome-to-the-ixo-protocol",
+            "text": "Please have a look at the  ixo Foundation website  for more information on what we do.",
+            "title": "Welcome to the ixo Protocol"
+        },
+        {
+            "location": "/#amply",
+            "text": "Amply is a MVP project that we have built to prove the utility of the ixo protocol.  The code for this project can be found on our  Amply github repository .",
+            "title": "Amply"
+        },
+        {
+            "location": "/documentation/",
+            "text": "Documentation\n\n\nThe ixo project is made up of five key repositories namely:\n\n\n\n\nschema\n \n\n\nixo-node\n\n\nixo-module\n \n\n\nixo-web\n \n\n\nmkdocs\n \ngithub\n\n\n\n\nSchema\n\n\ngithub\n\n\nA repository for holding schema templates for the ixo Protocol\n\n\nFolder Structure\n\n\n/projects\n - Project Templates\n\n\n/agents\n - Agent Templates\n\n\n/claims\n - Claim Templates\n\n\n/evaluations\n - Evaluation Templates\n\n\nTemplate Schemas\n\n\nAll Templates follow the \nJSON-LD\n structure examples can be found at \nSchema.org\n\n\nExample:\n\n\n{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"Organization\",\n  \"url\": \"http://www.example.com\",\n  \"name\": \"Unlimited Ball Bearings Corp.\",\n  \"contactPoint\": {\n    \"@type\": \"ContactPoint\",\n    \"telephone\": \"+1-401-555-1212\",\n    \"contactType\": \"Customer service\"\n  }\n}\n\n\n\n\nTemplates\n\n\nTemplates describe the labels, input type and the optionality of fields.  These are used on the client side for rendering schemas.\n\n\nTemplates consist of a single data element called \nentities\n which is an array of the fields/entities that need to be rendered on screen. Each entity has three mandatory values:\n\n\nlabel\n - The label for the input\n\n\nname\n - The name of the input which must be present in the schema and uses dot notation for complex types\n\n\ntype\n - The which describes how the input should be captured\n\n\noptional\n - Determines whether the entity is required or optional (Defaults to \nfalse\n)\n\n\noptions\n - Only used if the type is \nselect\n and contains a list of \nlabels\n and \nvalues\n.\n\n\nExample:\n\n\n\"options\": [\n  {\n    \"label\": \"Identity Document\", \n    \"value\": \"id\"\n  },\n  {\n    \"label\": \"Passport\",\n    \"value\": \"passport\"\n  }\n]\n\n\n\n\nTemplate Types\n\n\ntext\n - Renders a text input\n\n\ntextarea\n - Renders a multiline text input\n\n\ncountry\n - Renders a selection box containing a list of country names and returns the (ISO 3166-2)[https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2]\n\n\nselect\n - Generic selection box containing a list of options.  If this type is selected the \noption\n value must also be set.\n\n\nimage\n - Renders an image or allows one to be uploaded\n\n\nixo-Node\n\n\ngithub\n\n\nThe backend of the ixo protocol which defines the nodes that run the network\n\nTODO\n\n\nixo-Module\n\n\ngithub\n\n\nAn npm package that wrappers the communication to the ixo-node and provides usable services to a Javascript application.\n\nTODO\n\n\nixo-Web\n\n\ngithub\n\n\nA reference implemenation of a web frontend for the ixo protocol\n\nTODO\n\n\nmkdocs\n\n\ngithub\n\n\nThe repository contains the documentaion for the ixo system and is build using mkdocs.  It builds the content for this site.",
+            "title": "Documentation"
+        },
+        {
+            "location": "/documentation/#documentation",
+            "text": "The ixo project is made up of five key repositories namely:   schema    ixo-node  ixo-module    ixo-web    mkdocs   github",
+            "title": "Documentation"
+        },
+        {
+            "location": "/documentation/#schema",
+            "text": "github  A repository for holding schema templates for the ixo Protocol",
+            "title": "Schema"
+        },
+        {
+            "location": "/documentation/#folder-structure",
+            "text": "/projects  - Project Templates  /agents  - Agent Templates  /claims  - Claim Templates  /evaluations  - Evaluation Templates",
+            "title": "Folder Structure"
+        },
+        {
+            "location": "/documentation/#template-schemas",
+            "text": "All Templates follow the  JSON-LD  structure examples can be found at  Schema.org  Example:  {\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"Organization\",\n  \"url\": \"http://www.example.com\",\n  \"name\": \"Unlimited Ball Bearings Corp.\",\n  \"contactPoint\": {\n    \"@type\": \"ContactPoint\",\n    \"telephone\": \"+1-401-555-1212\",\n    \"contactType\": \"Customer service\"\n  }\n}",
+            "title": "Template Schemas"
+        },
+        {
+            "location": "/documentation/#templates",
+            "text": "Templates describe the labels, input type and the optionality of fields.  These are used on the client side for rendering schemas.  Templates consist of a single data element called  entities  which is an array of the fields/entities that need to be rendered on screen. Each entity has three mandatory values:  label  - The label for the input  name  - The name of the input which must be present in the schema and uses dot notation for complex types  type  - The which describes how the input should be captured  optional  - Determines whether the entity is required or optional (Defaults to  false )  options  - Only used if the type is  select  and contains a list of  labels  and  values .  Example:  \"options\": [\n  {\n    \"label\": \"Identity Document\", \n    \"value\": \"id\"\n  },\n  {\n    \"label\": \"Passport\",\n    \"value\": \"passport\"\n  }\n]",
+            "title": "Templates"
+        },
+        {
+            "location": "/documentation/#template-types",
+            "text": "text  - Renders a text input  textarea  - Renders a multiline text input  country  - Renders a selection box containing a list of country names and returns the (ISO 3166-2)[https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2]  select  - Generic selection box containing a list of options.  If this type is selected the  option  value must also be set.  image  - Renders an image or allows one to be uploaded",
+            "title": "Template Types"
+        },
+        {
+            "location": "/documentation/#ixo-node",
+            "text": "github  The backend of the ixo protocol which defines the nodes that run the network TODO",
+            "title": "ixo-Node"
+        },
+        {
+            "location": "/documentation/#ixo-module",
+            "text": "github  An npm package that wrappers the communication to the ixo-node and provides usable services to a Javascript application. TODO",
+            "title": "ixo-Module"
+        },
+        {
+            "location": "/documentation/#ixo-web",
+            "text": "github  A reference implemenation of a web frontend for the ixo protocol TODO",
+            "title": "ixo-Web"
+        },
+        {
+            "location": "/documentation/#mkdocs",
+            "text": "github  The repository contains the documentaion for the ixo system and is build using mkdocs.  It builds the content for this site.",
+            "title": "mkdocs"
+        },
+        {
+            "location": "/api/",
+            "text": "API\n\n\nTODO\n\n\nixo-Node API\n\n\nixo-Module API",
+            "title": "API"
+        },
+        {
+            "location": "/api/#api",
+            "text": "TODO",
+            "title": "API"
+        },
+        {
+            "location": "/api/#ixo-node-api",
+            "text": "",
+            "title": "ixo-Node API"
+        },
+        {
+            "location": "/api/#ixo-module-api",
+            "text": "",
+            "title": "ixo-Module API"
+        }
+    ]
+}
