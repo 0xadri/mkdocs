@@ -51,7 +51,7 @@ Retrieves the project template from the template registry.
 Request:
 
 ```
-{"jsonrpc": "2.0", "method": "getTemplate", "params": {"name":<project name>}, "id": 1}
+{"jsonrpc": "2.0", "method": "getTemplate", "params": {"name":<project template name>}, "id": 1}
 ```
 
 Response:
@@ -187,7 +187,7 @@ Retrieves the agent template called "default" from the template registry.
 Request:
 
 ```
-{"jsonrpc": "2.0", "method": "getTemplate", "params": {"name":<template name>}, "id": 1}
+{"jsonrpc": "2.0", "method": "getTemplate", "params": {"name": <agent template name>}, "id": 1}
 ```
 
 Response:
