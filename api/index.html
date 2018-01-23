@@ -110,6 +110,10 @@
         <li class="first-level active"><a href="#api">API</a></li>
             <li class="second-level"><a href="#ixo-node-api">ixo-Node API</a></li>
                 
+                <li class="third-level"><a href="#network">Network</a></li>
+                <li class="third-level"><a href="#project">Project</a></li>
+                <li class="third-level"><a href="#template">Template</a></li>
+                <li class="third-level"><a href="#agent">Agent</a></li>
             <li class="second-level"><a href="#ixo-module-api">ixo-Module API</a></li>
                 
     </ul>
@@ -119,6 +123,233 @@
 <h1 id="api">API</h1>
 <p><em>TODO</em></p>
 <h2 id="ixo-node-api">ixo-Node API</h2>
+<p>The ixo node uses JSON-RPC to receive client requests.  The structure of all calls follow the same structure:</p>
+<p>URI: <code>&lt;node server&gt;/api/&lt;entity&gt;</code></p>
+<p>Request type: <code>POST</code></p>
+<p>Structure: 
+<code>{"jsonrpc": "2.0", "method": "&lt;method name&gt;",  "id": &lt;message id&gt;,     "params": &lt;json data object&gt; }</code></p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;node server&gt;</code></td>
+<td>The URL of the server</td>
+</tr>
+<tr>
+<td><code>&lt;entity&gt;</code></td>
+<td>The entity to send the method</td>
+</tr>
+<tr>
+<td><code>&lt;method name&gt;</code></td>
+<td>The name of the method to call</td>
+</tr>
+<tr>
+<td><code>&lt;message id&gt;</code></td>
+<td>The message ID, used to correlate asynchronous responses</td>
+</tr>
+<tr>
+<td><code>&lt;json data object&gt;</code></td>
+<td>The parametors that are passed to the method</td>
+</tr>
+</tbody>
+</table>
+<h3 id="network">Network</h3>
+<p>Example URI: https://ixo-node.herokuapp.com/api/network</p>
+<h4 id="ping">Ping</h4>
+<p>Pings the network to ensure connectivity.</p>
+<p>Request:</p>
+<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;ping&quot;, &quot;id&quot;: 1}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;id&quot;: 1, &quot;result&quot;: &quot;pong&quot;}
+</code></pre>
+
+<h3 id="project">Project</h3>
+<p>Example URI: https://ixo-node.herokuapp.com/api/project</p>
+<h4 id="get-template">Get Template</h4>
+<p>Retrieves the project template from the template registry.</p>
+<p>Request:</p>
+<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;getTemplate&quot;, &quot;params&quot;: {&quot;name&quot;:&lt;project name&gt;}, &quot;id&quot;: 1}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 1,
+    &quot;result&quot;: {
+        &quot;template&quot;: &lt;the template&gt;,
+        &quot;form&quot;: &lt;template's corresponding form&gt;
+    }
+}
+</code></pre>
+
+<h4 id="create-project">Create Project</h4>
+<p>Creates a new project.</p>
+<p>Request:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;, 
+    &quot;method&quot;: &quot;create&quot;, 
+    &quot;id&quot;: 3, 
+    &quot;params&quot;: {
+        &quot;data&quot;: &lt;project data&gt;,
+        &quot;signature&quot;: {
+            &quot;type&quot;: &quot;ECDSA&quot;,
+            &quot;created&quot;: &quot;2016-02-08T16:02:20Z&quot;, 
+            &quot;creator&quot;: &lt;did of user&gt;,
+            &quot;signature&quot;: &lt;signature&gt;
+        }
+    }
+}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 3,
+    &quot;result&quot;: {
+        &quot;__v&quot;: 0,
+        &lt;project data&gt;
+        &quot;tx&quot;: &quot;b51cd2665d146d0a0240fd2756beb4c9e9c1948275ac5d37a7ae405ab2d71a7a&quot;,
+        &quot;_id&quot;: &quot;5a66e09b38f45f01d90d122a&quot;,
+        &quot;created&quot;: &quot;2018-01-23T07:13:31.060Z&quot;
+    }
+}
+</code></pre>
+
+<h4 id="list-projects">List Projects</h4>
+<p>Lists all new projects.</p>
+<p>Request:</p>
+<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;list&quot;, &quot;id&quot;: 1}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 1,
+    &quot;result&quot;: &lt;array of projects&gt;
+}
+</code></pre>
+
+<h4 id="list-projects-for-a-specific-did">List Projects for a specific DID</h4>
+<p>Lists all projects owned by a specific DID.</p>
+<p>Request:</p>
+<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;listForDID&quot;, &quot;params&quot;: {&quot;did&quot;:&lt;did&gt;}, &quot;id&quot;: 1}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 1,
+    &quot;result&quot;: &lt;array of projects&gt;
+}
+</code></pre>
+
+<h3 id="template">Template</h3>
+<p>Example URI: https://ixo-node.herokuapp.com/api/template</p>
+<h4 id="get-template_1">Get Template</h4>
+<p>Retrieves a template from the template registry. Valid types are: 'project', 'agent', claim' or 'evaluation'</p>
+<p>Request:</p>
+<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;getTemplate&quot;, &quot;params&quot;: {&quot;type&quot;: &lt;template type&gt;, &quot;name&quot;: &lt;name of template&gt;}, &quot;id&quot;: 1}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 1,
+    &quot;result&quot;: {
+        &quot;template&quot;: &lt;the template&gt;,
+        &quot;form&quot;: &lt;template's corresponding form&gt;
+    }
+}
+</code></pre>
+
+<h3 id="agent">Agent</h3>
+<p>Example URI: https://ixo-node.herokuapp.com/api/agent</p>
+<h4 id="get-template_2">Get Template</h4>
+<p>Retrieves the agent template called "default" from the template registry.</p>
+<p>Request:</p>
+<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;getTemplate&quot;, &quot;params&quot;: {&quot;name&quot;:&lt;template name&gt;}, &quot;id&quot;: 1}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 1,
+    &quot;result&quot;: {
+        &quot;template&quot;: &lt;the template&gt;,
+        &quot;form&quot;: &lt;template's corresponding form&gt;
+    }
+}
+</code></pre>
+
+<h4 id="create-agent">Create Agent</h4>
+<p>Creates a new agent.</p>
+<p>Request:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;, 
+    &quot;method&quot;: &quot;create&quot;, 
+    &quot;id&quot;: 3, 
+    &quot;params&quot;: {
+        &quot;data&quot;: &lt;agent data&gt;,
+        &quot;signature&quot;: {
+            &quot;type&quot;: &quot;ECDSA&quot;,
+            &quot;created&quot;: &quot;2016-02-08T16:02:20Z&quot;, 
+            &quot;creator&quot;: &lt;did of user&gt;,
+            &quot;signature&quot;: &lt;signature&gt;
+        }
+    }
+}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 3,
+    &quot;result&quot;: {
+        &quot;__v&quot;: 0,
+        &lt;agent data&gt;
+        &quot;tx&quot;: &quot;b51cd2665d146d0a0240fd2756beb4c9e9c1948275ac5d37a7ae405ab2d71a7a&quot;,
+        &quot;did&quot;: &lt;cedator's did&gt;
+        &quot;_id&quot;: &quot;5a66e09b38f45f01d90d122a&quot;,
+        &quot;created&quot;: &quot;2018-01-23T07:13:31.060Z&quot;
+    }
+}
+</code></pre>
+
+<h4 id="list-agents-for-a-specific-did">List Agents for a specific DID</h4>
+<p>Lists all agents for a specific DID.</p>
+<p>Request:</p>
+<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;listForDID&quot;, &quot;params&quot;: {&quot;did&quot;:&lt;did&gt;}, &quot;id&quot;: 1}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 1,
+    &quot;result&quot;: &lt;array of agents&gt;
+}
+</code></pre>
+
+<h4 id="list-agents-for-a-specific-did_1">List Agents for a specific DID</h4>
+<p>Lists all agents for a specific DID.</p>
+<p>Request:</p>
+<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;listForProject&quot;, &quot;params&quot;: {&quot;projectTx&quot;:&lt;project TX&gt;}, &quot;id&quot;: 1}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 1,
+    &quot;result&quot;: &lt;array of agents&gt;
+}
+</code></pre>
+
 <h2 id="ixo-module-api">ixo-Module API</h2></div>
         
     </div>
