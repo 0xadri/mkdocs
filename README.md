@@ -8,7 +8,7 @@ For full documentation visit [mkdocs.org](http://mkdocs.org).
 * `mkdocs serve` - Start the live-reloading docs server.
 * `mkdocs build` - Build the documentation site.
 * `mkdocs help` - Print this help message.
-* `mkdocs gh-deploy` - Deploy to Github pages
+* `mkdocs gh-deploy -c` - Deploy to Github pages
 
 ## Project layout
 
