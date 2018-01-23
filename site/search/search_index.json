@@ -72,7 +72,7 @@
         },
         {
             "location": "/api/",
-            "text": "API\n\n\nTODO\n\n\nixo-Node API\n\n\nixo-Module API",
+            "text": "API\n\n\nTODO\n\n\nixo-Node API\n\n\nThe ixo node uses JSON-RPC to receive client requests.  The structure of all calls follow the same structure:\n\n\nURI: \n<node server>/api/<entity>\n\n\nRequest type: \nPOST\n\n\nStructure: \n\n{\"jsonrpc\": \"2.0\", \"method\": \"<method name>\",  \"id\": <message id>,     \"params\": <json data object> }\n\n\n\n\n\n\n\n\nVariable\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\n<node server>\n\n\nThe URL of the server\n\n\n\n\n\n\n<entity>\n\n\nThe entity to send the method\n\n\n\n\n\n\n<method name>\n\n\nThe name of the method to call\n\n\n\n\n\n\n<message id>\n\n\nThe message ID, used to correlate asynchronous responses\n\n\n\n\n\n\n<json data object>\n\n\nThe parametors that are passed to the method\n\n\n\n\n\n\n\n\nNetwork\n\n\nExample URI: https://ixo-node.herokuapp.com/api/network\n\n\nPing\n\n\nPings the network to ensure connectivity.\n\n\nRequest:\n\n\n{\"jsonrpc\": \"2.0\", \"method\": \"ping\", \"id\": 1}\n\n\n\n\nResponse:\n\n\n{\"jsonrpc\": \"2.0\", \"id\": 1, \"result\": \"pong\"}\n\n\n\n\nProject\n\n\nExample URI: https://ixo-node.herokuapp.com/api/project\n\n\nGet Template\n\n\nRetrieves the project template from the template registry.\n\n\nRequest:\n\n\n{\"jsonrpc\": \"2.0\", \"method\": \"getTemplate\", \"params\": {\"name\":<project name>}, \"id\": 1}\n\n\n\n\nResponse:\n\n\n{\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"result\": {\n        \"template\": <the template>,\n        \"form\": <template's corresponding form>\n    }\n}\n\n\n\n\nCreate Project\n\n\nCreates a new project.\n\n\nRequest:\n\n\n{\n    \"jsonrpc\": \"2.0\", \n    \"method\": \"create\", \n    \"id\": 3, \n    \"params\": {\n        \"data\": <project data>,\n        \"signature\": {\n            \"type\": \"ECDSA\",\n            \"created\": \"2016-02-08T16:02:20Z\", \n            \"creator\": <did of user>,\n            \"signature\": <signature>\n        }\n    }\n}\n\n\n\n\nResponse:\n\n\n{\n    \"jsonrpc\": \"2.0\",\n    \"id\": 3,\n    \"result\": {\n        \"__v\": 0,\n        <project data>\n        \"tx\": \"b51cd2665d146d0a0240fd2756beb4c9e9c1948275ac5d37a7ae405ab2d71a7a\",\n        \"_id\": \"5a66e09b38f45f01d90d122a\",\n        \"created\": \"2018-01-23T07:13:31.060Z\"\n    }\n}\n\n\n\n\nList Projects\n\n\nLists all new projects.\n\n\nRequest:\n\n\n{\"jsonrpc\": \"2.0\", \"method\": \"list\", \"id\": 1}\n\n\n\n\nResponse:\n\n\n{\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"result\": <array of projects>\n}\n\n\n\n\nList Projects for a specific DID\n\n\nLists all projects owned by a specific DID.\n\n\nRequest:\n\n\n{\"jsonrpc\": \"2.0\", \"method\": \"listForDID\", \"params\": {\"did\":<did>}, \"id\": 1}\n\n\n\n\nResponse:\n\n\n{\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"result\": <array of projects>\n}\n\n\n\n\nTemplate\n\n\nExample URI: https://ixo-node.herokuapp.com/api/template\n\n\nGet Template\n\n\nRetrieves a template from the template registry. Valid types are: 'project', 'agent', claim' or 'evaluation'\n\n\nRequest:\n\n\n{\"jsonrpc\": \"2.0\", \"method\": \"getTemplate\", \"params\": {\"type\": <template type>, \"name\": <name of template>}, \"id\": 1}\n\n\n\n\nResponse:\n\n\n{\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"result\": {\n        \"template\": <the template>,\n        \"form\": <template's corresponding form>\n    }\n}\n\n\n\n\nAgent\n\n\nExample URI: https://ixo-node.herokuapp.com/api/agent\n\n\nGet Template\n\n\nRetrieves the agent template called \"default\" from the template registry.\n\n\nRequest:\n\n\n{\"jsonrpc\": \"2.0\", \"method\": \"getTemplate\", \"params\": {\"name\":<template name>}, \"id\": 1}\n\n\n\n\nResponse:\n\n\n{\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"result\": {\n        \"template\": <the template>,\n        \"form\": <template's corresponding form>\n    }\n}\n\n\n\n\nCreate Agent\n\n\nCreates a new agent.\n\n\nRequest:\n\n\n{\n    \"jsonrpc\": \"2.0\", \n    \"method\": \"create\", \n    \"id\": 3, \n    \"params\": {\n        \"data\": <agent data>,\n        \"signature\": {\n            \"type\": \"ECDSA\",\n            \"created\": \"2016-02-08T16:02:20Z\", \n            \"creator\": <did of user>,\n            \"signature\": <signature>\n        }\n    }\n}\n\n\n\n\nResponse:\n\n\n{\n    \"jsonrpc\": \"2.0\",\n    \"id\": 3,\n    \"result\": {\n        \"__v\": 0,\n        <agent data>\n        \"tx\": \"b51cd2665d146d0a0240fd2756beb4c9e9c1948275ac5d37a7ae405ab2d71a7a\",\n        \"did\": <cedator's did>\n        \"_id\": \"5a66e09b38f45f01d90d122a\",\n        \"created\": \"2018-01-23T07:13:31.060Z\"\n    }\n}\n\n\n\n\nList Agents for a specific DID\n\n\nLists all agents for a specific DID.\n\n\nRequest:\n\n\n{\"jsonrpc\": \"2.0\", \"method\": \"listForDID\", \"params\": {\"did\":<did>}, \"id\": 1}\n\n\n\n\nResponse:\n\n\n{\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"result\": <array of agents>\n}\n\n\n\n\nList Agents for a specific DID\n\n\nLists all agents for a specific DID.\n\n\nRequest:\n\n\n{\"jsonrpc\": \"2.0\", \"method\": \"listForProject\", \"params\": {\"projectTx\":<project TX>}, \"id\": 1}\n\n\n\n\nResponse:\n\n\n{\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"result\": <array of agents>\n}\n\n\n\n\nixo-Module API",
             "title": "API"
         },
         {
@@ -82,8 +82,78 @@
         },
         {
             "location": "/api/#ixo-node-api",
-            "text": "",
+            "text": "The ixo node uses JSON-RPC to receive client requests.  The structure of all calls follow the same structure:  URI:  <node server>/api/<entity>  Request type:  POST  Structure:  {\"jsonrpc\": \"2.0\", \"method\": \"<method name>\",  \"id\": <message id>,     \"params\": <json data object> }     Variable  Description      <node server>  The URL of the server    <entity>  The entity to send the method    <method name>  The name of the method to call    <message id>  The message ID, used to correlate asynchronous responses    <json data object>  The parametors that are passed to the method",
             "title": "ixo-Node API"
+        },
+        {
+            "location": "/api/#network",
+            "text": "Example URI: https://ixo-node.herokuapp.com/api/network",
+            "title": "Network"
+        },
+        {
+            "location": "/api/#ping",
+            "text": "Pings the network to ensure connectivity.  Request:  {\"jsonrpc\": \"2.0\", \"method\": \"ping\", \"id\": 1}  Response:  {\"jsonrpc\": \"2.0\", \"id\": 1, \"result\": \"pong\"}",
+            "title": "Ping"
+        },
+        {
+            "location": "/api/#project",
+            "text": "Example URI: https://ixo-node.herokuapp.com/api/project",
+            "title": "Project"
+        },
+        {
+            "location": "/api/#get-template",
+            "text": "Retrieves the project template from the template registry.  Request:  {\"jsonrpc\": \"2.0\", \"method\": \"getTemplate\", \"params\": {\"name\":<project name>}, \"id\": 1}  Response:  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"result\": {\n        \"template\": <the template>,\n        \"form\": <template's corresponding form>\n    }\n}",
+            "title": "Get Template"
+        },
+        {
+            "location": "/api/#create-project",
+            "text": "Creates a new project.  Request:  {\n    \"jsonrpc\": \"2.0\", \n    \"method\": \"create\", \n    \"id\": 3, \n    \"params\": {\n        \"data\": <project data>,\n        \"signature\": {\n            \"type\": \"ECDSA\",\n            \"created\": \"2016-02-08T16:02:20Z\", \n            \"creator\": <did of user>,\n            \"signature\": <signature>\n        }\n    }\n}  Response:  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 3,\n    \"result\": {\n        \"__v\": 0,\n        <project data>\n        \"tx\": \"b51cd2665d146d0a0240fd2756beb4c9e9c1948275ac5d37a7ae405ab2d71a7a\",\n        \"_id\": \"5a66e09b38f45f01d90d122a\",\n        \"created\": \"2018-01-23T07:13:31.060Z\"\n    }\n}",
+            "title": "Create Project"
+        },
+        {
+            "location": "/api/#list-projects",
+            "text": "Lists all new projects.  Request:  {\"jsonrpc\": \"2.0\", \"method\": \"list\", \"id\": 1}  Response:  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"result\": <array of projects>\n}",
+            "title": "List Projects"
+        },
+        {
+            "location": "/api/#list-projects-for-a-specific-did",
+            "text": "Lists all projects owned by a specific DID.  Request:  {\"jsonrpc\": \"2.0\", \"method\": \"listForDID\", \"params\": {\"did\":<did>}, \"id\": 1}  Response:  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"result\": <array of projects>\n}",
+            "title": "List Projects for a specific DID"
+        },
+        {
+            "location": "/api/#template",
+            "text": "Example URI: https://ixo-node.herokuapp.com/api/template",
+            "title": "Template"
+        },
+        {
+            "location": "/api/#get-template_1",
+            "text": "Retrieves a template from the template registry. Valid types are: 'project', 'agent', claim' or 'evaluation'  Request:  {\"jsonrpc\": \"2.0\", \"method\": \"getTemplate\", \"params\": {\"type\": <template type>, \"name\": <name of template>}, \"id\": 1}  Response:  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"result\": {\n        \"template\": <the template>,\n        \"form\": <template's corresponding form>\n    }\n}",
+            "title": "Get Template"
+        },
+        {
+            "location": "/api/#agent",
+            "text": "Example URI: https://ixo-node.herokuapp.com/api/agent",
+            "title": "Agent"
+        },
+        {
+            "location": "/api/#get-template_2",
+            "text": "Retrieves the agent template called \"default\" from the template registry.  Request:  {\"jsonrpc\": \"2.0\", \"method\": \"getTemplate\", \"params\": {\"name\":<template name>}, \"id\": 1}  Response:  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"result\": {\n        \"template\": <the template>,\n        \"form\": <template's corresponding form>\n    }\n}",
+            "title": "Get Template"
+        },
+        {
+            "location": "/api/#create-agent",
+            "text": "Creates a new agent.  Request:  {\n    \"jsonrpc\": \"2.0\", \n    \"method\": \"create\", \n    \"id\": 3, \n    \"params\": {\n        \"data\": <agent data>,\n        \"signature\": {\n            \"type\": \"ECDSA\",\n            \"created\": \"2016-02-08T16:02:20Z\", \n            \"creator\": <did of user>,\n            \"signature\": <signature>\n        }\n    }\n}  Response:  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 3,\n    \"result\": {\n        \"__v\": 0,\n        <agent data>\n        \"tx\": \"b51cd2665d146d0a0240fd2756beb4c9e9c1948275ac5d37a7ae405ab2d71a7a\",\n        \"did\": <cedator's did>\n        \"_id\": \"5a66e09b38f45f01d90d122a\",\n        \"created\": \"2018-01-23T07:13:31.060Z\"\n    }\n}",
+            "title": "Create Agent"
+        },
+        {
+            "location": "/api/#list-agents-for-a-specific-did",
+            "text": "Lists all agents for a specific DID.  Request:  {\"jsonrpc\": \"2.0\", \"method\": \"listForDID\", \"params\": {\"did\":<did>}, \"id\": 1}  Response:  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"result\": <array of agents>\n}",
+            "title": "List Agents for a specific DID"
+        },
+        {
+            "location": "/api/#list-agents-for-a-specific-did_1",
+            "text": "Lists all agents for a specific DID.  Request:  {\"jsonrpc\": \"2.0\", \"method\": \"listForProject\", \"params\": {\"projectTx\":<project TX>}, \"id\": 1}  Response:  {\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"result\": <array of agents>\n}",
+            "title": "List Agents for a specific DID"
         },
         {
             "location": "/api/#ixo-module-api",

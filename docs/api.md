@@ -79,6 +79,9 @@ Request:
 	"method": "create", 
 	"id": 3, 
 	"params": {
+    "template": {
+      name: <template name>
+    },
 		"data": <project data>,
 		"signature": {
 			"type": "ECDSA",
@@ -212,6 +215,9 @@ Request:
 	"method": "create", 
 	"id": 3, 
 	"params": {
+    "template": {
+      name: <template name>
+    },
 		"data": <agent data>,
 		"signature": {
 			"type": "ECDSA",
