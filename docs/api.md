@@ -293,7 +293,7 @@ Response:
 `npm install --save ixo-module`
 
 ####Create new Ixo Object
-```js
+```
 import Ixo from 'ixo-module';
 var ixo = new Ixo('ixo_node_url')
 ```
@@ -303,23 +303,23 @@ var ixo = new Ixo('ixo_node_url')
 **Generate Mnemonic**
 
 Request:
-```js
+```
 ixo.cryptoUtil.generateMnemonic()
 ```
 
 Response:
-```js
+```
 dilemma allow swamp hedgehog client reject mistake spell involve index panda course
 ```
 **Generate SovrinDID**
 
 Request:
-```js
+```
 ixo.cryptoUtil.generateSovrinDID(mnemonic)
 ```
 
 Response:
-```js
+```
 {
     "did": "LuEoT1EkTVT7vaYP1ibvfw",
         "verifyKey": "Br6jjwiPNBgDod4hHAKNP5AfA6ViV39eVX3UV4t9uADC",
@@ -333,24 +333,24 @@ Response:
 **Sign Document**
 
 Request:
-```js
+```
 ixo.cryptoUtil.getDocumentSignature(sdid.secret.signKey, sdid.verifyKey, JSON.stringify(testJson))
 ```
 
 Response:
-```js
+```
 DjoT6XqQ53J2kR4zd1shB17qFuM9DM5A2DAxQ3jjtgacvvpafWefHx54kkHewMVMTAsZm61wDCtzMV2TwkL7Fc5YdTc898X4tQ8SepthqyFBdMVs8fAt3fWDGD1fiVe5cymPCDcHwB6hP34DpQB3UAcfZSoPP2wxCbCLhTAF25RywqEWmcMDqF42pEqa9RonpF6AYGxYQt2tUKT9383HR6RhCkkbrkJSBwYQ6b4jsnysz23p4TPfahPKGWinGahXFwtZKD69SSjipzQNHWFXb5YuoqQcCToTFcEteQ3dtkDQdCcWFZ9N1
 ```
 
 **Validate Signature**
 
 Request:
-```js
+```
 ixo.cryptoUtil.verifyDocumentSignature(signature, sdid.verifyKey)
 ```
 
 Response:
-```js
+```
 true/false
 ```
 
@@ -359,7 +359,7 @@ true/false
 **Ping ixo Server Node**
    
 Request:
-   ```js
+   ```
    
    ixo.network.pingIxoServerNode().then((result) => {
        console.log('Ping Results: ' + result)
@@ -368,7 +368,7 @@ Request:
    ```
    
 Response:
- ```js
+ ```
 Ping Results: {
              "jsonrpc": "2.0",
              "id": 1,
@@ -381,7 +381,7 @@ Ping Results: {
    **Gets project template**
    
    Request:
-   ```js
+   ```
    ixo.project.getProjectTemplate().then((result) => {
        console.log('Project Template: ' + result)
    })
@@ -453,7 +453,7 @@ Ping Results: {
 
 Request:
    
-   ```js
+   ```
    ixo.project.listProjects().then((result) => {
        console.log('Project List:  ' + result)
    })
@@ -462,7 +462,7 @@ Request:
    
 Response:
 
-```js
+```
 Project List:
 {
    "jsonrpc":"2.0",
@@ -544,7 +544,7 @@ Project List:
 
 Request:
    
-   ```js
+   ```
    ixo.auth.getCredentialProvider(provider).then((result) => {
        console.log('Provider:  ' + result);
    })
@@ -553,7 +553,7 @@ Request:
    
 Response:
 
-```js
+```
 Cridential Provider Object
 ```
    
@@ -561,7 +561,7 @@ Cridential Provider Object
  
  Request:
     
-    ```js
+    ```
       ixo.auth.sign(provider, dataToSign).then((signature: string) => {
                     console.log(signature);
                 }
@@ -573,6 +573,6 @@ Cridential Provider Object
     
  Response:
  
- ```js
+ ```
  0xa51b768f35a9d02151590c419cd32b072fbb3a92871dfcc24021da828f0846e94fd1f24c1a987699e06479262a414d6739f0add1387d6276d7dd8b9099a306501c
  ```
