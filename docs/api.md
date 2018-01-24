@@ -537,5 +537,42 @@ Project List:
 }
 
 ```
+
+#### Auth
+
+**Get Credential Provider**
+
+Request:
    
+   ```js
+   ixo.auth.getCredentialProvider(provider).then((result) => {
+       console.log('Provider:  ' + result);
+   })
+  
+   ```
+   
+Response:
+
+```js
+Cridential Provider Object
+```
+   
+ **Sign Data**
  
+ Request:
+    
+    ```js
+      ixo.auth.sign(provider, dataToSign).then((signature: string) => {
+                    console.log(signature);
+                }
+            ).catch((error) => {
+                console.log(error);
+            });
+   
+    ```
+    
+ Response:
+ 
+ ```js
+ 0xa51b768f35a9d02151590c419cd32b072fbb3a92871dfcc24021da828f0846e94fd1f24c1a987699e06479262a414d6739f0add1387d6276d7dd8b9099a306501c
+ ```

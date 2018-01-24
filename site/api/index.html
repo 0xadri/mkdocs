@@ -116,6 +116,10 @@
                 <li class="third-level"><a href="#agent">Agent</a></li>
             <li class="second-level"><a href="#ixo-module-api">ixo-Module API</a></li>
                 
+                <li class="third-level"><a href="#install-using-npm">Install using npm</a></li>
+                <li class="third-level"><a href="#create-new-ixo-object">Create new Ixo Object</a></li>
+                <li class="third-level"><a href="#cryptoutil">CryptoUtil</a></li>
+                <li class="third-level"><a href="#network_1">Network</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
@@ -175,7 +179,7 @@
 <h4 id="get-template">Get Template</h4>
 <p>Retrieves the project template from the template registry.</p>
 <p>Request:</p>
-<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;getTemplate&quot;, &quot;params&quot;: {&quot;name&quot;:&lt;project name&gt;}, &quot;id&quot;: 1}
+<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;getTemplate&quot;, &quot;params&quot;: {&quot;name&quot;:&lt;project template name&gt;}, &quot;id&quot;: 1}
 </code></pre>
 
 <p>Response:</p>
@@ -277,7 +281,7 @@
 <h4 id="get-template_2">Get Template</h4>
 <p>Retrieves the agent template called "default" from the template registry.</p>
 <p>Request:</p>
-<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;getTemplate&quot;, &quot;params&quot;: {&quot;name&quot;:&lt;template name&gt;}, &quot;id&quot;: 1}
+<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;getTemplate&quot;, &quot;params&quot;: {&quot;name&quot;: &lt;agent template name&gt;}, &quot;id&quot;: 1}
 </code></pre>
 
 <p>Response:</p>
@@ -356,7 +360,235 @@
 }
 </code></pre>
 
-<h2 id="ixo-module-api">ixo-Module API</h2></div>
+<h2 id="ixo-module-api">ixo-Module API</h2>
+<h4 id="install-using-npm">Install using npm</h4>
+<p><code>npm install --save ixo-module</code></p>
+<h4 id="create-new-ixo-object">Create new Ixo Object</h4>
+<pre><code class="js">import Ixo from 'ixo-module';
+var ixo = new Ixo('ixo_node_url')
+</code></pre>
+
+<h4 id="cryptoutil">CryptoUtil</h4>
+<p><strong>Generate Mnemonic</strong></p>
+<p>Request:</p>
+<pre><code class="js">ixo.cryptoUtil.generateMnemonic()
+</code></pre>
+
+<p>Response:</p>
+<pre><code class="js">dilemma allow swamp hedgehog client reject mistake spell involve index panda course
+</code></pre>
+
+<p><strong>Generate SovrinDID</strong></p>
+<p>Request:</p>
+<pre><code class="js">ixo.cryptoUtil.generateSovrinDID(mnemonic)
+</code></pre>
+
+<p>Response:</p>
+<pre><code class="js">{
+    &quot;did&quot;: &quot;LuEoT1EkTVT7vaYP1ibvfw&quot;,
+        &quot;verifyKey&quot;: &quot;Br6jjwiPNBgDod4hHAKNP5AfA6ViV39eVX3UV4t9uADC&quot;,
+            &quot;secret&quot;: {
+                     &quot;seed&quot;: &quot;b3cad338b23d0e58583ca243481262ee5f8632b14d713245e8b91be87daff073&quot;,
+                     &quot;signKey&quot;: &quot;D6qMjQCdjB8gHkEPyxXoyJTxkk5WK9egYQAEtJ6RX5fx&quot;
+    }
+}
+</code></pre>
+
+<p><strong>Sign Document</strong></p>
+<p>Request:</p>
+<pre><code class="js">ixo.cryptoUtil.getDocumentSignature(sdid.secret.signKey, sdid.verifyKey, JSON.stringify(testJson))
+</code></pre>
+
+<p>Response:</p>
+<pre><code class="js">DjoT6XqQ53J2kR4zd1shB17qFuM9DM5A2DAxQ3jjtgacvvpafWefHx54kkHewMVMTAsZm61wDCtzMV2TwkL7Fc5YdTc898X4tQ8SepthqyFBdMVs8fAt3fWDGD1fiVe5cymPCDcHwB6hP34DpQB3UAcfZSoPP2wxCbCLhTAF25RywqEWmcMDqF42pEqa9RonpF6AYGxYQt2tUKT9383HR6RhCkkbrkJSBwYQ6b4jsnysz23p4TPfahPKGWinGahXFwtZKD69SSjipzQNHWFXb5YuoqQcCToTFcEteQ3dtkDQdCcWFZ9N1
+</code></pre>
+
+<p><strong>Validate Signature</strong></p>
+<p>Request:</p>
+<pre><code class="js">ixo.cryptoUtil.verifyDocumentSignature(signature, sdid.verifyKey)
+</code></pre>
+
+<p>Response:</p>
+<pre><code class="js">true/false
+</code></pre>
+
+<h4 id="network_1">Network</h4>
+<p><strong>Ping ixo Server Node</strong></p>
+<p>Request:
+   ```js</p>
+<p>ixo.network.pingIxoServerNode().then((result) =&gt; {
+       console.log('Ping Results: ' + result)
+   })</p>
+<p>```</p>
+<p>Response:
+ ```js
+Ping Results: {
+             "jsonrpc": "2.0",
+             "id": 1,
+             "result": "pong"
+     }</p>
+<pre><code>
+#### Projects
+
+   **Gets project template**
+
+   Request:
+   ```js
+   ixo.project.getProjectTemplate().then((result) =&gt; {
+       console.log('Project Template: ' + result)
+   })
+
+   ```
+   Response:
+   ```
+   Project Template:
+   {
+      &quot;jsonrpc&quot;:&quot;2.0&quot;,
+      &quot;id&quot;:1,
+      &quot;result&quot;:{
+         &quot;template&quot;:{
+            &quot;@context&quot;:&quot;http://ixo.foundation/schema&quot;,
+            &quot;@type&quot;:&quot;Project&quot;,
+            &quot;so&quot;:&quot;http://schema.org/&quot;,
+            &quot;name&quot;:&quot;so:name&quot;,
+            &quot;about&quot;:&quot;so:about&quot;,
+            &quot;country&quot;:&quot;so:country&quot;,
+            &quot;thumbnail&quot;:{
+               &quot;@type&quot;:&quot;ImageObject&quot;,
+               &quot;contentUrl&quot;:&quot;so:contentUrl&quot;
+            },
+            &quot;owner&quot;:{
+               &quot;@type&quot;:&quot;Person&quot;,
+               &quot;email&quot;:&quot;so:email&quot;,
+               &quot;name&quot;:&quot;so:name&quot;
+            }
+         },
+         &quot;form&quot;:{
+            &quot;fields&quot;:[
+               {
+                  &quot;label&quot;:&quot;Project Name&quot;,
+                  &quot;name&quot;:&quot;name&quot;,
+                  &quot;type&quot;:&quot;text&quot;
+               },
+               {
+                  &quot;label&quot;:&quot;About&quot;,
+                  &quot;name&quot;:&quot;about&quot;,
+                  &quot;type&quot;:&quot;textarea&quot;
+               },
+               {
+                  &quot;label&quot;:&quot;Country&quot;,
+                  &quot;name&quot;:&quot;country&quot;,
+                  &quot;type&quot;:&quot;country&quot;
+               },
+               {
+                  &quot;label&quot;:&quot;Thumbnail&quot;,
+                  &quot;name&quot;:&quot;thumbnail&quot;,
+                  &quot;type&quot;:&quot;image&quot;
+               },
+               {
+                  &quot;label&quot;:&quot;Owner Name&quot;,
+                  &quot;name&quot;:&quot;owner.name&quot;,
+                  &quot;type&quot;:&quot;text&quot;
+               },
+               {
+                  &quot;label&quot;:&quot;Owner email&quot;,
+                  &quot;name&quot;:&quot;owner.email&quot;,
+                  &quot;type&quot;:&quot;text&quot;
+               }
+            ]
+         }
+      }
+   }
+   ```
+
+**Gets list of projects**
+
+Request:
+
+   ```js
+   ixo.project.listProjects().then((result) =&gt; {
+       console.log('Project List:  ' + result)
+   })
+
+   ```
+
+Response:
+
+```js
+Project List:
+{
+   &quot;jsonrpc&quot;:&quot;2.0&quot;,
+   &quot;id&quot;:1,
+   &quot;result&quot;:[
+      {
+         &quot;_id&quot;:&quot;5a61abec670a09001abf0560&quot;,
+         &quot;name&quot;:&quot;Water Saving&quot;,
+         &quot;country&quot;:&quot;ZA&quot;,
+         &quot;tx&quot;:&quot;f249310d2582927fc2019a94f96ca9df9a1c069bf3826bec89a4226a8201df4e&quot;,
+         &quot;__v&quot;:0,
+         &quot;owner&quot;:{
+            &quot;email&quot;:&quot;joe@bloggs.com&quot;,
+            &quot;name&quot;:&quot;Joe Blogs&quot;,
+            &quot;did&quot;:&quot;0x92928b5135d8dbad88b1e772bf5b8f91bfe41a8d&quot;
+         },
+         &quot;created&quot;:&quot;2018-01-19T08:27:24.669Z&quot;
+      },
+      {
+         &quot;_id&quot;:&quot;5a61abeb670a09001abf055e&quot;,
+         &quot;name&quot;:&quot;Water Saving&quot;,
+         &quot;country&quot;:&quot;ZA&quot;,
+         &quot;tx&quot;:&quot;77fc5cbdc2985aab2bda1754e36f9a879c29d98c0eb49394df07d40f306c3b65&quot;,
+         &quot;__v&quot;:0,
+         &quot;owner&quot;:{
+            &quot;email&quot;:&quot;joe@bloggs.com&quot;,
+            &quot;name&quot;:&quot;Joe Blogs&quot;,
+            &quot;did&quot;:&quot;0x92928b5135d8dbad88b1e772bf5b8f91bfe41a8d&quot;
+         },
+         &quot;created&quot;:&quot;2018-01-19T08:27:23.679Z&quot;
+      },
+      {
+         &quot;_id&quot;:&quot;5a61abea670a09001abf055c&quot;,
+         &quot;name&quot;:&quot;Water Saving&quot;,
+         &quot;country&quot;:&quot;ZA&quot;,
+         &quot;tx&quot;:&quot;a843e51f7e8787a669463bb0eeda7c2f4578fb501388ab2bc0ae3493012b086e&quot;,
+         &quot;__v&quot;:0,
+         &quot;owner&quot;:{
+            &quot;email&quot;:&quot;joe@bloggs.com&quot;,
+            &quot;name&quot;:&quot;Joe Blogs&quot;,
+            &quot;did&quot;:&quot;0x92928b5135d8dbad88b1e772bf5b8f91bfe41a8d&quot;
+         },
+         &quot;created&quot;:&quot;2018-01-19T08:27:22.685Z&quot;
+      },
+      {
+         &quot;_id&quot;:&quot;5a61abe8670a09001abf055a&quot;,
+         &quot;name&quot;:&quot;Water Saving&quot;,
+         &quot;country&quot;:&quot;ZA&quot;,
+         &quot;tx&quot;:&quot;02382076c5ae1b0478d32bf48f8e8f9b39049ae98d7fb573e346e72cd4d8242e&quot;,
+         &quot;__v&quot;:0,
+         &quot;owner&quot;:{
+            &quot;email&quot;:&quot;joe@bloggs.com&quot;,
+            &quot;name&quot;:&quot;Joe Blogs&quot;,
+            &quot;did&quot;:&quot;0x92928b5135d8dbad88b1e772bf5b8f91bfe41a8d&quot;
+         },
+         &quot;created&quot;:&quot;2018-01-19T08:27:20.833Z&quot;
+      },
+      {
+         &quot;_id&quot;:&quot;5a61abe7670a09001abf0558&quot;,
+         &quot;name&quot;:&quot;Water Saving&quot;,
+         &quot;country&quot;:&quot;ZA&quot;,
+         &quot;tx&quot;:&quot;d164ffd4d18add95eea273783c4b98e3046618d3c2009b01a19f935ab9f734ca&quot;,
+         &quot;__v&quot;:0,
+         &quot;owner&quot;:{
+            &quot;email&quot;:&quot;joe@bloggs.com&quot;,
+            &quot;name&quot;:&quot;Joe Blogs&quot;,
+            &quot;did&quot;:&quot;0x92928b5135d8dbad88b1e772bf5b8f91bfe41a8d&quot;
+         },
+         &quot;created&quot;:&quot;2018-01-19T08:27:19.124Z&quot;
+      }
+   ]
+}
+
+</code></pre></div>
         
     </div>
 
