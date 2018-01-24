@@ -120,6 +120,7 @@
                 <li class="third-level"><a href="#create-new-ixo-object">Create new Ixo Object</a></li>
                 <li class="third-level"><a href="#cryptoutil">CryptoUtil</a></li>
                 <li class="third-level"><a href="#network_1">Network</a></li>
+                <li class="third-level"><a href="#auth">Auth</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
@@ -588,7 +589,35 @@ Project List:
    ]
 }
 
-</code></pre></div>
+</code></pre>
+
+<h4 id="auth">Auth</h4>
+<p><strong>Get Credential Provider</strong></p>
+<p>Request:</p>
+<p>```js
+   ixo.auth.getCredentialProvider(provider).then((result) =&gt; {
+       console.log('Provider:  ' + result);
+   })</p>
+<p>```</p>
+<p>Response:</p>
+<pre><code class="js">Cridential Provider Object
+</code></pre>
+
+<p><strong>Sign Data</strong></p>
+<p>Request:</p>
+<pre><code>```js
+  ixo.auth.sign(provider, dataToSign).then((signature: string) =&gt; {
+                console.log(signature);
+            }
+        ).catch((error) =&gt; {
+            console.log(error);
+        });
+
+```
+</code></pre>
+<p>Response:</p>
+<p><code>js
+ 0xa51b768f35a9d02151590c419cd32b072fbb3a92871dfcc24021da828f0846e94fd1f24c1a987699e06479262a414d6739f0add1387d6276d7dd8b9099a306501c</code></p></div>
         
     </div>
 
