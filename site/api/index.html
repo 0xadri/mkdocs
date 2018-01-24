@@ -120,6 +120,8 @@
                 <li class="third-level"><a href="#create-new-ixo-object">Create new Ixo Object</a></li>
                 <li class="third-level"><a href="#cryptoutil">CryptoUtil</a></li>
                 <li class="third-level"><a href="#network_1">Network</a></li>
+                <li class="third-level"><a href="#projects">Projects</a></li>
+                <li class="third-level"><a href="#auth">Auth</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
@@ -414,34 +416,31 @@ var ixo = new Ixo('ixo_node_url')
 
 <h4 id="network_1">Network</h4>
 <p><strong>Ping ixo Server Node</strong></p>
-<p>Request:
-   ```</p>
-<p>ixo.network.pingIxoServerNode().then((result) =&gt; {
-       console.log('Ping Results: ' + result)
-   })</p>
-<p>```</p>
-<p>Response:
- ```
-Ping Results: {
-             "jsonrpc": "2.0",
-             "id": 1,
-             "result": "pong"
-     }</p>
-<pre><code>
-#### Projects
+<p>Request:</p>
+<pre><code>ixo.network.pingIxoServerNode().then((result) =&gt; {
+    console.log('Ping Results: ' + result)})
 
-   **Gets project template**
+</code></pre>
 
-   Request:
-   ```
-   ixo.project.getProjectTemplate().then((result) =&gt; {
+<p>Response:</p>
+<pre><code>Ping Results: {
+             &quot;jsonrpc&quot;: &quot;2.0&quot;,
+             &quot;id&quot;: 1,
+             &quot;result&quot;: &quot;pong&quot;
+     }
+</code></pre>
+
+<h4 id="projects">Projects</h4>
+<p><strong>Gets project template</strong></p>
+<p>Request:</p>
+<pre><code>   ixo.project.getProjectTemplate().then((result) =&gt; {
        console.log('Project Template: ' + result)
    })
 
-   ```
-   Response:
-   ```
-   Project Template:
+</code></pre>
+
+<p>Response:</p>
+<pre><code>   Project Template:
    {
       &quot;jsonrpc&quot;:&quot;2.0&quot;,
       &quot;id&quot;:1,
@@ -499,127 +498,113 @@ Ping Results: {
          }
       }
    }
-   ```
+</code></pre>
 
-**Gets list of projects**
-
-Request:
-
-   ```
-   ixo.project.listProjects().then((result) =&gt; {
+<p><strong>Gets list of projects</strong></p>
+<p>Request:</p>
+<pre><code>   ixo.project.listProjects().then((result) =&gt; {
        console.log('Project List:  ' + result)
    })
 
-   ```
-
-Response:
-
 </code></pre>
 
-<p>Project List:
+<p>Response:</p>
+<pre><code>Project List:
 {
-   "jsonrpc":"2.0",
-   "id":1,
-   "result":[
+   &quot;jsonrpc&quot;:&quot;2.0&quot;,
+   &quot;id&quot;:1,
+   &quot;result&quot;:[
       {
-         "_id":"5a61abec670a09001abf0560",
-         "name":"Water Saving",
-         "country":"ZA",
-         "tx":"f249310d2582927fc2019a94f96ca9df9a1c069bf3826bec89a4226a8201df4e",
-         "<strong>v":0,
-         "owner":{
-            "email":"joe@bloggs.com",
-            "name":"Joe Blogs",
-            "did":"0x92928b5135d8dbad88b1e772bf5b8f91bfe41a8d"
+         &quot;_id&quot;:&quot;5a61abec670a09001abf0560&quot;,
+         &quot;name&quot;:&quot;Water Saving&quot;,
+         &quot;country&quot;:&quot;ZA&quot;,
+         &quot;tx&quot;:&quot;f249310d2582927fc2019a94f96ca9df9a1c069bf3826bec89a4226a8201df4e&quot;,
+         &quot;__v&quot;:0,
+         &quot;owner&quot;:{
+            &quot;email&quot;:&quot;joe@bloggs.com&quot;,
+            &quot;name&quot;:&quot;Joe Blogs&quot;,
+            &quot;did&quot;:&quot;0x92928b5135d8dbad88b1e772bf5b8f91bfe41a8d&quot;
          },
-         "created":"2018-01-19T08:27:24.669Z"
+         &quot;created&quot;:&quot;2018-01-19T08:27:24.669Z&quot;
       },
       {
-         "_id":"5a61abeb670a09001abf055e",
-         "name":"Water Saving",
-         "country":"ZA",
-         "tx":"77fc5cbdc2985aab2bda1754e36f9a879c29d98c0eb49394df07d40f306c3b65",
-         "</strong>v":0,
-         "owner":{
-            "email":"joe@bloggs.com",
-            "name":"Joe Blogs",
-            "did":"0x92928b5135d8dbad88b1e772bf5b8f91bfe41a8d"
+         &quot;_id&quot;:&quot;5a61abeb670a09001abf055e&quot;,
+         &quot;name&quot;:&quot;Water Saving&quot;,
+         &quot;country&quot;:&quot;ZA&quot;,
+         &quot;tx&quot;:&quot;77fc5cbdc2985aab2bda1754e36f9a879c29d98c0eb49394df07d40f306c3b65&quot;,
+         &quot;__v&quot;:0,
+         &quot;owner&quot;:{
+            &quot;email&quot;:&quot;joe@bloggs.com&quot;,
+            &quot;name&quot;:&quot;Joe Blogs&quot;,
+            &quot;did&quot;:&quot;0x92928b5135d8dbad88b1e772bf5b8f91bfe41a8d&quot;
          },
-         "created":"2018-01-19T08:27:23.679Z"
+         &quot;created&quot;:&quot;2018-01-19T08:27:23.679Z&quot;
       },
       {
-         "_id":"5a61abea670a09001abf055c",
-         "name":"Water Saving",
-         "country":"ZA",
-         "tx":"a843e51f7e8787a669463bb0eeda7c2f4578fb501388ab2bc0ae3493012b086e",
-         "<strong>v":0,
-         "owner":{
-            "email":"joe@bloggs.com",
-            "name":"Joe Blogs",
-            "did":"0x92928b5135d8dbad88b1e772bf5b8f91bfe41a8d"
+         &quot;_id&quot;:&quot;5a61abea670a09001abf055c&quot;,
+         &quot;name&quot;:&quot;Water Saving&quot;,
+         &quot;country&quot;:&quot;ZA&quot;,
+         &quot;tx&quot;:&quot;a843e51f7e8787a669463bb0eeda7c2f4578fb501388ab2bc0ae3493012b086e&quot;,
+         &quot;__v&quot;:0,
+         &quot;owner&quot;:{
+            &quot;email&quot;:&quot;joe@bloggs.com&quot;,
+            &quot;name&quot;:&quot;Joe Blogs&quot;,
+            &quot;did&quot;:&quot;0x92928b5135d8dbad88b1e772bf5b8f91bfe41a8d&quot;
          },
-         "created":"2018-01-19T08:27:22.685Z"
+         &quot;created&quot;:&quot;2018-01-19T08:27:22.685Z&quot;
       },
       {
-         "_id":"5a61abe8670a09001abf055a",
-         "name":"Water Saving",
-         "country":"ZA",
-         "tx":"02382076c5ae1b0478d32bf48f8e8f9b39049ae98d7fb573e346e72cd4d8242e",
-         "</strong>v":0,
-         "owner":{
-            "email":"joe@bloggs.com",
-            "name":"Joe Blogs",
-            "did":"0x92928b5135d8dbad88b1e772bf5b8f91bfe41a8d"
+         &quot;_id&quot;:&quot;5a61abe8670a09001abf055a&quot;,
+         &quot;name&quot;:&quot;Water Saving&quot;,
+         &quot;country&quot;:&quot;ZA&quot;,
+         &quot;tx&quot;:&quot;02382076c5ae1b0478d32bf48f8e8f9b39049ae98d7fb573e346e72cd4d8242e&quot;,
+         &quot;__v&quot;:0,
+         &quot;owner&quot;:{
+            &quot;email&quot;:&quot;joe@bloggs.com&quot;,
+            &quot;name&quot;:&quot;Joe Blogs&quot;,
+            &quot;did&quot;:&quot;0x92928b5135d8dbad88b1e772bf5b8f91bfe41a8d&quot;
          },
-         "created":"2018-01-19T08:27:20.833Z"
+         &quot;created&quot;:&quot;2018-01-19T08:27:20.833Z&quot;
       },
       {
-         "_id":"5a61abe7670a09001abf0558",
-         "name":"Water Saving",
-         "country":"ZA",
-         "tx":"d164ffd4d18add95eea273783c4b98e3046618d3c2009b01a19f935ab9f734ca",
-         "__v":0,
-         "owner":{
-            "email":"joe@bloggs.com",
-            "name":"Joe Blogs",
-            "did":"0x92928b5135d8dbad88b1e772bf5b8f91bfe41a8d"
+         &quot;_id&quot;:&quot;5a61abe7670a09001abf0558&quot;,
+         &quot;name&quot;:&quot;Water Saving&quot;,
+         &quot;country&quot;:&quot;ZA&quot;,
+         &quot;tx&quot;:&quot;d164ffd4d18add95eea273783c4b98e3046618d3c2009b01a19f935ab9f734ca&quot;,
+         &quot;__v&quot;:0,
+         &quot;owner&quot;:{
+            &quot;email&quot;:&quot;joe@bloggs.com&quot;,
+            &quot;name&quot;:&quot;Joe Blogs&quot;,
+            &quot;did&quot;:&quot;0x92928b5135d8dbad88b1e772bf5b8f91bfe41a8d&quot;
          },
-         "created":"2018-01-19T08:27:19.124Z"
+         &quot;created&quot;:&quot;2018-01-19T08:27:19.124Z&quot;
       }
    ]
-}</p>
-<pre><code>
-#### Auth
-
-**Get Credential Provider**
-
-Request:
-
-   ```
-   ixo.auth.getCredentialProvider(provider).then((result) =&gt; {
-       console.log('Provider:  ' + result);
-   })
-
-   ```
-
-Response:
+}
 
 </code></pre>
 
-<p>Cridential Provider Object
-```</p>
+<h4 id="auth">Auth</h4>
+<p><strong>Get Credential Provider</strong></p>
+<p>Request:</p>
+<pre><code>ixo.auth.getCredentialProvider(provider).then((result) =&gt; {
+    console.log('Provider:  ' + result);
+})
+</code></pre>
+
+<p>Response:</p>
+<pre><code>Cridential Provider Object
+</code></pre>
+
 <p><strong>Sign Data</strong></p>
 <p>Request:</p>
-<pre><code>```
-  ixo.auth.sign(provider, dataToSign).then((signature: string) =&gt; {
-                console.log(signature);
-            }
-        ).catch((error) =&gt; {
-            console.log(error);
-        });
-
-```
+<pre><code>ixo.auth.sign(provider, dataToSign).then((signature: string) =&gt; {
+        console.log(signature);
+    }).catch((error) =&gt; {
+        console.log(error);
+    });
 </code></pre>
+
 <p>Response:</p>
 <p><code>0xa51b768f35a9d02151590c419cd32b072fbb3a92871dfcc24021da828f0846e94fd1f24c1a987699e06479262a414d6739f0add1387d6276d7dd8b9099a306501c</code></p></div>
         
