@@ -564,7 +564,7 @@ ixo.auth.getCredentialProvider(provider).then((result) => {
 Response:
 
 ```
-Cridential Provider Object
+Credential Provider Object
 ```
    
 **Sign Data**
