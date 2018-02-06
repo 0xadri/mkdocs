@@ -18,7 +18,26 @@ Structure:
 | `<entity>`           | The entity to send the method |
 | `<method name>`      | The name of the method to call |
 | `<message id>`       | The message ID, used to correlate asynchronous responses |
-| `<json data object>` | The parametors that are passed to the method |
+| `<json data object>` | The parameters that are passed to the method handler |
+
+### Structure of params object
+
+Everything in the payload section is signed to create a signature.  It shoul dbe packed using `JSON.stringify()` method before signing. 
+
+```
+{
+    payload: {
+        "did": <did|publicKey of user>,
+        "data": <request data>
+    },
+    "signature": {
+        "type": <signature type ECDSA or E25519>,
+        "created": <date of signature>,
+        "creator": <did|publicKey of user>,
+        "signature": <signature in hex>
+    }
+}
+```
 
 ### Network
 
@@ -51,7 +70,7 @@ Retrieves the project template from the template registry.
 Request:
 
 ```
-{"jsonrpc": "2.0", "method": "getTemplate", "params": {"name":<project template name>}, "id": 1}
+{"jsonrpc": "2.0", "method": "getTemplate", "params": {"payload":{"did":<did of user>,"data":{"name":<project template name>}}}, "id": 1}
 ```
 
 Response:
@@ -79,10 +98,13 @@ Request:
 	"method": "create", 
 	"id": 3, 
 	"params": {
-    "template": {
-      name: <template name>
-    },
-		"data": <project data>,
+        "payload":{
+            "did":<did of user>,
+            "template": {
+                name: <template name>
+            },
+		    "data": <project data>
+        },
 		"signature": {
 			"type": "ECDSA",
     		"created": "2016-02-08T16:02:20Z", 
@@ -136,7 +158,7 @@ Lists all projects owned by a specific DID.
 Request:
 
 ```
-{"jsonrpc": "2.0", "method": "listForDID", "params": {"did":<did>}, "id": 1}
+{"jsonrpc": "2.0", "method": "listForDID", "params": {"payload":{"did":<did of user>,"data":{"did":<did of owner>}}}, "id": 1}
 ```
 
 Response:
@@ -160,7 +182,7 @@ Retrieves a template from the template registry. Valid types are: 'project', 'ag
 Request:
 
 ```
-{"jsonrpc": "2.0", "method": "getTemplate", "params": {"type": <template type>, "name": <name of template>}, "id": 1}
+{"jsonrpc": "2.0", "method": "getTemplate", "params": {"payload":{"did":<did of user>,"data":{"type": <template type>, "name": <name of template>}}}, "id": 1}
 ```
 
 Response:
@@ -187,7 +209,7 @@ Retrieves the agent template called "default" from the template registry.
 Request:
 
 ```
-{"jsonrpc": "2.0", "method": "getTemplate", "params": {"name": <agent template name>}, "id": 1}
+{"jsonrpc": "2.0", "method": "getTemplate", "params": {"payload":{"did":<did of user>,"data":{"name": <name of agent template>}}}, "id": 1}
 ```
 
 Response:
@@ -215,10 +237,13 @@ Request:
 	"method": "create", 
 	"id": 3, 
 	"params": {
-    "template": {
-      name: <template name>
-    },
-		"data": <agent data>,
+        payload: {
+            "template": {
+                name: <template name>
+            },
+            "did": <did of user>,
+		    "data": <agent data>
+        },
 		"signature": {
 			"type": "ECDSA",
     		"created": "2016-02-08T16:02:20Z", 
@@ -253,7 +278,7 @@ Lists all agents for a specific DID.
 Request:
 
 ```
-{"jsonrpc": "2.0", "method": "listForDID", "params": {"did":<did>}, "id": 1}
+{"jsonrpc": "2.0", "method": "listForDID", "params": {"payload":{"did":<did of user>,"data":{"did":<did of owner>}}}, "id": 1}
 ```
 
 Response:
@@ -273,7 +298,7 @@ Lists all agents for a specific DID.
 Request:
 
 ```
-{"jsonrpc": "2.0", "method": "listForProject", "params": {"projectTx":<project TX>}, "id": 1}
+{"jsonrpc": "2.0", "method": "listForProject", "params": {"payload":{"did":<did of user>,"data":{"projectTx":<project TX>}}}, "id": 1}
 ```
 
 Response:

@@ -55,6 +55,8 @@ Templates consist of a single data element called `entities` which is an array o
 
 `options` - Only used if the type is `select` and contains a list of `labels` and `values`.
 
+`hidden` - If `true` do not display this field.  Defaults to `false`
+
 Example:
 ```
 "options": [
