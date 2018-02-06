@@ -4,7 +4,11 @@
     
     <url>
      <loc>/</loc>
+<<<<<<< HEAD
      <lastmod>2018-02-06</lastmod>
+=======
+     <lastmod>2018-01-26</lastmod>
+>>>>>>> f92eb28d7041e061317561d80151da2aa6d74d4d
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +16,11 @@
     
     <url>
      <loc>/documentation/</loc>
+<<<<<<< HEAD
      <lastmod>2018-02-06</lastmod>
+=======
+     <lastmod>2018-01-26</lastmod>
+>>>>>>> f92eb28d7041e061317561d80151da2aa6d74d4d
      <changefreq>daily</changefreq>
     </url>
     
@@ -20,7 +28,11 @@
     
     <url>
      <loc>/api/</loc>
+<<<<<<< HEAD
      <lastmod>2018-02-06</lastmod>
+=======
+     <lastmod>2018-01-26</lastmod>
+>>>>>>> f92eb28d7041e061317561d80151da2aa6d74d4d
      <changefreq>daily</changefreq>
     </url>
     
