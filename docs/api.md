@@ -291,9 +291,9 @@ Response:
 }
 ```
 
-#### List Agents for a specific DID
+#### List Agents for a specific Project ID
 
-Lists all agents for a specific DID.
+Lists all agents for a specific project id.
 
 Request:
 
