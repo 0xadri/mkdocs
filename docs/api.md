@@ -26,7 +26,7 @@ Everything in the payload section is signed to create a signature.  It shoul dbe
 
 ```
 {
-    payload: {
+    "payload": {
         "did": <did|publicKey of user>,
         "data": <request data>
     },
@@ -101,7 +101,7 @@ Request:
         "payload":{
             "did":<did of user>,
             "template": {
-                name: <template name>
+                "name": <template name>
             },
 		    "data": <project data>
         },
@@ -239,7 +239,7 @@ Request:
 	"params": {
         payload: {
             "template": {
-                name: <template name>
+                "name": <template name>
             },
             "did": <did of user>,
 		    "data": <agent data>
