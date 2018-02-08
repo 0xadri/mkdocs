@@ -168,7 +168,7 @@
 <h3 id="structure-of-params-object">Structure of params object</h3>
 <p>Everything in the payload section is signed to create a signature.  It shoul dbe packed using <code>JSON.stringify()</code> method before signing. </p>
 <pre><code>{
-    payload: {
+    &quot;payload&quot;: {
         &quot;did&quot;: &lt;did|publicKey of user&gt;,
         &quot;data&quot;: &lt;request data&gt;
     },
@@ -223,7 +223,7 @@
         &quot;payload&quot;:{
             &quot;did&quot;:&lt;did of user&gt;,
             &quot;template&quot;: {
-                name: &lt;template name&gt;
+                &quot;name&quot;: &lt;template name&gt;
             },
             &quot;data&quot;: &lt;project data&gt;
         },
@@ -327,7 +327,7 @@
     &quot;params&quot;: {
         payload: {
             &quot;template&quot;: {
-                name: &lt;template name&gt;
+                &quot;name&quot;: &lt;template name&gt;
             },
             &quot;did&quot;: &lt;did of user&gt;,
             &quot;data&quot;: &lt;agent data&gt;
