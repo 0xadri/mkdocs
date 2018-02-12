@@ -350,7 +350,48 @@
         &quot;__v&quot;: 0,
         &lt;agent data&gt;
         &quot;tx&quot;: &quot;b51cd2665d146d0a0240fd2756beb4c9e9c1948275ac5d37a7ae405ab2d71a7a&quot;,
-        &quot;did&quot;: &lt;cedator's did&gt;
+        &quot;did&quot;: &lt;creator's did&gt;
+        &quot;_id&quot;: &quot;5a66e09b38f45f01d90d122a&quot;,
+        &quot;created&quot;: &quot;2018-01-23T07:13:31.060Z&quot;
+    }
+}
+</code></pre>
+
+<h4 id="update-agent-status">Update Agent Status</h4>
+<p>Update Agent Status</p>
+<p>Request:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;, 
+    &quot;method&quot;: &quot;updateAgentStatus&quot;, 
+    &quot;id&quot;: 3, 
+    &quot;params&quot;: {
+        payload: {
+            },
+            &quot;did&quot;: &lt;did of user&gt;,
+            &quot;data&quot;: {
+                agentTx: &lt;tx of the agent to update&gt;,
+                status: &lt;Approved|NotApproved|Revoked|Pending&gt;
+            }
+        },
+        &quot;signature&quot;: {
+            &quot;type&quot;: &quot;ECDSA&quot;,
+            &quot;created&quot;: &quot;2016-02-08T16:02:20Z&quot;, 
+            &quot;creator&quot;: &lt;did of user&gt;,
+            &quot;signature&quot;: &lt;signature&gt;
+        }
+    }
+}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 3,
+    &quot;result&quot;: {
+        &quot;__v&quot;: 0,
+        &lt;agent data&gt;
+        &quot;tx&quot;: &quot;b51cd2665d146d0a0240fd2756beb4c9e9c1948275ac5d37a7ae405ab2d71a7a&quot;,
+        &quot;did&quot;: &lt;creator's did&gt;
         &quot;_id&quot;: &quot;5a66e09b38f45f01d90d122a&quot;,
         &quot;created&quot;: &quot;2018-01-23T07:13:31.060Z&quot;
     }

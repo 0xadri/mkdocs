@@ -264,7 +264,54 @@ Response:
         "__v": 0,
         <agent data>
         "tx": "b51cd2665d146d0a0240fd2756beb4c9e9c1948275ac5d37a7ae405ab2d71a7a",
-        "did": <cedator's did>
+        "did": <creator's did>
+        "_id": "5a66e09b38f45f01d90d122a",
+        "created": "2018-01-23T07:13:31.060Z"
+    }
+}
+```
+
+#### Update Agent Status
+
+Update Agent Status
+
+Request:
+
+```
+{
+	"jsonrpc": "2.0", 
+	"method": "updateAgentStatus", 
+	"id": 3, 
+	"params": {
+        payload: {
+            },
+            "did": <did of user>,
+		    "data": {
+                agentTx: <tx of the agent to update>,
+                status: <Approved|NotApproved|Revoked|Pending>
+            }
+        },
+		"signature": {
+			"type": "ECDSA",
+    		"created": "2016-02-08T16:02:20Z", 
+    		"creator": <did of user>,
+    		"signature": <signature>
+    	}
+    }
+}
+```
+
+Response:
+
+```
+{
+    "jsonrpc": "2.0",
+    "id": 3,
+    "result": {
+        "__v": 0,
+        <agent data>
+        "tx": "b51cd2665d146d0a0240fd2756beb4c9e9c1948275ac5d37a7ae405ab2d71a7a",
+        "did": <creator's did>
         "_id": "5a66e09b38f45f01d90d122a",
         "created": "2018-01-23T07:13:31.060Z"
     }
