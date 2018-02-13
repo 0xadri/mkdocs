@@ -358,6 +358,209 @@ Response:
 }
 ```
 
+### Claim
+
+Example URI: https://ixo-node.herokuapp.com/api/claim
+
+#### Get Claim Template
+
+Retrieves the claim template called "default" from the template registry.
+
+Request:
+
+```
+{"jsonrpc": "2.0", "method": "getTemplate", "params": {"payload":{"did":<did of user>,"data":{"name": <name of claim template>}}}, "id": 1}
+```
+
+Response:
+
+```
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": {
+        "template": <the template>,
+        "form": <template's corresponding form>
+    }
+}
+```
+
+#### Create Claim
+
+Creates a new claim.
+
+Request:
+
+```
+{
+	"jsonrpc": "2.0", 
+	"method": "create", 
+	"id": 3, 
+	"params": {
+        payload: {
+            "template": {
+                "name": <template name>
+            },
+            "did": <did of user>,
+		    "data": <claim data>
+        },
+		"signature": {
+			"type": "ECDSA",
+    		"created": "2016-02-08T16:02:20Z", 
+    		"creator": <did of user>,
+    		"signature": <signature>
+    	}
+    }
+}
+```
+
+Response:
+
+```
+{
+    "jsonrpc": "2.0",
+    "id": 3,
+    "result": {
+        "__v": 0,
+        <claim data>
+        "tx": "b51cd2665d146d0a0240fd2756beb4c9e9c1948275ac5d37a7ae405ab2d71a7a",
+        "did": <creator's did>
+        "_id": "5a66e09b38f45f01d90d122a",
+        "created": "2018-01-23T07:13:31.060Z"
+    }
+}
+```
+
+#### Evaluate Claim
+
+Evaluate a new claim.
+
+Request:
+
+```
+{
+	"jsonrpc": "2.0", 
+	"method": "evaluateClaim", 
+	"id": 3, 
+	"params": {
+        payload: {
+            "template": {
+                "name": <template name>
+            },
+            "did": <did of user>,
+		    "data": {
+                claimTx: <tx of the claim>
+                <other evaluation data>
+            }
+        },
+		"signature": {
+			"type": "ECDSA",
+    		"created": "2016-02-08T16:02:20Z", 
+    		"creator": <did of user>,
+    		"signature": <signature>
+    	}
+    }
+}
+```
+
+Response:
+
+```
+{
+    "jsonrpc": "2.0",
+    "id": 3,
+    "result": {
+        "__v": 0,
+        <claim data>
+        "tx": "b51cd2665d146d0a0240fd2756beb4c9e9c1948275ac5d37a7ae405ab2d71a7a",
+        "did": <creator's did>
+        "_id": "5a66e09b38f45f01d90d122a",
+        "created": "2018-01-23T07:13:31.060Z"
+        "latestEvaluation": "Approved",
+        "evaluations": [{
+            <evaluation data>
+        }]
+    }
+}
+```
+
+#### List Claims for a specific Project ID
+
+Lists all claims for a specific agent did.
+
+Request:
+
+```
+{"jsonrpc": "2.0", "method": "listForDID", "params": {"payload":{"did":<did of user>,"data":{"did":<agent did>}}}, "id": 1}
+```
+
+Response:
+
+```
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": <array of claims>
+}
+```
+
+#### List Claims for a specific Project ID
+
+Lists all claims for a specific project id.
+
+Request:
+
+```
+{"jsonrpc": "2.0", "method": "listForProject", "params": {"payload":{"did":<did of user>,"data":{"projectTx":<project TX>}}}, "id": 1}
+```
+
+Response:
+
+```
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": <array of claims>
+}
+```
+
+#### Lists all claims for a specific project ID and status.
+
+Request:
+
+```
+{"jsonrpc": "2.0", "method": "listForProjectAndDID", "params": {"payload":{"did":<did of user>,"data":{"projectTx":<project tx>,"status":<claim status>}}}, "id": 1}
+```
+
+Response:
+
+```
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": <array of claims>
+}
+```
+
+#### Lists all claims for a specific project ID and agent DID.
+
+Request:
+
+```
+{"jsonrpc": "2.0", "method": "listForProjectAndDID", "params": {"payload":{"did":<did of user>,"data":{"projectTx":<project tx>,"did":<agent did>}}}, "id": 1}
+```
+
+Response:
+
+```
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": <array of claims>
+}
+```
+
+
 ## ixo-Module API
 
 #### Install using npm
