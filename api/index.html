@@ -115,6 +115,7 @@
                 <li class="third-level"><a href="#project">Project</a></li>
                 <li class="third-level"><a href="#template">Template</a></li>
                 <li class="third-level"><a href="#agent">Agent</a></li>
+                <li class="third-level"><a href="#claim">Claim</a></li>
             <li class="second-level"><a href="#ixo-module-api">ixo-Module API</a></li>
                 
                 <li class="third-level"><a href="#install-using-npm">Install using npm</a></li>
@@ -280,6 +281,20 @@
 }
 </code></pre>
 
+<h4 id="list-projects-for-a-specific-agent-did-and-role">List Projects for a specific Agent DID and role</h4>
+<p>Lists all projects owned by a specific DID.</p>
+<p>Request:</p>
+<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;listForDID&quot;, &quot;params&quot;: {&quot;payload&quot;:{&quot;did&quot;:&lt;did of user&gt;,&quot;data&quot;:{&quot;did&quot;:&lt;did of agent&gt;, &quot;role&quot;: &lt;role IA,EA or SA&gt;}}}, &quot;id&quot;: 1}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 1,
+    &quot;result&quot;: &lt;array of projects&gt;
+}
+</code></pre>
+
 <h3 id="template">Template</h3>
 <p>Example URI: https://ixo-node.herokuapp.com/api/template</p>
 <h4 id="get-template_1">Get Template</h4>
@@ -424,6 +439,166 @@
     &quot;jsonrpc&quot;: &quot;2.0&quot;,
     &quot;id&quot;: 1,
     &quot;result&quot;: &lt;array of agents&gt;
+}
+</code></pre>
+
+<h3 id="claim">Claim</h3>
+<p>Example URI: https://ixo-node.herokuapp.com/api/claim</p>
+<h4 id="get-claim-template">Get Claim Template</h4>
+<p>Retrieves the claim template called "default" from the template registry.</p>
+<p>Request:</p>
+<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;getTemplate&quot;, &quot;params&quot;: {&quot;payload&quot;:{&quot;did&quot;:&lt;did of user&gt;,&quot;data&quot;:{&quot;name&quot;: &lt;name of claim template&gt;}}}, &quot;id&quot;: 1}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 1,
+    &quot;result&quot;: {
+        &quot;template&quot;: &lt;the template&gt;,
+        &quot;form&quot;: &lt;template's corresponding form&gt;
+    }
+}
+</code></pre>
+
+<h4 id="create-claim">Create Claim</h4>
+<p>Creates a new claim.</p>
+<p>Request:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;, 
+    &quot;method&quot;: &quot;create&quot;, 
+    &quot;id&quot;: 3, 
+    &quot;params&quot;: {
+        payload: {
+            &quot;template&quot;: {
+                &quot;name&quot;: &lt;template name&gt;
+            },
+            &quot;did&quot;: &lt;did of user&gt;,
+            &quot;data&quot;: &lt;claim data&gt;
+        },
+        &quot;signature&quot;: {
+            &quot;type&quot;: &quot;ECDSA&quot;,
+            &quot;created&quot;: &quot;2016-02-08T16:02:20Z&quot;, 
+            &quot;creator&quot;: &lt;did of user&gt;,
+            &quot;signature&quot;: &lt;signature&gt;
+        }
+    }
+}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 3,
+    &quot;result&quot;: {
+        &quot;__v&quot;: 0,
+        &lt;claim data&gt;
+        &quot;tx&quot;: &quot;b51cd2665d146d0a0240fd2756beb4c9e9c1948275ac5d37a7ae405ab2d71a7a&quot;,
+        &quot;did&quot;: &lt;creator's did&gt;
+        &quot;_id&quot;: &quot;5a66e09b38f45f01d90d122a&quot;,
+        &quot;created&quot;: &quot;2018-01-23T07:13:31.060Z&quot;
+    }
+}
+</code></pre>
+
+<h4 id="evaluate-claim">Evaluate Claim</h4>
+<p>Evaluate a new claim.</p>
+<p>Request:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;, 
+    &quot;method&quot;: &quot;evaluateClaim&quot;, 
+    &quot;id&quot;: 3, 
+    &quot;params&quot;: {
+        payload: {
+            &quot;template&quot;: {
+                &quot;name&quot;: &lt;template name&gt;
+            },
+            &quot;did&quot;: &lt;did of user&gt;,
+            &quot;data&quot;: {
+                claimTx: &lt;tx of the claim&gt;
+                &lt;other evaluation data&gt;
+            }
+        },
+        &quot;signature&quot;: {
+            &quot;type&quot;: &quot;ECDSA&quot;,
+            &quot;created&quot;: &quot;2016-02-08T16:02:20Z&quot;, 
+            &quot;creator&quot;: &lt;did of user&gt;,
+            &quot;signature&quot;: &lt;signature&gt;
+        }
+    }
+}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 3,
+    &quot;result&quot;: {
+        &quot;__v&quot;: 0,
+        &lt;claim data&gt;
+        &quot;tx&quot;: &quot;b51cd2665d146d0a0240fd2756beb4c9e9c1948275ac5d37a7ae405ab2d71a7a&quot;,
+        &quot;did&quot;: &lt;creator's did&gt;
+        &quot;_id&quot;: &quot;5a66e09b38f45f01d90d122a&quot;,
+        &quot;created&quot;: &quot;2018-01-23T07:13:31.060Z&quot;
+        &quot;latestEvaluation&quot;: &quot;Approved&quot;,
+        &quot;evaluations&quot;: [{
+            &lt;evaluation data&gt;
+        }]
+    }
+}
+</code></pre>
+
+<h4 id="list-claims-for-a-specific-project-id">List Claims for a specific Project ID</h4>
+<p>Lists all claims for a specific agent did.</p>
+<p>Request:</p>
+<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;listForDID&quot;, &quot;params&quot;: {&quot;payload&quot;:{&quot;did&quot;:&lt;did of user&gt;,&quot;data&quot;:{&quot;did&quot;:&lt;agent did&gt;}}}, &quot;id&quot;: 1}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 1,
+    &quot;result&quot;: &lt;array of claims&gt;
+}
+</code></pre>
+
+<h4 id="list-claims-for-a-specific-project-id_1">List Claims for a specific Project ID</h4>
+<p>Lists all claims for a specific project id.</p>
+<p>Request:</p>
+<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;listForProject&quot;, &quot;params&quot;: {&quot;payload&quot;:{&quot;did&quot;:&lt;did of user&gt;,&quot;data&quot;:{&quot;projectTx&quot;:&lt;project TX&gt;}}}, &quot;id&quot;: 1}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 1,
+    &quot;result&quot;: &lt;array of claims&gt;
+}
+</code></pre>
+
+<h4 id="lists-all-claims-for-a-specific-project-id-and-status">Lists all claims for a specific project ID and status.</h4>
+<p>Request:</p>
+<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;listForProjectAndDID&quot;, &quot;params&quot;: {&quot;payload&quot;:{&quot;did&quot;:&lt;did of user&gt;,&quot;data&quot;:{&quot;projectTx&quot;:&lt;project tx&gt;,&quot;status&quot;:&lt;claim status&gt;}}}, &quot;id&quot;: 1}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 1,
+    &quot;result&quot;: &lt;array of claims&gt;
+}
+</code></pre>
+
+<h4 id="lists-all-claims-for-a-specific-project-id-and-agent-did">Lists all claims for a specific project ID and agent DID.</h4>
+<p>Request:</p>
+<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;listForProjectAndDID&quot;, &quot;params&quot;: {&quot;payload&quot;:{&quot;did&quot;:&lt;did of user&gt;,&quot;data&quot;:{&quot;projectTx&quot;:&lt;project tx&gt;,&quot;did&quot;:&lt;agent did&gt;}}}, &quot;id&quot;: 1}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 1,
+    &quot;result&quot;: &lt;array of claims&gt;
 }
 </code></pre>
 
