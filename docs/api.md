@@ -178,7 +178,7 @@ Lists all projects owned by a specific DID.
 Request:
 
 ```
-{"jsonrpc": "2.0", "method": "listForDID", "params": {"payload":{"did":<did of user>,"data":{"did":<did of agent>, "role": <role IA,EA or SA>}}}, "id": 1}
+{"jsonrpc": "2.0", "method": "listForAgentDIDAndRole", "params": {"payload":{"did":<did of user>,"data":{"did":<did of agent>, "role": <role IA,EA or SA>}}}, "id": 1}
 ```
 
 Response:
