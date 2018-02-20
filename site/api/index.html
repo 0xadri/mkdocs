@@ -119,11 +119,12 @@
             <li class="second-level"><a href="#ixo-module-api">ixo-Module API</a></li>
                 
                 <li class="third-level"><a href="#install-using-npm">Install using npm</a></li>
-                <li class="third-level"><a href="#create-new-ixo-object">Create new Ixo Object</a></li>
+                <li class="third-level"><a href="#create-new-ixo-object-without-provider">Create new Ixo Object (Without provider)</a></li>
+                <li class="third-level"><a href="#create-new-ixo-object-with-provider">Create new Ixo Object (With provider)</a></li>
                 <li class="third-level"><a href="#cryptoutil">CryptoUtil</a></li>
                 <li class="third-level"><a href="#network_1">Network</a></li>
                 <li class="third-level"><a href="#projects">Projects</a></li>
-                <li class="third-level"><a href="#auth">Auth</a></li>
+                <li class="third-level"><a href="#agent_1">Agent</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
@@ -270,6 +271,20 @@
 <p>Lists all projects owned by a specific DID.</p>
 <p>Request:</p>
 <pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;listForDID&quot;, &quot;params&quot;: {&quot;payload&quot;:{&quot;did&quot;:&lt;did of user&gt;,&quot;data&quot;:{&quot;did&quot;:&lt;did of owner&gt;}}}, &quot;id&quot;: 1}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 1,
+    &quot;result&quot;: &lt;array of projects&gt;
+}
+</code></pre>
+
+<h4 id="list-projects-for-a-specific-agent-did-and-role">List Projects for a specific Agent DID and role</h4>
+<p>Lists all projects owned by a specific DID.</p>
+<p>Request:</p>
+<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;listForDID&quot;, &quot;params&quot;: {&quot;payload&quot;:{&quot;did&quot;:&lt;did of user&gt;,&quot;data&quot;:{&quot;did&quot;:&lt;did of agent&gt;, &quot;role&quot;: &lt;role IA,EA or SA&gt;}}}, &quot;id&quot;: 1}
 </code></pre>
 
 <p>Response:</p>
@@ -590,9 +605,14 @@
 <h2 id="ixo-module-api">ixo-Module API</h2>
 <h4 id="install-using-npm">Install using npm</h4>
 <p><code>npm install --save ixo-module</code></p>
-<h4 id="create-new-ixo-object">Create new Ixo Object</h4>
+<h4 id="create-new-ixo-object-without-provider">Create new Ixo Object (Without provider)</h4>
 <pre><code>import Ixo from 'ixo-module';
 var ixo = new Ixo('ixo_node_url')
+</code></pre>
+
+<h4 id="create-new-ixo-object-with-provider">Create new Ixo Object (With provider)</h4>
+<pre><code>import Ixo from 'ixo-module';
+var ixo = new Ixo('ixo_node_url', provider)
 </code></pre>
 
 <h4 id="cryptoutil">CryptoUtil</h4>
@@ -658,7 +678,7 @@ var ixo = new Ixo('ixo_node_url')
 <h4 id="projects">Projects</h4>
 <p><strong>Gets project template</strong></p>
 <p>Request:</p>
-<pre><code>   ixo.project.getProjectTemplate().then((result) =&gt; {
+<pre><code>   ixo.project.getProjectTemplate('templateName').then((result) =&gt; {
        console.log('Project Template: ' + result)
    })
 
@@ -809,29 +829,120 @@ var ixo = new Ixo('ixo_node_url')
 
 </code></pre>
 
-<h4 id="auth">Auth</h4>
-<p><strong>Get Credential Provider</strong></p>
+<p><strong>List Project By DID</strong></p>
 <p>Request:</p>
-<pre><code>ixo.auth.getCredentialProvider(provider).then((result) =&gt; {
-    console.log('Provider:  ' + result);
-})
+<pre><code>ixo.project.listProjectsByDid('did').then((response:any) =&gt; {
+            console.log('Projects by did: ' + success(JSON.stringify(response, null, '\t')));
+        }).catch((result: Error) =&gt; {
+            console.log(error(result));
+        });
 </code></pre>
 
 <p>Response:</p>
-<pre><code>Credential Provider Object
+<pre><code>Projects by did: {
+        &quot;jsonrpc&quot;: &quot;2.0&quot;,
+        &quot;id&quot;: 34773,
+        &quot;result&quot;: [
+             {
+                &quot;_id&quot;: &quot;5a86cd665989a8001ad3d6c0&quot;,
+                &quot;name&quot;: &quot;Test Project&quot;,
+                &quot;about&quot;: &quot;&quot;,
+                &quot;country&quot;: &quot;BD&quot;,
+                &quot;thumbnail&quot;: &quot;&quot;,
+                &quot;agentTemplate&quot;: &quot;default&quot;,
+                &quot;claimTemplate&quot;: &quot;default&quot;,
+                &quot;evaluationTemplate&quot;: &quot;default&quot;,
+                &quot;tx&quot;: &quot;8b630a062e38feeae73837a9da8f32cac2006b436792f905653555c24c2d83a2&quot;,
+                &quot;__v&quot;: 0,
+                &quot;owner&quot;: {
+                        &quot;name&quot;: &quot;Nicolaas&quot;,
+                        &quot;email&quot;: &quot;nicolaas.vercuiel73@gmail.com&quot;,
+                        &quot;did&quot;: &quot;0x8ce576f2cedd9cb87fe5768039f5edb4b5f9ed74&quot;
+                },
+                &quot;created&quot;: &quot;2018-02-16T12:24:06.175Z&quot;
+        }
+        ]
+}
 </code></pre>
 
-<p><strong>Sign Data</strong></p>
+<p><strong>Create Project</strong></p>
 <p>Request:</p>
-<pre><code>ixo.auth.sign(provider, dataToSign).then((signature: string) =&gt; {
-        console.log(signature);
-    }).catch((error) =&gt; {
-        console.log(error);
-    });
+<pre><code> ixo.project.createProject(projectData, 'templateName').then((response: any) =&gt;{
+            console.log('Project create response: ' + success(JSON.stringify(response, null, '\t')));
+        }).catch((result: Error) =&gt; {
+            console.log(error(result));
+        });
+
 </code></pre>
 
 <p>Response:</p>
-<p><code>0xa51b768f35a9d02151590c419cd32b072fbb3a92871dfcc24021da828f0846e94fd1f24c1a987699e06479262a414d6739f0add1387d6276d7dd8b9099a306501c</code></p></div>
+<pre><code> Project create response: {
+        &quot;jsonrpc&quot;: &quot;2.0&quot;,
+        &quot;id&quot;: 11460,
+        &quot;result&quot;: {
+                &quot;__v&quot;: 0,
+                &quot;name&quot;: &quot;Reforestation&quot;,
+                &quot;country&quot;: &quot;UK&quot;,
+                &quot;tx&quot;: &quot;72a1e33c4c704e56dc497e5a7eec7367ff5bf51208a4e321e2b1d975b932a06f&quot;,
+                &quot;_id&quot;: &quot;5a8a87da79d282001a0203d2&quot;,
+                &quot;owner&quot;: {
+                        &quot;email&quot;: &quot;peter@noname.com&quot;,
+                        &quot;name&quot;: &quot;Peter Piper&quot;,
+                        &quot;did&quot;: &quot;0x1805356a35b88414e75f7df9b9fd7d9555420785&quot;
+                },
+                &quot;created&quot;: &quot;2018-02-19T08:16:26.787Z&quot;
+        }
+}
+
+</code></pre>
+
+<h4 id="agent_1">Agent</h4>
+<p><strong>Create Agent</strong></p>
+<p>Request:</p>
+<pre><code> ixo.agent.createAgent(agentData, 'default').then((response: any) =&gt; {
+                  console.log('Agent create: ' + success(JSON.stringify(response, null, '\t')));
+        }).catch((result: Error) =&gt; {
+            console.log(error(result));
+        });
+</code></pre>
+
+<p><strong>Get Agent template</strong></p>
+<p>Request:</p>
+<pre><code> ixo.agent.getAgentTemplate('default').then((response: any) =&gt; {
+            console.log('Agent template: ' + success(JSON.stringify(response, null, '\t')));
+        }).catch((result: Error) =&gt; {
+            console.log(error(result));
+        });
+</code></pre>
+
+<p><strong>List Agents for DID</strong></p>
+<p>Request:</p>
+<pre><code>ixo.agent.listAgentsForDID('did').then((response: any) =&gt; {
+            console.log('Agent list for DID: ' + success(JSON.stringify(response, null, '\t')));
+            expect(response.result).to.not.equal(null);
+        }).catch((result: Error) =&gt; {
+            console.log(error(result));
+        });
+</code></pre>
+
+<p><strong>List Agents for project</strong></p>
+<p>Request:</p>
+<pre><code> ixo.agent.listAgentsForProject(ixo.credentialProvider.getDid(), 'projectTx').then((response: any) =&gt; {
+            console.log('Agent list for Project: ' + success(JSON.stringify(response, null, '\t')));
+        }).catch((result: Error) =&gt; {
+            console.log(error(result));
+        });
+</code></pre>
+
+<p><strong>Update Agent status</strong></p>
+<p>Request:</p>
+<pre><code>   ixo.agent.updateAgentStatus(agentUpdate).then((response: any) =&gt; {
+            console.log('Agent status update: ' + success(JSON.stringify(response, null, '\t')));
+            expect(response.result).to.not.equal(null);
+        }).catch((result: Error) =&gt; {
+            console.log(error(result));
+        });
+</code></pre></div>
         
     </div>
 

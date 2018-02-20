@@ -171,6 +171,26 @@ Response:
 }
 ```
 
+#### List Projects for a specific Agent DID and role
+
+Lists all projects owned by a specific DID.
+
+Request:
+
+```
+{"jsonrpc": "2.0", "method": "listForDID", "params": {"payload":{"did":<did of user>,"data":{"did":<did of agent>, "role": <role IA,EA or SA>}}}, "id": 1}
+```
+
+Response:
+
+```
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": <array of projects>
+}
+```
+
 ### Template
 
 Example URI: https://ixo-node.herokuapp.com/api/template
@@ -567,11 +587,18 @@ Response:
 
 `npm install --save ixo-module`
 
-####Create new Ixo Object
+####Create new Ixo Object (Without provider)
 
 ```
 import Ixo from 'ixo-module';
 var ixo = new Ixo('ixo_node_url')
+```
+
+####Create new Ixo Object (With provider)
+
+```
+import Ixo from 'ixo-module';
+var ixo = new Ixo('ixo_node_url', provider)
 ```
 
 #### CryptoUtil
@@ -667,7 +694,7 @@ Ping Results: {
    
 Request:
 ```
-   ixo.project.getProjectTemplate().then((result) => {
+   ixo.project.getProjectTemplate('templateName').then((result) => {
        console.log('Project Template: ' + result)
    })
    
@@ -823,39 +850,143 @@ Project List:
 }
 
 ```
-
-#### Auth
-
-**Get Credential Provider**
+**List Project By DID**
 
 Request:
    
 ```
-ixo.auth.getCredentialProvider(provider).then((result) => {
-    console.log('Provider:  ' + result);
-})
+ixo.project.listProjectsByDid('did').then((response:any) => {
+            console.log('Projects by did: ' + success(JSON.stringify(response, null, '\t')));
+        }).catch((result: Error) => {
+            console.log(error(result));
+        });
 ```
-   
+
 Response:
+   
+```
+Projects by did: {
+        "jsonrpc": "2.0",
+        "id": 34773,
+        "result": [
+             {
+                "_id": "5a86cd665989a8001ad3d6c0",
+                "name": "Test Project",
+                "about": "",
+                "country": "BD",
+                "thumbnail": "",
+                "agentTemplate": "default",
+                "claimTemplate": "default",
+                "evaluationTemplate": "default",
+                "tx": "8b630a062e38feeae73837a9da8f32cac2006b436792f905653555c24c2d83a2",
+                "__v": 0,
+                "owner": {
+                        "name": "Nicolaas",
+                        "email": "nicolaas.vercuiel73@gmail.com",
+                        "did": "0x8ce576f2cedd9cb87fe5768039f5edb4b5f9ed74"
+                },
+                "created": "2018-02-16T12:24:06.175Z"
+        }
+        ]
+}
+```
+
+**Create Project**
+
+Request:
+   
+```
+ ixo.project.createProject(projectData, 'templateName').then((response: any) =>{
+            console.log('Project create response: ' + success(JSON.stringify(response, null, '\t')));
+        }).catch((result: Error) => {
+            console.log(error(result));
+        });
 
 ```
-Credential Provider Object
+
+Response:
+   
+```
+ Project create response: {
+        "jsonrpc": "2.0",
+        "id": 11460,
+        "result": {
+                "__v": 0,
+                "name": "Reforestation",
+                "country": "UK",
+                "tx": "72a1e33c4c704e56dc497e5a7eec7367ff5bf51208a4e321e2b1d975b932a06f",
+                "_id": "5a8a87da79d282001a0203d2",
+                "owner": {
+                        "email": "peter@noname.com",
+                        "name": "Peter Piper",
+                        "did": "0x1805356a35b88414e75f7df9b9fd7d9555420785"
+                },
+                "created": "2018-02-19T08:16:26.787Z"
+        }
+}
+
+```
+
+#### Agent
+
+**Create Agent**
+
+Request:
+   
+```
+ ixo.agent.createAgent(agentData, 'default').then((response: any) => {
+                  console.log('Agent create: ' + success(JSON.stringify(response, null, '\t')));
+        }).catch((result: Error) => {
+            console.log(error(result));
+        });
+```
+
+**Get Agent template**
+
+Request:
+   
+```
+ ixo.agent.getAgentTemplate('default').then((response: any) => {
+            console.log('Agent template: ' + success(JSON.stringify(response, null, '\t')));
+        }).catch((result: Error) => {
+            console.log(error(result));
+        });
 ```
    
-**Sign Data**
+**List Agents for DID**
  
 Request:
     
 ```
-ixo.auth.sign(provider, dataToSign).then((signature: string) => {
-        console.log(signature);
-    }).catch((error) => {
-        console.log(error);
-    });
+ixo.agent.listAgentsForDID('did').then((response: any) => {
+            console.log('Agent list for DID: ' + success(JSON.stringify(response, null, '\t')));
+            expect(response.result).to.not.equal(null);
+        }).catch((result: Error) => {
+            console.log(error(result));
+        });
+```
+
+**List Agents for project**
+
+Request:
+
+```
+ ixo.agent.listAgentsForProject(ixo.credentialProvider.getDid(), 'projectTx').then((response: any) => {
+            console.log('Agent list for Project: ' + success(JSON.stringify(response, null, '\t')));
+        }).catch((result: Error) => {
+            console.log(error(result));
+        });
 ```
     
-Response:
- 
- ```
- 0xa51b768f35a9d02151590c419cd32b072fbb3a92871dfcc24021da828f0846e94fd1f24c1a987699e06479262a414d6739f0add1387d6276d7dd8b9099a306501c
- ```
+**Update Agent status**
+
+Request:
+
+```
+   ixo.agent.updateAgentStatus(agentUpdate).then((response: any) => {
+            console.log('Agent status update: ' + success(JSON.stringify(response, null, '\t')));
+            expect(response.result).to.not.equal(null);
+        }).catch((result: Error) => {
+            console.log(error(result));
+        });
+```
