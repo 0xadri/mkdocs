@@ -16,7 +16,7 @@ Structure:
 |----------------------|-----------------------|
 | `<node server>`      | The URL of the server |
 | `<entity>`           | The entity to send the method |
-| `<method name>`      | The name of the method to call |
+| `<method name>`      | The name of the method to call defined in the config file |
 | `<message id>`       | The message ID, used to correlate asynchronous responses |
 | `<json data object>` | The parameters that are passed to the method handler |
 
