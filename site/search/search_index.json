@@ -2,13 +2,33 @@
     "docs": [
         {
             "location": "/",
-            "text": "Welcome to the ixo Protocol\n\n\nPlease have a look at the \nixo Foundation website\n for more information on what we do.\n\n\nAmply\n\n\nAmply is a MVP project that we have built to prove the utility of the ixo protocol.  The code for this project can be found on our \nAmply github repository\n.",
+            "text": "Welcome to the ixo Protocol\n\n\nPlease have a look at the \nixo Foundation website\n for more information on what we do.\n\n\nIntroduction\n\n\nThe documentation on this site is aimed at technical people who wish to understand the inner workings of the ixo protocol, how it works and how to integrate your applications and systems into the protocol.\n\n\nIn simple terms, the ixo protocol allows for the creating of projects in persuit of the UN's sustainable development goals. People, systems or IOT devices can then submit claims regarding \nthe work performed against these projects.  This work is then evaluated for accuracy and authenticity by evaluators.  Evaluators may also be people, systems or evaluation oracles that could pull in vast amounts of data to determine the evaluation result.\n\n\nOverview of the Architecture\n\n\nThe ixo platform is managed by a number of components and systems that interoperate in order to provide the full services that the ixo protocol offers.\n\n\n\n\nThe ixo Blockchain\n\n\nThe ixo blockchain contains the records of evey claim that is issued against a project the the subsequent evaluation of those claims.  Each record is validated by a quorum of validator nodes before it is written to the chain and thereafter the record cannot be removed or updated.  This data is then aggegated to build out the final states of the projects.\n\n\nAll the information on the ixo blockchain is publically avaialble through the ixo Explorer. This data includes the project information, stats regarding the project, the stakeholders of the project and the structure of data being captured against the project.  All actual claim data is stored in the Project Datastore.\n\n\nPrivacy of Data\n\n\nMuch of the data that is captured within a claim is highly sensive in nature.  This data might have specific regulator requirements such as GDPR or maybe the data may not reside outside certain geographical boundaries.  In order to comply with this and to also put the data into the hands of the owners of the project we have created the concept of independant data stores for each project.\n\n\nThe ixo Blockchain keeps a link to the location of these project data stores and provides services to the project data that are goverened by cryptographic access controls.\n\n\nAmply\n\n\nAmply is a MVP project that we have built to prove the utility of the ixo protocol.  The code for this project can be found on our \nAmply github repository\n.",
             "title": "Home"
         },
         {
             "location": "/#welcome-to-the-ixo-protocol",
             "text": "Please have a look at the  ixo Foundation website  for more information on what we do.",
             "title": "Welcome to the ixo Protocol"
+        },
+        {
+            "location": "/#introduction",
+            "text": "The documentation on this site is aimed at technical people who wish to understand the inner workings of the ixo protocol, how it works and how to integrate your applications and systems into the protocol.  In simple terms, the ixo protocol allows for the creating of projects in persuit of the UN's sustainable development goals. People, systems or IOT devices can then submit claims regarding \nthe work performed against these projects.  This work is then evaluated for accuracy and authenticity by evaluators.  Evaluators may also be people, systems or evaluation oracles that could pull in vast amounts of data to determine the evaluation result.",
+            "title": "Introduction"
+        },
+        {
+            "location": "/#overview-of-the-architecture",
+            "text": "The ixo platform is managed by a number of components and systems that interoperate in order to provide the full services that the ixo protocol offers.",
+            "title": "Overview of the Architecture"
+        },
+        {
+            "location": "/#the-ixo-blockchain",
+            "text": "The ixo blockchain contains the records of evey claim that is issued against a project the the subsequent evaluation of those claims.  Each record is validated by a quorum of validator nodes before it is written to the chain and thereafter the record cannot be removed or updated.  This data is then aggegated to build out the final states of the projects.  All the information on the ixo blockchain is publically avaialble through the ixo Explorer. This data includes the project information, stats regarding the project, the stakeholders of the project and the structure of data being captured against the project.  All actual claim data is stored in the Project Datastore.",
+            "title": "The ixo Blockchain"
+        },
+        {
+            "location": "/#privacy-of-data",
+            "text": "Much of the data that is captured within a claim is highly sensive in nature.  This data might have specific regulator requirements such as GDPR or maybe the data may not reside outside certain geographical boundaries.  In order to comply with this and to also put the data into the hands of the owners of the project we have created the concept of independant data stores for each project.  The ixo Blockchain keeps a link to the location of these project data stores and provides services to the project data that are goverened by cryptographic access controls.",
+            "title": "Privacy of Data"
         },
         {
             "location": "/#amply",

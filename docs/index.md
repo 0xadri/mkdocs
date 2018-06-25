@@ -14,6 +14,8 @@ The ixo platform is managed by a number of components and systems that interoper
 
 ![Architecture Overview](./img/architecture-06-2018-Overview.png)
 
+For futher information see the [documentation on our components](./documentation/).
+
 ##The ixo Blockchain
 The ixo blockchain contains the records of evey claim that is issued against a project the the subsequent evaluation of those claims.  Each record is validated by a quorum of validator nodes before it is written to the chain and thereafter the record cannot be removed or updated.  This data is then aggegated to build out the final states of the projects.
 
@@ -24,6 +26,10 @@ Much of the data that is captured within a claim is highly sensive in nature.  T
 
 The ixo Blockchain keeps a link to the location of these project data stores and provides services to the project data that are goverened by cryptographic access controls.
 
+##Security
+All requests to that create data or access sensitive data require cryptographic signatures and a capabilities model supports this to provide finer grained access control.
+
+# Pilots
 ## Amply
 Amply is a MVP project that we have built to prove the utility of the ixo protocol.  The code for this project can be found on our [Amply github repository](https://github.com/TrustlabTech).  
 
