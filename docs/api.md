@@ -25,25 +25,29 @@ Structure:
 Everything in the payload section is signed to create a signature.  It should be packed using `JSON.stringify()` method before signing. 
 
 ```
- {
-    "payload": {        
-        "template": {
-            "name": "<template to validate>"
+{
+	"jsonrpc":"2.0", 
+	"method":"createAgent",
+	"id": 123,
+	"params": {
+		"payload": {
+			
+            "template": {
+                "name": "create_agent"
+            },
+            "data": {"projectDid": "did:ixo:TknEju4pjyRQvVehivZ82x",
+            		 "name": "Brennon",
+            		 "surname": "Hampton",
+            		 "email": "brennon@me.com",
+            		 "agentDid": "did:sov:64",
+            		 "role": "SA"}
         },
-        "data": {
-            "projectDid": <project did>,
-            "name": "Brennon",
-            "surname": "Hampton",
-            "email": "brennon@me.com",
-            "agentDid": "did:sov:64",
-            "role": "SA"
+        "signature": {
+            "type": "ed25519-sha-256",
+            "created": "2018-06-27T16:02:20Z", 
+            "creator": "did:sov:2p19P17cr6XavfMJ8htYSS",
+            "signatureValue": "A011D11A2D91A9CB03ECFFB7D9AFC1001DB56B3DABF42BDD0F4D00352A9B8E0E73E85F0B4586DA2934696C0A78602EEB047EA6B3D9096C1A0C3FB144E6A51C09"
         }
-    },
-    "signature": {
-        "type": <signature type ECDSA or E25519>,
-        "created": <date of signature>, 
-        "creator": <user did>,
-        "signatureValue":  <signature in hex>
     }
 }
 
