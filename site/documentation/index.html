@@ -108,34 +108,64 @@
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
         <li class="first-level active"><a href="#documentation">Documentation</a></li>
-            <li class="second-level"><a href="#schema">Schema</a></li>
+            <li class="second-level"><a href="#web-dashboard">Web Dashboard</a></li>
+                
+            <li class="second-level"><a href="#keysafe-browser-extension">Keysafe Browser Extension</a></li>
+                
+            <li class="second-level"><a href="#ixo-npm-module">ixo NPM Module</a></li>
+                
+            <li class="second-level"><a href="#project-datastore">Project Datastore</a></li>
+                
+            <li class="second-level"><a href="#ixo-blockchain">ixo Blockchain</a></li>
+                
+            <li class="second-level"><a href="#ixo-explorer">ixo Explorer</a></li>
+                
+            <li class="second-level"><a href="#schemas">Schemas</a></li>
                 
                 <li class="third-level"><a href="#folder-structure">Folder Structure</a></li>
                 <li class="third-level"><a href="#template-schemas">Template Schemas</a></li>
                 <li class="third-level"><a href="#templates">Templates</a></li>
-            <li class="second-level"><a href="#ixo-node">ixo-Node</a></li>
-                
-            <li class="second-level"><a href="#ixo-module">ixo-Module</a></li>
-                
-            <li class="second-level"><a href="#ixo-web">ixo-Web</a></li>
-                
-            <li class="second-level"><a href="#mkdocs">mkdocs</a></li>
+            <li class="second-level"><a href="#documentation_1">Documentation</a></li>
                 
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
 
 <h1 id="documentation">Documentation</h1>
-<p>The ixo project is made up of five key repositories namely:</p>
+<p>The ixo project is made up of the following key components namely:</p>
 <ul>
-<li><a href="#schema">schema</a> </li>
-<li><a href="#ixo-node">ixo-node</a></li>
-<li><a href="#ixo-module">ixo-module</a> </li>
-<li><a href="#ixo-web">ixo-web</a> </li>
-<li><a href="#mkdocs">mkdocs</a> <a href="https://github.com/ixofoundation/mkdocs">github</a></li>
+<li><a href="#web-dashboard">Web Dashboard</a></li>
+<li><a href="#keysafe-browser-extension">Keysafe Browser Extension</a></li>
+<li><a href="#ixo-npm-module">ixo NPM Module</a> </li>
+<li><a href="#project-datastore">Project Datastore</a></li>
+<li><a href="#ixo-blockchain">ixo Blockchain</a></li>
+<li><a href="#ixo-explorer">ixo Explorer</a></li>
+<li><a href="#schemas">Schemas</a> </li>
+<li><a href="#documentation">Documentation</a> </li>
 </ul>
-<h2 id="schema">Schema</h2>
-<p><a href="https://github.com/ixofoundation/schema">github</a></p>
+<h2 id="web-dashboard">Web Dashboard</h2>
+<p><img alt="github" src="../img/GitHub-Mark-16px.png" /> <a href="https://github.com/ixofoundation/ixo-web">https://github.com/ixofoundation/ixo-web</a></p>
+<p>A reference implementation of the web frontend and dashboard of the ixo protocol
+<em>TODO</em></p>
+<h2 id="keysafe-browser-extension">Keysafe Browser Extension</h2>
+<p><img alt="github" src="../img/GitHub-Mark-16px.png" /> <a href="https://github.com/ixofoundation/ixo-keysafe-browser-extension">https://github.com/ixofoundation/ixo-keysafe-browser-extension</a></p>
+<p>The ixo-keysafe-browser-extension provides signing capabilities for the ixo web frontend. It is fork from the <a href="https://metamask.io/">MetaMask</a> browser extension, but now uses Sovrin generated DID's as user credentials.</p>
+<h2 id="ixo-npm-module">ixo NPM Module</h2>
+<p><img alt="github" src="../img/GitHub-Mark-16px.png" /> <a href="https://github.com/ixofoundation/ixo-module">https://github.com/ixofoundation/ixo-module</a></p>
+<p>An npm package that wrappers the communication to the ixo backend services and provides usable services to a Javascript application.
+<em>TODO</em></p>
+<h2 id="project-datastore">Project Datastore</h2>
+<p><img alt="github" src="../img/GitHub-Mark-16px.png" /> <a href="https://github.com/ixofoundation/ixo-pds">https://github.com/ixofoundation/ixo-pds</a></p>
+<p>A reference implemenation of a project data store. The ixo-pds builds a fully functional docker image to process and store claims and evaluations and then adds a record of these interactoins to the ixo Blockchain</p>
+<p><em>TODO</em></p>
+<h2 id="ixo-blockchain">ixo Blockchain</h2>
+<p><img alt="github" src="../img/GitHub-Mark-16px.png" /> <a href="https://github.com/ixofoundation/ixo-cosmos">https://github.com/ixofoundation/ixo-cosmos</a></p>
+<p>Built on top of Tendermint and using the cosmos SDK, the ixo blockchain records the projects, claims and evaluations that are created through using the ixo-protocol</p>
+<h2 id="ixo-explorer">ixo Explorer</h2>
+<p><img alt="github" src="../img/GitHub-Mark-16px.png" /> <a href="https://github.com/ixofoundation/ixo-block-sync">https://github.com/ixofoundation/ixo-block-sync</a></p>
+<p>The ixo Explorer provides a set of simple API's to access the publically available project documentation.  It synchronises off the ixo blockchain and stores the current state of projects.</p>
+<h2 id="schemas">Schemas</h2>
+<p><img alt="github" src="../img/GitHub-Mark-16px.png" /> <a href="https://github.com/ixofoundation/schema">https://github.com/ixofoundation/schem</a></p>
 <p>A repository for holding schema templates for the ixo Protocol</p>
 <h3 id="folder-structure">Folder Structure</h3>
 <p><code>/projects</code> - Project Templates</p>
@@ -186,20 +216,8 @@
 <p><code>country</code> - Renders a selection box containing a list of country names and returns the (ISO 3166-2)[https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2]</p>
 <p><code>select</code> - Generic selection box containing a list of options.  If this type is selected the <code>option</code> value must also be set.</p>
 <p><code>image</code> - Renders an image or allows one to be uploaded</p>
-<h2 id="ixo-node">ixo-Node</h2>
-<p><a href="https://github.com/ixofoundation/ixo-node">github</a></p>
-<p>The backend of the ixo protocol which defines the nodes that run the network
-<em>TODO</em></p>
-<h2 id="ixo-module">ixo-Module</h2>
-<p><a href="https://github.com/ixofoundation/ixo-module">github</a></p>
-<p>An npm package that wrappers the communication to the ixo-node and provides usable services to a Javascript application.
-<em>TODO</em></p>
-<h2 id="ixo-web">ixo-Web</h2>
-<p><a href="https://github.com/ixofoundation/ixo-web">github</a></p>
-<p>A reference implemenation of a web frontend for the ixo protocol
-<em>TODO</em></p>
-<h2 id="mkdocs">mkdocs</h2>
-<p><a href="https://github.com/ixofoundation/mkdocs">github</a></p>
+<h2 id="documentation_1">Documentation</h2>
+<p><img alt="github" src="../img/GitHub-Mark-16px.png" /> <a href="https://github.com/ixofoundation/mkdocs">https://github.com/ixofoundation/mkdocs</a></p>
 <p>The repository contains the documentaion for the ixo system and is build using mkdocs.  It builds the content for this site.</p></div>
         
     </div>
@@ -217,7 +235,9 @@
     <script>
     var base_url = '..';
     </script>
-    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    <!--
+        <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    -->
     <script src="../js/base.js"></script>
     <script src="../search/require.js"></script>
     <script src="../search/search.js"></script>

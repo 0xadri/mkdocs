@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/",
-            "text": "Welcome to the ixo Protocol\n\n\nPlease have a look at the \nixo Foundation website\n for more information on what we do.\n\n\nAmply\n\n\nAmply is a MVP project that we have built to prove the utility of the ixo protocol.  The code for this project can be found on our \nAmply github repository\n.",
+            "text": "Welcome to the ixo Protocol\n\n\nPlease have a look at the \nixo Foundation website\n for more information on what we do.\n\n\nIntroduction\n\n\nThe documentation on this site is aimed at technical people who wish to understand the inner workings of the ixo protocol, how it works and how to integrate your applications and systems into the protocol.\n\n\nIn simple terms, the ixo protocol allows for the creating of projects in persuit of the UN's sustainable development goals. People, systems or IOT devices can then submit claims regarding \nthe work performed against these projects.  This work is then evaluated for accuracy and authenticity by evaluators.  Evaluators may also be people, systems or evaluation oracles that could pull in vast amounts of data to determine the evaluation result.\n\n\nOverview of the Architecture\n\n\nThe ixo platform is managed by a number of components and systems that interoperate in order to provide the full services that the ixo protocol offers.\n\n\n\n\nThe ixo Blockchain\n\n\nThe ixo blockchain contains the records of evey claim that is issued against a project the the subsequent evaluation of those claims.  Each record is validated by a quorum of validator nodes before it is written to the chain and thereafter the record cannot be removed or updated.  This data is then aggegated to build out the final states of the projects.\n\n\nAll the information on the ixo blockchain is publically avaialble through the ixo Explorer. This data includes the project information, stats regarding the project, the stakeholders of the project and the structure of data being captured against the project.  All actual claim data is stored in the Project Datastore.\n\n\nPrivacy of Data\n\n\nMuch of the data that is captured within a claim is highly sensive in nature.  This data might have specific regulator requirements such as GDPR or maybe the data may not reside outside certain geographical boundaries.  In order to comply with this and to also put the data into the hands of the owners of the project we have created the concept of independant data stores for each project.\n\n\nThe ixo Blockchain keeps a link to the location of these project data stores and provides services to the project data that are goverened by cryptographic access controls.\n\n\nAmply\n\n\nAmply is a MVP project that we have built to prove the utility of the ixo protocol.  The code for this project can be found on our \nAmply github repository\n.",
             "title": "Home"
         },
         {
@@ -11,24 +11,74 @@
             "title": "Welcome to the ixo Protocol"
         },
         {
+            "location": "/#introduction",
+            "text": "The documentation on this site is aimed at technical people who wish to understand the inner workings of the ixo protocol, how it works and how to integrate your applications and systems into the protocol.  In simple terms, the ixo protocol allows for the creating of projects in persuit of the UN's sustainable development goals. People, systems or IOT devices can then submit claims regarding \nthe work performed against these projects.  This work is then evaluated for accuracy and authenticity by evaluators.  Evaluators may also be people, systems or evaluation oracles that could pull in vast amounts of data to determine the evaluation result.",
+            "title": "Introduction"
+        },
+        {
+            "location": "/#overview-of-the-architecture",
+            "text": "The ixo platform is managed by a number of components and systems that interoperate in order to provide the full services that the ixo protocol offers.",
+            "title": "Overview of the Architecture"
+        },
+        {
+            "location": "/#the-ixo-blockchain",
+            "text": "The ixo blockchain contains the records of evey claim that is issued against a project the the subsequent evaluation of those claims.  Each record is validated by a quorum of validator nodes before it is written to the chain and thereafter the record cannot be removed or updated.  This data is then aggegated to build out the final states of the projects.  All the information on the ixo blockchain is publically avaialble through the ixo Explorer. This data includes the project information, stats regarding the project, the stakeholders of the project and the structure of data being captured against the project.  All actual claim data is stored in the Project Datastore.",
+            "title": "The ixo Blockchain"
+        },
+        {
+            "location": "/#privacy-of-data",
+            "text": "Much of the data that is captured within a claim is highly sensive in nature.  This data might have specific regulator requirements such as GDPR or maybe the data may not reside outside certain geographical boundaries.  In order to comply with this and to also put the data into the hands of the owners of the project we have created the concept of independant data stores for each project.  The ixo Blockchain keeps a link to the location of these project data stores and provides services to the project data that are goverened by cryptographic access controls.",
+            "title": "Privacy of Data"
+        },
+        {
             "location": "/#amply",
             "text": "Amply is a MVP project that we have built to prove the utility of the ixo protocol.  The code for this project can be found on our  Amply github repository .",
             "title": "Amply"
         },
         {
             "location": "/documentation/",
-            "text": "Documentation\n\n\nThe ixo project is made up of five key repositories namely:\n\n\n\n\nschema\n \n\n\nixo-node\n\n\nixo-module\n \n\n\nixo-web\n \n\n\nmkdocs\n \ngithub\n\n\n\n\nSchema\n\n\ngithub\n\n\nA repository for holding schema templates for the ixo Protocol\n\n\nFolder Structure\n\n\n/projects\n - Project Templates\n\n\n/agents\n - Agent Templates\n\n\n/claims\n - Claim Templates\n\n\n/evaluations\n - Evaluation Templates\n\n\nTemplate Schemas\n\n\nAll Templates follow the \nJSON-LD\n structure examples can be found at \nSchema.org\n\n\nExample:\n\n\n{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"Organization\",\n  \"url\": \"http://www.example.com\",\n  \"name\": \"Unlimited Ball Bearings Corp.\",\n  \"contactPoint\": {\n    \"@type\": \"ContactPoint\",\n    \"telephone\": \"+1-401-555-1212\",\n    \"contactType\": \"Customer service\"\n  }\n}\n\n\n\n\nTemplates\n\n\nTemplates describe the labels, input type and the optionality of fields.  These are used on the client side for rendering schemas.\n\n\nTemplates consist of a single data element called \nentities\n which is an array of the fields/entities that need to be rendered on screen. Each entity has three mandatory values:\n\n\nlabel\n - The label for the input\n\n\nname\n - The name of the input which must be present in the schema and uses dot notation for complex types\n\n\ntype\n - The which describes how the input should be captured\n\n\noptional\n - Determines whether the entity is required or optional (Defaults to \nfalse\n)\n\n\noptions\n - Only used if the type is \nselect\n and contains a list of \nlabels\n and \nvalues\n.\n\n\nhidden\n - If \ntrue\n do not display this field.  Defaults to \nfalse\n\n\nExample:\n\n\n\"options\": [\n  {\n    \"label\": \"Identity Document\", \n    \"value\": \"id\"\n  },\n  {\n    \"label\": \"Passport\",\n    \"value\": \"passport\"\n  }\n]\n\n\n\n\nTemplate Types\n\n\ntext\n - Renders a text input\n\n\ntextarea\n - Renders a multiline text input\n\n\ncountry\n - Renders a selection box containing a list of country names and returns the (ISO 3166-2)[https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2]\n\n\nselect\n - Generic selection box containing a list of options.  If this type is selected the \noption\n value must also be set.\n\n\nimage\n - Renders an image or allows one to be uploaded\n\n\nixo-Node\n\n\ngithub\n\n\nThe backend of the ixo protocol which defines the nodes that run the network\n\nTODO\n\n\nixo-Module\n\n\ngithub\n\n\nAn npm package that wrappers the communication to the ixo-node and provides usable services to a Javascript application.\n\nTODO\n\n\nixo-Web\n\n\ngithub\n\n\nA reference implemenation of a web frontend for the ixo protocol\n\nTODO\n\n\nmkdocs\n\n\ngithub\n\n\nThe repository contains the documentaion for the ixo system and is build using mkdocs.  It builds the content for this site.",
+            "text": "Documentation\n\n\nThe ixo project is made up of the following key components namely:\n\n\n\n\nWeb Dashboard\n\n\nKeysafe Browser Extension\n\n\nixo NPM Module\n \n\n\nProject Datastore\n\n\nixo Blockchain\n\n\nixo Explorer\n\n\nSchemas\n \n\n\nDocumentation\n \n\n\n\n\nWeb Dashboard\n\n\n \nhttps://github.com/ixofoundation/ixo-web\n\n\nA reference implementation of the web frontend and dashboard of the ixo protocol\n\nTODO\n\n\nKeysafe Browser Extension\n\n\n \nhttps://github.com/ixofoundation/ixo-keysafe-browser-extension\n\n\nThe ixo-keysafe-browser-extension provides signing capabilities for the ixo web frontend. It is fork from the \nMetaMask\n browser extension, but now uses Sovrin generated DID's as user credentials.\n\n\nixo NPM Module\n\n\n \nhttps://github.com/ixofoundation/ixo-module\n\n\nAn npm package that wrappers the communication to the ixo backend services and provides usable services to a Javascript application.\n\nTODO\n\n\nProject Datastore\n\n\n \nhttps://github.com/ixofoundation/ixo-pds\n\n\nA reference implemenation of a project data store. The ixo-pds builds a fully functional docker image to process and store claims and evaluations and then adds a record of these interactoins to the ixo Blockchain\n\n\nTODO\n\n\nixo Blockchain\n\n\n \nhttps://github.com/ixofoundation/ixo-cosmos\n\n\nBuilt on top of Tendermint and using the cosmos SDK, the ixo blockchain records the projects, claims and evaluations that are created through using the ixo-protocol\n\n\nixo Explorer\n\n\n \nhttps://github.com/ixofoundation/ixo-block-sync\n\n\nThe ixo Explorer provides a set of simple API's to access the publically available project documentation.  It synchronises off the ixo blockchain and stores the current state of projects.\n\n\nSchemas\n\n\n \nhttps://github.com/ixofoundation/schem\n\n\nA repository for holding schema templates for the ixo Protocol\n\n\nFolder Structure\n\n\n/projects\n - Project Templates\n\n\n/agents\n - Agent Templates\n\n\n/claims\n - Claim Templates\n\n\n/evaluations\n - Evaluation Templates\n\n\nTemplate Schemas\n\n\nAll Templates follow the \nJSON-LD\n structure examples can be found at \nSchema.org\n\n\nExample:\n\n\n{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"Organization\",\n  \"url\": \"http://www.example.com\",\n  \"name\": \"Unlimited Ball Bearings Corp.\",\n  \"contactPoint\": {\n    \"@type\": \"ContactPoint\",\n    \"telephone\": \"+1-401-555-1212\",\n    \"contactType\": \"Customer service\"\n  }\n}\n\n\n\n\nTemplates\n\n\nTemplates describe the labels, input type and the optionality of fields.  These are used on the client side for rendering schemas.\n\n\nTemplates consist of a single data element called \nentities\n which is an array of the fields/entities that need to be rendered on screen. Each entity has three mandatory values:\n\n\nlabel\n - The label for the input\n\n\nname\n - The name of the input which must be present in the schema and uses dot notation for complex types\n\n\ntype\n - The which describes how the input should be captured\n\n\noptional\n - Determines whether the entity is required or optional (Defaults to \nfalse\n)\n\n\noptions\n - Only used if the type is \nselect\n and contains a list of \nlabels\n and \nvalues\n.\n\n\nhidden\n - If \ntrue\n do not display this field.  Defaults to \nfalse\n\n\nExample:\n\n\n\"options\": [\n  {\n    \"label\": \"Identity Document\", \n    \"value\": \"id\"\n  },\n  {\n    \"label\": \"Passport\",\n    \"value\": \"passport\"\n  }\n]\n\n\n\n\nTemplate Types\n\n\ntext\n - Renders a text input\n\n\ntextarea\n - Renders a multiline text input\n\n\ncountry\n - Renders a selection box containing a list of country names and returns the (ISO 3166-2)[https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2]\n\n\nselect\n - Generic selection box containing a list of options.  If this type is selected the \noption\n value must also be set.\n\n\nimage\n - Renders an image or allows one to be uploaded\n\n\nDocumentation\n\n\n \nhttps://github.com/ixofoundation/mkdocs\n\n\nThe repository contains the documentaion for the ixo system and is build using mkdocs.  It builds the content for this site.",
             "title": "Documentation"
         },
         {
             "location": "/documentation/#documentation",
-            "text": "The ixo project is made up of five key repositories namely:   schema    ixo-node  ixo-module    ixo-web    mkdocs   github",
+            "text": "The ixo project is made up of the following key components namely:   Web Dashboard  Keysafe Browser Extension  ixo NPM Module    Project Datastore  ixo Blockchain  ixo Explorer  Schemas    Documentation",
             "title": "Documentation"
         },
         {
-            "location": "/documentation/#schema",
-            "text": "github  A repository for holding schema templates for the ixo Protocol",
-            "title": "Schema"
+            "location": "/documentation/#web-dashboard",
+            "text": "https://github.com/ixofoundation/ixo-web  A reference implementation of the web frontend and dashboard of the ixo protocol TODO",
+            "title": "Web Dashboard"
+        },
+        {
+            "location": "/documentation/#keysafe-browser-extension",
+            "text": "https://github.com/ixofoundation/ixo-keysafe-browser-extension  The ixo-keysafe-browser-extension provides signing capabilities for the ixo web frontend. It is fork from the  MetaMask  browser extension, but now uses Sovrin generated DID's as user credentials.",
+            "title": "Keysafe Browser Extension"
+        },
+        {
+            "location": "/documentation/#ixo-npm-module",
+            "text": "https://github.com/ixofoundation/ixo-module  An npm package that wrappers the communication to the ixo backend services and provides usable services to a Javascript application. TODO",
+            "title": "ixo NPM Module"
+        },
+        {
+            "location": "/documentation/#project-datastore",
+            "text": "https://github.com/ixofoundation/ixo-pds  A reference implemenation of a project data store. The ixo-pds builds a fully functional docker image to process and store claims and evaluations and then adds a record of these interactoins to the ixo Blockchain  TODO",
+            "title": "Project Datastore"
+        },
+        {
+            "location": "/documentation/#ixo-blockchain",
+            "text": "https://github.com/ixofoundation/ixo-cosmos  Built on top of Tendermint and using the cosmos SDK, the ixo blockchain records the projects, claims and evaluations that are created through using the ixo-protocol",
+            "title": "ixo Blockchain"
+        },
+        {
+            "location": "/documentation/#ixo-explorer",
+            "text": "https://github.com/ixofoundation/ixo-block-sync  The ixo Explorer provides a set of simple API's to access the publically available project documentation.  It synchronises off the ixo blockchain and stores the current state of projects.",
+            "title": "ixo Explorer"
+        },
+        {
+            "location": "/documentation/#schemas",
+            "text": "https://github.com/ixofoundation/schem  A repository for holding schema templates for the ixo Protocol",
+            "title": "Schemas"
         },
         {
             "location": "/documentation/#folder-structure",
@@ -51,24 +101,9 @@
             "title": "Template Types"
         },
         {
-            "location": "/documentation/#ixo-node",
-            "text": "github  The backend of the ixo protocol which defines the nodes that run the network TODO",
-            "title": "ixo-Node"
-        },
-        {
-            "location": "/documentation/#ixo-module",
-            "text": "github  An npm package that wrappers the communication to the ixo-node and provides usable services to a Javascript application. TODO",
-            "title": "ixo-Module"
-        },
-        {
-            "location": "/documentation/#ixo-web",
-            "text": "github  A reference implemenation of a web frontend for the ixo protocol TODO",
-            "title": "ixo-Web"
-        },
-        {
-            "location": "/documentation/#mkdocs",
-            "text": "github  The repository contains the documentaion for the ixo system and is build using mkdocs.  It builds the content for this site.",
-            "title": "mkdocs"
+            "location": "/documentation/#documentation_1",
+            "text": "https://github.com/ixofoundation/mkdocs  The repository contains the documentaion for the ixo system and is build using mkdocs.  It builds the content for this site.",
+            "title": "Documentation"
         },
         {
             "location": "/api/",
