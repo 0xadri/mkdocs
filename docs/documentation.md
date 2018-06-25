@@ -1,15 +1,52 @@
 # Documentation
 
-The ixo project is made up of five key repositories namely:
+The ixo project is made up of the following key components namely:
 
-- [schema](#schema) 
-- [ixo-node](#ixo-node)
-- [ixo-module](#ixo-module) 
-- [ixo-web](#ixo-web) 
-- [mkdocs](#mkdocs) [github](https://github.com/ixofoundation/mkdocs)
+- [Web Dashboard](#web-dashboard)
+- [Keysafe Browser Extension](#keysafe-browser-extension)
+- [ixo NPM Module](#ixo-npm-module) 
+- [Project Datastore](#project-datastore)
+- [ixo Blockchain](#ixo-blockchain)
+- [ixo Explorer](#ixo-explorer)
+- [Schemas](#schemas) 
+- [Documentation](#documentation) 
 
-##Schema 
-[github](https://github.com/ixofoundation/schema)
+##Web Dashboard
+![github](./img/GitHub-Mark-16px.png) [https://github.com/ixofoundation/ixo-web](https://github.com/ixofoundation/ixo-web)
+
+A reference implementation of the web frontend and dashboard of the ixo protocol
+*TODO*
+
+##Keysafe Browser Extension
+![github](./img/GitHub-Mark-16px.png) [https://github.com/ixofoundation/ixo-keysafe-browser-extension](https://github.com/ixofoundation/ixo-keysafe-browser-extension)
+
+The ixo-keysafe-browser-extension provides signing capabilities for the ixo web frontend. It is fork from the [MetaMask](https://metamask.io/) browser extension, but now uses Sovrin generated DID's as user credentials.
+
+##ixo NPM Module
+![github](./img/GitHub-Mark-16px.png) [https://github.com/ixofoundation/ixo-module](https://github.com/ixofoundation/ixo-module)
+
+An npm package that wrappers the communication to the ixo backend services and provides usable services to a Javascript application.
+*TODO*
+
+##Project Datastore
+![github](./img/GitHub-Mark-16px.png) [https://github.com/ixofoundation/ixo-pds](https://github.com/ixofoundation/ixo-pds)
+
+A reference implemenation of a project data store. The ixo-pds builds a fully functional docker image to process and store claims and evaluations and then adds a record of these interactoins to the ixo Blockchain
+
+*TODO*
+
+##ixo Blockchain
+![github](./img/GitHub-Mark-16px.png) [https://github.com/ixofoundation/ixo-cosmos](https://github.com/ixofoundation/ixo-cosmos)
+
+Built on top of Tendermint and using the cosmos SDK, the ixo blockchain records the projects, claims and evaluations that are created through using the ixo-protocol
+
+##ixo Explorer
+![github](./img/GitHub-Mark-16px.png) [https://github.com/ixofoundation/ixo-block-sync](https://github.com/ixofoundation/ixo-block-sync)
+
+The ixo Explorer provides a set of simple API's to access the publically available project documentation.  It synchronises off the ixo blockchain and stores the current state of projects.
+
+##Schemas 
+![github](./img/GitHub-Mark-16px.png) [https://github.com/ixofoundation/schem](https://github.com/ixofoundation/schema)
 
 A repository for holding schema templates for the ixo Protocol
 
@@ -82,27 +119,8 @@ Example:
 
 `image` - Renders an image or allows one to be uploaded
 
-
-##ixo-Node
-[github](https://github.com/ixofoundation/ixo-node)
-
-The backend of the ixo protocol which defines the nodes that run the network
-*TODO*
-
-##ixo-Module
-[github](https://github.com/ixofoundation/ixo-module)
-
-An npm package that wrappers the communication to the ixo-node and provides usable services to a Javascript application.
-*TODO*
-
-##ixo-Web
-[github](https://github.com/ixofoundation/ixo-web)
-
-A reference implemenation of a web frontend for the ixo protocol
-*TODO*
-
-##mkdocs
-[github](https://github.com/ixofoundation/mkdocs)
+##Documentation
+![github](./img/GitHub-Mark-16px.png) [https://github.com/ixofoundation/mkdocs](https://github.com/ixofoundation/mkdocs)
 
 The repository contains the documentaion for the ixo system and is build using mkdocs.  It builds the content for this site.
 
