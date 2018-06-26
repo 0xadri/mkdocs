@@ -29,6 +29,15 @@ The ixo Blockchain keeps a link to the location of these project data stores and
 ##Security
 All requests to that create data or access sensitive data require cryptographic signatures and a capabilities model supports this to provide finer grained access control.
 
+## Message Flows
+![Message Flows](./img/architecture-06-2018-MessageFlows.png)
+
+### Update Messages
+In general update requests are created and signed on the front end using our keysafe which holds the private keys for the user. The request with it's signature portion is then passed to the Project Datastore (PDS) when it is processed and the results is then ledgered onto the ixo blockchain with hash references back to the original transaction on the PDS. The block containin the request is then processed on the ixo blockchange and the ixo Explorer the sychs this block to the current system state.
+
+### Read Messages
+When reading publically availably data a REST call is made to the ixo Explorer that contians the current state of the the blockchain.  If provate information needs ot be accessed than a signed request is submitted to the PDS which will respond withthe data if the the signature and capabilited of the user adhere to the policies for that data.
+
 # Pilots
 ## Amply
 Amply is a MVP project that we have built to prove the utility of the ixo protocol.  The code for this project can be found on our [Amply github repository](https://github.com/TrustlabTech).  
