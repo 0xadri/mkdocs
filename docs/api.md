@@ -2,19 +2,179 @@
 
 The ixo platform has a number of different components that each has a set of APIs
 
-## ixo module API
-### Install using npm
+## ixo NPM module API
+
+The ixo NPM module makes it easier to interact withthe project data stores and the ixo blockchain
+
+### Usage
+#### Install using npm
 
 `npm install --save ixo-module`
 
-###Create new Ixo Object (Without provider)
+#### Create new Ixo Object (Without provider)
 
 ```
 import Ixo from 'ixo-module';
 var ixo = new Ixo('ixo_node_url')
 ```
 
-* TODO *
+### Project Functions
+Functions pertaining to projects. These calls take the form `ixo.project.<functionName>`
+
+#### List Projects
+Returns a list of all projects
+
+Request:
+```
+ixo.project.listProjects().then((result) => {
+    console.log('Project List: ' + result)
+})   
+```
+
+Response: [ixo Explorer: listProjects](#explorer-listProjects)
+
+
+#### Get Project
+Retrieves public project details by DID
+```
+let projectDid = 'did:ixo:TknEju4pjyRQvVehivZ82x';
+ixo.project.getProjectByDid(projectDid).then((result) => {
+    console.log('Project Details: ' + result)
+})   
+```
+
+Response: [ixo Explorer: getProject](#explorer-getProject)
+
+#### Create Project
+```
+ixo.project.createProject(projectData, signature, PDSUrl).then((result) => {
+    console.log('Project Details: ' + result)
+})   
+```
+
+Response: [PDS: createProject](#pds-createProject)
+
+
+#### Upload a Document
+Function to upload a dataUrl to the project.  It returns a unique reference to the data so it can be retrieved at a later stage. It is used for uploading images and json templates, but it could countain any other project specific public data.
+
+The `dataUrl` takes the form of `data:<mediatype>;<encoding>,<data>`
+
+```
+// Upload an image
+let dataUrl = 'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO 9TXL0Y4OHwAAAABJRU5ErkJggg==';
+ixo.project.createPublic(dataUrl, PDSUrl) {
+    console.log('Document hash: ' + result)
+})   
+```
+
+Response: [PDS: createPublic](#pds-createPublic-image)
+
+#### Retrieve a Document
+Retrieves a previously uploaded document using the document hash
+
+```
+ixo.project.fetchPublic(documentHash, PDSUrl) {
+    console.log('Document hash: ' + result)
+})   
+```
+
+Response: [PDS: fetchPublic](#pds-fetchPublic-image)
+
+### Agent Functions
+Functions pertaining to agents on projects.  These calls take the form `ixo.agent.<functionName>`
+
+#### List Agents on a Project
+Returns a list of all agents on a project
+
+Request:
+```
+ixo.agent.listAgentsForProject(data, signature, PDSUrl).then((result) => {
+    console.log('Agent List: ' + result)
+})   
+```
+
+Response: [PDS: listAgents](#pds-listAgents)
+
+
+#### Create an Agent on a Project
+Create an agents on a project
+
+Request:
+```
+ixo.agent.createAgent(agentData, signature, PDSUrl).then((result) => {
+    console.log('Create Agent: ' + result)
+})   
+```
+
+Response: [PDS: createAgent](#pds-createAgent)
+
+#### Update Agent Status
+Update an agent's status on a project
+
+Valid statuses are:
+ 
+| Status  | Value |
+| ------- | ----- |
+|Pending  | 0     |
+|Approved | 1     |
+|Revoked  | 2     |
+
+Request:
+```
+ixo.agent.createAgent(agentData, signature, PDSUrl).then((result) => {
+    console.log('Update Agent Status: ' + result)
+})   
+```
+
+Response: [PDS: updateAgentStatus](#pds-updateAgentStatus)
+
+### Claim Functions
+Functions pertaining to agents on projects.  These calls take the form `ixo.claim.<functionName>`
+
+#### List Claims on a Project
+Returns a list of all claims on a project
+
+Request:
+```
+ixo.claim.listClaimsForProject(data, signature, PDSUrl).then((result) => {
+    console.log('Claim List: ' + result)
+})   
+```
+
+Response: [PDS: listClaimsForProject](#pds-listClaimsForProject)
+
+#### Create a Claim on a Project
+Create a claim on a project
+
+Request:
+```
+ixo.agent.createClaim(agentData, signature, PDSUrl).then((result) => {
+    console.log('Create Claim: ' + result)
+})   
+```
+
+Response: [PDS: createClaim](#pds-createClaim)
+
+#### Evaluate a Claim
+Create an evaluation for a claim
+
+Valid statuses are:
+ 
+| Status  | Value |
+| ------- | ----- |
+|Pending  | 0     |
+|Approved | 1     |
+|Rejected | 2     |
+
+Request:
+```
+ixo.agent.evaluateClaim(evaluationData, signature, PDSUrl).then((result) => {
+    console.log('Create Evaluation: ' + result)
+})   
+```
+
+Response: [PDS: evaluateClaim](#pds-evaluateClaim)
 
 ## Keysafe Browser Extension API
 
@@ -74,7 +234,7 @@ Data is stored in binary and can handle any of the following encodings: "ascii" 
 }
 
 ```
-
+<a name="pds-createPublic-image"></a>
 #### Upload an image
  
  Request:
@@ -102,6 +262,7 @@ Response:
 }
 ```
 
+<a name="pds-fetchPublic-image"></a>
 #### Fetch image
  
 Request:
@@ -128,6 +289,7 @@ Response:
 }
 ```
 
+<a name="pds-createPublic-json"></a>
 #### Upload a Json file
 
 Request:
@@ -155,6 +317,7 @@ Response:
 }
 ```
 
+<a name="pds-fetchPublic-json"></a>
 #### Fetch Json file
 
 Request:
@@ -230,7 +393,7 @@ Everything in the payload section is signed to create a signature.  It should be
 }
 
 ```
-
+<a name="pds-createProject"></a>
 #### Create Project
 
 Creates a new project.
@@ -276,6 +439,7 @@ Response:
 }
 ```
 
+<a name="pds-createAgent"></a>
 #### Create Agent
 
 Creates a new agent.
@@ -322,6 +486,7 @@ Response:
 }
 ```
 
+<a name="pds-updateAgentStatus"></a>
 #### Update Agent Status
 
 Update Agent Status
@@ -368,7 +533,7 @@ Response:
     }
 }
 ```
-
+<a name="pds-listAgents"></a>
 #### List Agents
 
 List claims and latest status.
@@ -416,6 +581,7 @@ Response:
 }
 ```
 
+<a name="pds-createClaim"></a>
 #### Submit Claim
 
 Creates a new claim.
@@ -433,7 +599,7 @@ Request:
                 "name": "<template to validate>"
             },
             "data": {
-                <usubmit claim data>
+                <submit claim data>
             }
         },
         "signature": {
@@ -461,6 +627,7 @@ Response:
 }
 ```
 
+<a name="pds-evaluateClaim"></a>
 #### Evaluate Claim
 
 Evaluate a new claim.
@@ -560,5 +727,15 @@ Response:
 
 ## ixo Explorer API
 
-* TODO *
+Returns a the publicly available data pertaining to projects
+
+<a name="explorer-listProjects"></a>
+### List Projects
+
+Lists all the projects
+
+<a name="explorer-getProject"></a>
+### Get Project
+
+Retrieves a project by project DID
 
