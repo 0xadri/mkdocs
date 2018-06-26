@@ -2,7 +2,7 @@
 
 The ixo project is made up of the following key components namely:
 
-- [Web Dashboard](#web-dashboard)
+- [Web Portal](#web-portal)
 - [Keysafe Browser Extension](#keysafe-browser-extension)
 - [ixo NPM Module](#ixo-npm-module) 
 - [Project Datastore](#project-datastore)
@@ -11,10 +11,12 @@ The ixo project is made up of the following key components namely:
 - [Schemas](#schemas) 
 - [Documentation](#documentation) 
 
-##Web Dashboard
+![Message Flows](./img/architecture-06-2018-MessageFlows.png)
+
+##Web Portal
 ![github](./img/GitHub-Mark-16px.png) [https://github.com/ixofoundation/ixo-web](https://github.com/ixofoundation/ixo-web)
 
-A reference implementation of the web frontend and dashboard of the ixo protocol
+A reference implementation of the web portal of the ixo protocol
 *TODO*
 
 ##Keysafe Browser Extension

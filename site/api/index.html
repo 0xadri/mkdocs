@@ -108,32 +108,49 @@
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
         <li class="first-level active"><a href="#api">API</a></li>
-            <li class="second-level"><a href="#ixo-node-api">ixo-Node API</a></li>
-                
-                <li class="third-level"><a href="#structure-of-params-object">Structure of params object</a></li>
-                <li class="third-level"><a href="#network">Network</a></li>
-                <li class="third-level"><a href="#project">Project</a></li>
-                <li class="third-level"><a href="#template">Template</a></li>
-                <li class="third-level"><a href="#agent">Agent</a></li>
-                <li class="third-level"><a href="#claim">Claim</a></li>
-            <li class="second-level"><a href="#ixo-module-api">ixo-Module API</a></li>
+            <li class="second-level"><a href="#ixo-module-api">ixo module API</a></li>
                 
                 <li class="third-level"><a href="#install-using-npm">Install using npm</a></li>
                 <li class="third-level"><a href="#create-new-ixo-object-without-provider">Create new Ixo Object (Without provider)</a></li>
-                <li class="third-level"><a href="#create-new-ixo-object-with-provider">Create new Ixo Object (With provider)</a></li>
-                <li class="third-level"><a href="#cryptoutil">CryptoUtil</a></li>
-                <li class="third-level"><a href="#network_1">Network</a></li>
-                <li class="third-level"><a href="#projects">Projects</a></li>
-                <li class="third-level"><a href="#agent_1">Agent</a></li>
+            <li class="second-level"><a href="#keysafe-browser-extension-api">Keysafe Browser Extension API</a></li>
+                
+            <li class="second-level"><a href="#project-datastore-api">Project Datastore API</a></li>
+                
+                <li class="third-level"><a href="#introduction">Introduction</a></li>
+                <li class="third-level"><a href="#public-api">Public API</a></li>
+                <li class="third-level"><a href="#private-api">Private API</a></li>
+                <li class="third-level"><a href="#structure-of-params-object">Structure of params object</a></li>
+            <li class="second-level"><a href="#ixo-blockchain-api">ixo Blockchain API</a></li>
+                
+            <li class="second-level"><a href="#ixo-explorer-api">ixo Explorer API</a></li>
+                
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
 
 <h1 id="api">API</h1>
-<p><em>TODO</em></p>
-<h2 id="ixo-node-api">ixo-Node API</h2>
-<p>The ixo node uses JSON-RPC to receive client requests.  The structure of all calls follow the same structure:</p>
-<p>URI: <code>&lt;node server&gt;/api/&lt;entity&gt;</code></p>
+<p>The ixo platform has a number of different components that each has a set of APIs</p>
+<h2 id="ixo-module-api">ixo module API</h2>
+<h3 id="install-using-npm">Install using npm</h3>
+<p><code>npm install --save ixo-module</code></p>
+<h3 id="create-new-ixo-object-without-provider">Create new Ixo Object (Without provider)</h3>
+<pre><code>import Ixo from 'ixo-module';
+var ixo = new Ixo('ixo_node_url')
+</code></pre>
+
+<h2 id="keysafe-browser-extension-api">Keysafe Browser Extension API</h2>
+<h2 id="project-datastore-api">Project Datastore API</h2>
+<h3 id="introduction">Introduction</h3>
+<p>The project data store holds the data relating to projects.  The API is split into a public API and a non public API. The public API requests do not require cryptographic signatures, while all other requests must be signed and adher to the capabilities that have been granted to the signer.</p>
+<h3 id="public-api">Public API</h3>
+<p>*Todo</p>
+<p>Upload an image</p>
+<p>Fetch image</p>
+<p>Upload a Json file</p>
+<p>Fetch Json file*</p>
+<h3 id="private-api">Private API</h3>
+<p>The ixo project data store (pds) uses JSON-RPC to receive client requests.  The structure of all calls follow the same structure:</p>
+<p>URI: <code>&lt;pds server&gt;/api/request</code></p>
 <p>Request type: <code>POST</code></p>
 <p>Structure: 
 <code>{"jsonrpc": "2.0", "method": "&lt;method name&gt;",  "id": &lt;message id&gt;,     "params": &lt;json data object&gt; }</code></p>
@@ -155,7 +172,7 @@
 </tr>
 <tr>
 <td><code>&lt;method name&gt;</code></td>
-<td>The name of the method to call</td>
+<td>The name of the method to call defined in the config file</td>
 </tr>
 <tr>
 <td><code>&lt;message id&gt;</code></td>
@@ -168,50 +185,33 @@
 </tbody>
 </table>
 <h3 id="structure-of-params-object">Structure of params object</h3>
-<p>Everything in the payload section is signed to create a signature.  It shoul dbe packed using <code>JSON.stringify()</code> method before signing. </p>
+<p>Everything in the payload section is signed to create a signature.  It should be packed using <code>JSON.stringify()</code> method before signing. </p>
 <pre><code>{
-    &quot;payload&quot;: {
-        &quot;did&quot;: &lt;did|publicKey of user&gt;,
-        &quot;data&quot;: &lt;request data&gt;
-    },
-    &quot;signature&quot;: {
-        &quot;type&quot;: &lt;signature type ECDSA or E25519&gt;,
-        &quot;created&quot;: &lt;date of signature&gt;,
-        &quot;creator&quot;: &lt;did|publicKey of user&gt;,
-        &quot;signature&quot;: &lt;signature in hex&gt;
+    &quot;jsonrpc&quot;:&quot;2.0&quot;, 
+    &quot;method&quot;:&quot;createAgent&quot;,
+    &quot;id&quot;: 123,
+    &quot;params&quot;: {
+        &quot;payload&quot;: {
+
+            &quot;template&quot;: {
+                &quot;name&quot;: &quot;create_agent&quot;
+            },
+            &quot;data&quot;: {&quot;projectDid&quot;: &quot;did:ixo:TknEju4pjyRQvVehivZ82x&quot;,
+                     &quot;name&quot;: &quot;Brennon&quot;,
+                     &quot;surname&quot;: &quot;Hampton&quot;,
+                     &quot;email&quot;: &quot;brennon@me.com&quot;,
+                     &quot;agentDid&quot;: &quot;did:sov:64&quot;,
+                     &quot;role&quot;: &quot;SA&quot;}
+        },
+        &quot;signature&quot;: {
+            &quot;type&quot;: &quot;ed25519-sha-256&quot;,
+            &quot;created&quot;: &quot;2018-06-27T16:02:20Z&quot;, 
+            &quot;creator&quot;: &quot;did:sov:2p19P17cr6XavfMJ8htYSS&quot;,
+            &quot;signatureValue&quot;: &quot;A011D11A2D91A9CB03ECFFB7D9AFC1001DB56B3DABF42BDD0F4D00352A9B8E0E73E85F0B4586DA2934696C0A78602EEB047EA6B3D9096C1A0C3FB144E6A51C09&quot;
+        }
     }
 }
-</code></pre>
 
-<h3 id="network">Network</h3>
-<p>Example URI: https://ixo-node.herokuapp.com/api/network</p>
-<h4 id="ping">Ping</h4>
-<p>Pings the network to ensure connectivity.</p>
-<p>Request:</p>
-<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;ping&quot;, &quot;id&quot;: 1}
-</code></pre>
-
-<p>Response:</p>
-<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;id&quot;: 1, &quot;result&quot;: &quot;pong&quot;}
-</code></pre>
-
-<h3 id="project">Project</h3>
-<p>Example URI: https://ixo-node.herokuapp.com/api/project</p>
-<h4 id="get-template">Get Template</h4>
-<p>Retrieves the project template from the template registry.</p>
-<p>Request:</p>
-<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;getTemplate&quot;, &quot;params&quot;: {&quot;payload&quot;:{&quot;did&quot;:&lt;did of user&gt;,&quot;data&quot;:{&quot;name&quot;:&lt;project template name&gt;}}}, &quot;id&quot;: 1}
-</code></pre>
-
-<p>Response:</p>
-<pre><code>{
-    &quot;jsonrpc&quot;: &quot;2.0&quot;,
-    &quot;id&quot;: 1,
-    &quot;result&quot;: {
-        &quot;template&quot;: &lt;the template&gt;,
-        &quot;form&quot;: &lt;template's corresponding form&gt;
-    }
-}
 </code></pre>
 
 <h4 id="create-project">Create Project</h4>
@@ -219,21 +219,22 @@
 <p>Request:</p>
 <pre><code>{
     &quot;jsonrpc&quot;: &quot;2.0&quot;, 
-    &quot;method&quot;: &quot;create&quot;, 
+    &quot;method&quot;: &quot;createProject&quot;, 
     &quot;id&quot;: 3, 
     &quot;params&quot;: {
-        &quot;payload&quot;:{
-            &quot;did&quot;:&lt;did of user&gt;,
+        &quot;payload&quot;: {        
             &quot;template&quot;: {
-                &quot;name&quot;: &lt;template name&gt;
+                &quot;name&quot;: &quot;&lt;template to validate&gt;&quot;
             },
-            &quot;data&quot;: &lt;project data&gt;
+            &quot;data&quot;: {
+                &lt;create project data&gt;
+            }
         },
         &quot;signature&quot;: {
-            &quot;type&quot;: &quot;ECDSA&quot;,
-            &quot;created&quot;: &quot;2016-02-08T16:02:20Z&quot;, 
-            &quot;creator&quot;: &lt;did of user&gt;,
-            &quot;signature&quot;: &lt;signature&gt;
+            &quot;type&quot;: &lt;signature type ECDSA or E25519&gt;,
+            &quot;created&quot;: &lt;date of signature&gt;, 
+            &quot;creator&quot;: &lt;user did&gt;,
+            &quot;signatureValue&quot;:  &lt;signature in hex&gt;
         }
     }
 }
@@ -248,87 +249,6 @@
         &lt;project data&gt;
         &quot;tx&quot;: &quot;b51cd2665d146d0a0240fd2756beb4c9e9c1948275ac5d37a7ae405ab2d71a7a&quot;,
         &quot;_id&quot;: &quot;5a66e09b38f45f01d90d122a&quot;,
-        &quot;created&quot;: &quot;2018-01-23T07:13:31.060Z&quot;
-    }
-}
-</code></pre>
-
-<h4 id="list-projects">List Projects</h4>
-<p>Lists all new projects.</p>
-<p>Request:</p>
-<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;list&quot;, &quot;id&quot;: 1}
-</code></pre>
-
-<p>Response:</p>
-<pre><code>{
-    &quot;jsonrpc&quot;: &quot;2.0&quot;,
-    &quot;id&quot;: 1,
-    &quot;result&quot;: &lt;array of projects&gt;
-}
-</code></pre>
-
-<h4 id="list-projects-for-a-specific-did">List Projects for a specific DID</h4>
-<p>Lists all projects owned by a specific DID.</p>
-<p>Request:</p>
-<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;listForDID&quot;, &quot;params&quot;: {&quot;payload&quot;:{&quot;did&quot;:&lt;did of user&gt;,&quot;data&quot;:{&quot;did&quot;:&lt;did of owner&gt;}}}, &quot;id&quot;: 1}
-</code></pre>
-
-<p>Response:</p>
-<pre><code>{
-    &quot;jsonrpc&quot;: &quot;2.0&quot;,
-    &quot;id&quot;: 1,
-    &quot;result&quot;: &lt;array of projects&gt;
-}
-</code></pre>
-
-<h4 id="list-projects-for-a-specific-agent-did-and-role">List Projects for a specific Agent DID and role</h4>
-<p>Lists all projects owned by a specific DID.</p>
-<p>Request:</p>
-<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;listForAgentDIDAndRole&quot;, &quot;params&quot;: {&quot;payload&quot;:{&quot;did&quot;:&lt;did of user&gt;,&quot;data&quot;:{&quot;did&quot;:&lt;did of agent&gt;, &quot;role&quot;: &lt;role IA,EA or SA&gt;}}}, &quot;id&quot;: 1}
-</code></pre>
-
-<p>Response:</p>
-<pre><code>{
-    &quot;jsonrpc&quot;: &quot;2.0&quot;,
-    &quot;id&quot;: 1,
-    &quot;result&quot;: &lt;array of projects&gt;
-}
-</code></pre>
-
-<h3 id="template">Template</h3>
-<p>Example URI: https://ixo-node.herokuapp.com/api/template</p>
-<h4 id="get-template_1">Get Template</h4>
-<p>Retrieves a template from the template registry. Valid types are: 'project', 'agent', claim' or 'evaluation'</p>
-<p>Request:</p>
-<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;getTemplate&quot;, &quot;params&quot;: {&quot;payload&quot;:{&quot;did&quot;:&lt;did of user&gt;,&quot;data&quot;:{&quot;type&quot;: &lt;template type&gt;, &quot;name&quot;: &lt;name of template&gt;}}}, &quot;id&quot;: 1}
-</code></pre>
-
-<p>Response:</p>
-<pre><code>{
-    &quot;jsonrpc&quot;: &quot;2.0&quot;,
-    &quot;id&quot;: 1,
-    &quot;result&quot;: {
-        &quot;template&quot;: &lt;the template&gt;,
-        &quot;form&quot;: &lt;template's corresponding form&gt;
-    }
-}
-</code></pre>
-
-<h3 id="agent">Agent</h3>
-<p>Example URI: https://ixo-node.herokuapp.com/api/agent</p>
-<h4 id="get-template_2">Get Template</h4>
-<p>Retrieves the agent template called "default" from the template registry.</p>
-<p>Request:</p>
-<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;getTemplate&quot;, &quot;params&quot;: {&quot;payload&quot;:{&quot;did&quot;:&lt;did of user&gt;,&quot;data&quot;:{&quot;name&quot;: &lt;name of agent template&gt;}}}, &quot;id&quot;: 1}
-</code></pre>
-
-<p>Response:</p>
-<pre><code>{
-    &quot;jsonrpc&quot;: &quot;2.0&quot;,
-    &quot;id&quot;: 1,
-    &quot;result&quot;: {
-        &quot;template&quot;: &lt;the template&gt;,
-        &quot;form&quot;: &lt;template's corresponding form&gt;
     }
 }
 </code></pre>
@@ -338,21 +258,22 @@
 <p>Request:</p>
 <pre><code>{
     &quot;jsonrpc&quot;: &quot;2.0&quot;, 
-    &quot;method&quot;: &quot;create&quot;, 
+    &quot;method&quot;: &quot;createAgent&quot;, 
     &quot;id&quot;: 3, 
     &quot;params&quot;: {
-        payload: {
+        &quot;payload&quot;: {        
             &quot;template&quot;: {
-                &quot;name&quot;: &lt;template name&gt;
+                &quot;name&quot;: &quot;&lt;template to validate&gt;&quot;
             },
-            &quot;did&quot;: &lt;did of user&gt;,
-            &quot;data&quot;: &lt;agent data&gt;
+            &quot;data&quot;: {
+                &lt;create agent data&gt;
+            }
         },
         &quot;signature&quot;: {
-            &quot;type&quot;: &quot;ECDSA&quot;,
-            &quot;created&quot;: &quot;2016-02-08T16:02:20Z&quot;, 
-            &quot;creator&quot;: &lt;did of user&gt;,
-            &quot;signature&quot;: &lt;signature&gt;
+            &quot;type&quot;: &lt;signature type ECDSA or E25519&gt;,
+            &quot;created&quot;: &lt;date of signature&gt;, 
+            &quot;creator&quot;: &lt;user did&gt;,
+            &quot;signatureValue&quot;:  &lt;signature in hex&gt;
         }
     }
 }
@@ -366,9 +287,8 @@
         &quot;__v&quot;: 0,
         &lt;agent data&gt;
         &quot;tx&quot;: &quot;b51cd2665d146d0a0240fd2756beb4c9e9c1948275ac5d37a7ae405ab2d71a7a&quot;,
-        &quot;did&quot;: &lt;creator's did&gt;
         &quot;_id&quot;: &quot;5a66e09b38f45f01d90d122a&quot;,
-        &quot;created&quot;: &quot;2018-01-23T07:13:31.060Z&quot;
+        &quot;version&quot;: 1
     }
 }
 </code></pre>
@@ -381,19 +301,19 @@
     &quot;method&quot;: &quot;updateAgentStatus&quot;, 
     &quot;id&quot;: 3, 
     &quot;params&quot;: {
-        payload: {
+        &quot;payload&quot;: {        
+            &quot;template&quot;: {
+                &quot;name&quot;: &quot;&lt;template to validate&gt;&quot;
             },
-            &quot;did&quot;: &lt;did of user&gt;,
             &quot;data&quot;: {
-                agentTx: &lt;tx of the agent to update&gt;,
-                status: &lt;Approved|NotApproved|Revoked|Pending&gt;
+                &lt;update agent data&gt;
             }
         },
         &quot;signature&quot;: {
-            &quot;type&quot;: &quot;ECDSA&quot;,
-            &quot;created&quot;: &quot;2016-02-08T16:02:20Z&quot;, 
-            &quot;creator&quot;: &lt;did of user&gt;,
-            &quot;signature&quot;: &lt;signature&gt;
+            &quot;type&quot;: &lt;signature type ECDSA or E25519&gt;,
+            &quot;created&quot;: &lt;date of signature&gt;, 
+            &quot;creator&quot;: &lt;user did&gt;,
+            &quot;signatureValue&quot;:  &lt;signature in hex&gt;
         }
     }
 }
@@ -409,78 +329,73 @@
         &quot;tx&quot;: &quot;b51cd2665d146d0a0240fd2756beb4c9e9c1948275ac5d37a7ae405ab2d71a7a&quot;,
         &quot;did&quot;: &lt;creator's did&gt;
         &quot;_id&quot;: &quot;5a66e09b38f45f01d90d122a&quot;,
-        &quot;created&quot;: &quot;2018-01-23T07:13:31.060Z&quot;
+        &quot;version&quot;: 1
     }
 }
 </code></pre>
 
-<h4 id="list-agents-for-a-specific-did">List Agents for a specific DID</h4>
-<p>Lists all agents for a specific DID.</p>
+<h4 id="list-agents">List Agents</h4>
+<p>List claims and latest status.</p>
 <p>Request:</p>
-<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;listForDID&quot;, &quot;params&quot;: {&quot;payload&quot;:{&quot;did&quot;:&lt;did of user&gt;,&quot;data&quot;:{&quot;did&quot;:&lt;did of owner&gt;}}}, &quot;id&quot;: 1}
-</code></pre>
-
-<p>Response:</p>
 <pre><code>{
-    &quot;jsonrpc&quot;: &quot;2.0&quot;,
-    &quot;id&quot;: 1,
-    &quot;result&quot;: &lt;array of agents&gt;
-}
-</code></pre>
-
-<h4 id="list-agents-for-a-specific-project-id">List Agents for a specific Project ID</h4>
-<p>Lists all agents for a specific project id.</p>
-<p>Request:</p>
-<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;listForProject&quot;, &quot;params&quot;: {&quot;payload&quot;:{&quot;did&quot;:&lt;did of user&gt;,&quot;data&quot;:{&quot;projectTx&quot;:&lt;project TX&gt;}}}, &quot;id&quot;: 1}
-</code></pre>
-
-<p>Response:</p>
-<pre><code>{
-    &quot;jsonrpc&quot;: &quot;2.0&quot;,
-    &quot;id&quot;: 1,
-    &quot;result&quot;: &lt;array of agents&gt;
-}
-</code></pre>
-
-<h3 id="claim">Claim</h3>
-<p>Example URI: https://ixo-node.herokuapp.com/api/claim</p>
-<h4 id="get-claim-template">Get Claim Template</h4>
-<p>Retrieves the claim template called "default" from the template registry.</p>
-<p>Request:</p>
-<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;getTemplate&quot;, &quot;params&quot;: {&quot;payload&quot;:{&quot;did&quot;:&lt;did of user&gt;,&quot;data&quot;:{&quot;name&quot;: &lt;name of claim template&gt;}}}, &quot;id&quot;: 1}
-</code></pre>
-
-<p>Response:</p>
-<pre><code>{
-    &quot;jsonrpc&quot;: &quot;2.0&quot;,
-    &quot;id&quot;: 1,
-    &quot;result&quot;: {
-        &quot;template&quot;: &lt;the template&gt;,
-        &quot;form&quot;: &lt;template's corresponding form&gt;
+    &quot;jsonrpc&quot;: &quot;2.0&quot;, 
+    &quot;method&quot;: &quot;listAgents&quot;, 
+    &quot;id&quot;: 3, 
+    &quot;params&quot;: {
+        &quot;payload&quot;: {        
+            &quot;template&quot;: {
+                &quot;name&quot;: &quot;&lt;template to validate&gt;&quot;
+            },
+            &quot;data&quot;: {
+                &lt;data to filter&gt;
+            }
+        },
+        &quot;signature&quot;: {
+            &quot;type&quot;: &lt;signature type ECDSA or E25519&gt;,
+            &quot;created&quot;: &lt;date of signature&gt;, 
+            &quot;creator&quot;: &lt;user did&gt;,
+            &quot;signatureValue&quot;:  &lt;signature in hex&gt;
+        }
     }
 }
 </code></pre>
 
-<h4 id="create-claim">Create Claim</h4>
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 3,
+    &quot;result&quot;: [
+        {
+            &lt;agent data&gt;,
+            &quot;currentStatus&quot;: {
+                &lt;agent status data&gt;
+            }
+        }
+    ]
+}
+</code></pre>
+
+<h4 id="submit-claim">Submit Claim</h4>
 <p>Creates a new claim.</p>
 <p>Request:</p>
 <pre><code>{
     &quot;jsonrpc&quot;: &quot;2.0&quot;, 
-    &quot;method&quot;: &quot;create&quot;, 
+    &quot;method&quot;: &quot;submitClaim&quot;, 
     &quot;id&quot;: 3, 
     &quot;params&quot;: {
-        payload: {
+        &quot;payload&quot;: {        
             &quot;template&quot;: {
-                &quot;name&quot;: &lt;template name&gt;
+                &quot;name&quot;: &quot;&lt;template to validate&gt;&quot;
             },
-            &quot;did&quot;: &lt;did of user&gt;,
-            &quot;data&quot;: &lt;claim data&gt;
+            &quot;data&quot;: {
+                &lt;usubmit claim data&gt;
+            }
         },
         &quot;signature&quot;: {
-            &quot;type&quot;: &quot;ECDSA&quot;,
-            &quot;created&quot;: &quot;2016-02-08T16:02:20Z&quot;, 
-            &quot;creator&quot;: &lt;did of user&gt;,
-            &quot;signature&quot;: &lt;signature&gt;
+            &quot;type&quot;: &lt;signature type ECDSA or E25519&gt;,
+            &quot;created&quot;: &lt;date of signature&gt;, 
+            &quot;creator&quot;: &lt;user did&gt;,
+            &quot;signatureValue&quot;:  &lt;signature in hex&gt;
         }
     }
 }
@@ -494,9 +409,7 @@
         &quot;__v&quot;: 0,
         &lt;claim data&gt;
         &quot;tx&quot;: &quot;b51cd2665d146d0a0240fd2756beb4c9e9c1948275ac5d37a7ae405ab2d71a7a&quot;,
-        &quot;did&quot;: &lt;creator's did&gt;
-        &quot;_id&quot;: &quot;5a66e09b38f45f01d90d122a&quot;,
-        &quot;created&quot;: &quot;2018-01-23T07:13:31.060Z&quot;
+        &quot;_id&quot;: &quot;5a66e09b38f45f01d90d122a&quot;
     }
 }
 </code></pre>
@@ -509,21 +422,19 @@
     &quot;method&quot;: &quot;evaluateClaim&quot;, 
     &quot;id&quot;: 3, 
     &quot;params&quot;: {
-        payload: {
+        &quot;payload&quot;: {        
             &quot;template&quot;: {
-                &quot;name&quot;: &lt;template name&gt;
+                &quot;name&quot;: &quot;&lt;template to validate&gt;&quot;
             },
-            &quot;did&quot;: &lt;did of user&gt;,
             &quot;data&quot;: {
-                claimTx: &lt;tx of the claim&gt;
-                &lt;other evaluation data&gt;
+                &lt;evaluate claim data&gt;
             }
         },
         &quot;signature&quot;: {
-            &quot;type&quot;: &quot;ECDSA&quot;,
-            &quot;created&quot;: &quot;2016-02-08T16:02:20Z&quot;, 
-            &quot;creator&quot;: &lt;did of user&gt;,
-            &quot;signature&quot;: &lt;signature&gt;
+            &quot;type&quot;: &lt;signature type ECDSA or E25519&gt;,
+            &quot;created&quot;: &lt;date of signature&gt;, 
+            &quot;creator&quot;: &lt;user did&gt;,
+            &quot;signatureValue&quot;:  &lt;signature in hex&gt;
         }
     }
 }
@@ -537,412 +448,61 @@
         &quot;__v&quot;: 0,
         &lt;claim data&gt;
         &quot;tx&quot;: &quot;b51cd2665d146d0a0240fd2756beb4c9e9c1948275ac5d37a7ae405ab2d71a7a&quot;,
-        &quot;did&quot;: &lt;creator's did&gt;
         &quot;_id&quot;: &quot;5a66e09b38f45f01d90d122a&quot;,
-        &quot;created&quot;: &quot;2018-01-23T07:13:31.060Z&quot;
-        &quot;latestEvaluation&quot;: &quot;Approved&quot;,
-        &quot;evaluations&quot;: [{
-            &lt;evaluation data&gt;
-        }]
+        &quot;version&quot;: 1
     }
 }
 </code></pre>
 
-<h4 id="list-claims-for-a-specific-project-id">List Claims for a specific Project ID</h4>
-<p>Lists all claims for a specific agent did.</p>
+<h4 id="list-claim">List Claim</h4>
+<p>List claims and latest status.</p>
 <p>Request:</p>
-<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;listForDID&quot;, &quot;params&quot;: {&quot;payload&quot;:{&quot;did&quot;:&lt;did of user&gt;,&quot;data&quot;:{&quot;did&quot;:&lt;agent did&gt;}}}, &quot;id&quot;: 1}
-</code></pre>
-
-<p>Response:</p>
 <pre><code>{
-    &quot;jsonrpc&quot;: &quot;2.0&quot;,
-    &quot;id&quot;: 1,
-    &quot;result&quot;: &lt;array of claims&gt;
-}
-</code></pre>
-
-<h4 id="list-claims-for-a-specific-project-id_1">List Claims for a specific Project ID</h4>
-<p>Lists all claims for a specific project id.</p>
-<p>Request:</p>
-<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;listForProject&quot;, &quot;params&quot;: {&quot;payload&quot;:{&quot;did&quot;:&lt;did of user&gt;,&quot;data&quot;:{&quot;projectTx&quot;:&lt;project TX&gt;}}}, &quot;id&quot;: 1}
-</code></pre>
-
-<p>Response:</p>
-<pre><code>{
-    &quot;jsonrpc&quot;: &quot;2.0&quot;,
-    &quot;id&quot;: 1,
-    &quot;result&quot;: &lt;array of claims&gt;
-}
-</code></pre>
-
-<h4 id="lists-all-claims-for-a-specific-project-id-and-status">Lists all claims for a specific project ID and status.</h4>
-<p>Request:</p>
-<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;listForProjectAndDID&quot;, &quot;params&quot;: {&quot;payload&quot;:{&quot;did&quot;:&lt;did of user&gt;,&quot;data&quot;:{&quot;projectTx&quot;:&lt;project tx&gt;,&quot;status&quot;:&lt;claim status&gt;}}}, &quot;id&quot;: 1}
-</code></pre>
-
-<p>Response:</p>
-<pre><code>{
-    &quot;jsonrpc&quot;: &quot;2.0&quot;,
-    &quot;id&quot;: 1,
-    &quot;result&quot;: &lt;array of claims&gt;
-}
-</code></pre>
-
-<h4 id="lists-all-claims-for-a-specific-project-id-and-agent-did">Lists all claims for a specific project ID and agent DID.</h4>
-<p>Request:</p>
-<pre><code>{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;listForProjectAndDID&quot;, &quot;params&quot;: {&quot;payload&quot;:{&quot;did&quot;:&lt;did of user&gt;,&quot;data&quot;:{&quot;projectTx&quot;:&lt;project tx&gt;,&quot;did&quot;:&lt;agent did&gt;}}}, &quot;id&quot;: 1}
-</code></pre>
-
-<p>Response:</p>
-<pre><code>{
-    &quot;jsonrpc&quot;: &quot;2.0&quot;,
-    &quot;id&quot;: 1,
-    &quot;result&quot;: &lt;array of claims&gt;
-}
-</code></pre>
-
-<h2 id="ixo-module-api">ixo-Module API</h2>
-<h4 id="install-using-npm">Install using npm</h4>
-<p><code>npm install --save ixo-module</code></p>
-<h4 id="create-new-ixo-object-without-provider">Create new Ixo Object (Without provider)</h4>
-<pre><code>import Ixo from 'ixo-module';
-var ixo = new Ixo('ixo_node_url')
-</code></pre>
-
-<h4 id="create-new-ixo-object-with-provider">Create new Ixo Object (With provider)</h4>
-<pre><code>import Ixo from 'ixo-module';
-var ixo = new Ixo('ixo_node_url', provider)
-</code></pre>
-
-<h4 id="cryptoutil">CryptoUtil</h4>
-<p><strong>Generate Mnemonic</strong></p>
-<p>Request:</p>
-<pre><code>ixo.cryptoUtil.generateMnemonic()
-</code></pre>
-
-<p>Response:</p>
-<pre><code>dilemma allow swamp hedgehog client reject mistake spell involve index panda course
-</code></pre>
-
-<p><strong>Generate SovrinDID</strong></p>
-<p>Request:</p>
-<pre><code>ixo.cryptoUtil.generateSovrinDID(mnemonic)
-</code></pre>
-
-<p>Response:</p>
-<pre><code>{
-    &quot;did&quot;: &quot;LuEoT1EkTVT7vaYP1ibvfw&quot;,
-        &quot;verifyKey&quot;: &quot;Br6jjwiPNBgDod4hHAKNP5AfA6ViV39eVX3UV4t9uADC&quot;,
-            &quot;secret&quot;: {
-                     &quot;seed&quot;: &quot;b3cad338b23d0e58583ca243481262ee5f8632b14d713245e8b91be87daff073&quot;,
-                     &quot;signKey&quot;: &quot;D6qMjQCdjB8gHkEPyxXoyJTxkk5WK9egYQAEtJ6RX5fx&quot;
-    }
-}
-</code></pre>
-
-<p><strong>Sign Document</strong></p>
-<p>Request:</p>
-<pre><code>ixo.cryptoUtil.getDocumentSignature(sdid.secret.signKey, sdid.verifyKey, JSON.stringify(testJson))
-</code></pre>
-
-<p>Response:</p>
-<pre><code>DjoT6XqQ53J2kR4zd1shB17qFuM9DM5A2DAxQ3jjtgacvvpafWefHx54kkHewMVMTAsZm61wDCtzMV2TwkL7Fc5YdTc898X4tQ8SepthqyFBdMVs8fAt3fWDGD1fiVe5cymPCDcHwB6hP34DpQB3UAcfZSoPP2wxCbCLhTAF25RywqEWmcMDqF42pEqa9RonpF6AYGxYQt2tUKT9383HR6RhCkkbrkJSBwYQ6b4jsnysz23p4TPfahPKGWinGahXFwtZKD69SSjipzQNHWFXb5YuoqQcCToTFcEteQ3dtkDQdCcWFZ9N1
-</code></pre>
-
-<p><strong>Validate Signature</strong></p>
-<p>Request:</p>
-<pre><code>ixo.cryptoUtil.verifyDocumentSignature(signature, sdid.verifyKey)
-</code></pre>
-
-<p>Response:</p>
-<pre><code>true/false
-</code></pre>
-
-<h4 id="network_1">Network</h4>
-<p><strong>Ping ixo Server Node</strong></p>
-<p>Request:</p>
-<pre><code>ixo.network.pingIxoServerNode().then((result) =&gt; {
-    console.log('Ping Results: ' + result)})
-
-</code></pre>
-
-<p>Response:</p>
-<pre><code>Ping Results: {
-             &quot;jsonrpc&quot;: &quot;2.0&quot;,
-             &quot;id&quot;: 1,
-             &quot;result&quot;: &quot;pong&quot;
-     }
-</code></pre>
-
-<h4 id="projects">Projects</h4>
-<p><strong>Gets project template</strong></p>
-<p>Request:</p>
-<pre><code>   ixo.project.getProjectTemplate('templateName').then((result) =&gt; {
-       console.log('Project Template: ' + result)
-   })
-
-</code></pre>
-
-<p>Response:</p>
-<pre><code>   Project Template:
-   {
-      &quot;jsonrpc&quot;:&quot;2.0&quot;,
-      &quot;id&quot;:1,
-      &quot;result&quot;:{
-         &quot;template&quot;:{
-            &quot;@context&quot;:&quot;http://ixo.foundation/schema&quot;,
-            &quot;@type&quot;:&quot;Project&quot;,
-            &quot;so&quot;:&quot;http://schema.org/&quot;,
-            &quot;name&quot;:&quot;so:name&quot;,
-            &quot;about&quot;:&quot;so:about&quot;,
-            &quot;country&quot;:&quot;so:country&quot;,
-            &quot;thumbnail&quot;:{
-               &quot;@type&quot;:&quot;ImageObject&quot;,
-               &quot;contentUrl&quot;:&quot;so:contentUrl&quot;
+    &quot;jsonrpc&quot;: &quot;2.0&quot;, 
+    &quot;method&quot;: &quot;listClaims&quot;, 
+    &quot;id&quot;: 3, 
+    &quot;params&quot;: {
+        &quot;payload&quot;: {        
+            &quot;template&quot;: {
+                &quot;name&quot;: &quot;&lt;template to validate&gt;&quot;
             },
-            &quot;owner&quot;:{
-               &quot;@type&quot;:&quot;Person&quot;,
-               &quot;email&quot;:&quot;so:email&quot;,
-               &quot;name&quot;:&quot;so:name&quot;
+            &quot;data&quot;: {
+                &lt;data to filter&gt;
             }
-         },
-         &quot;form&quot;:{
-            &quot;fields&quot;:[
-               {
-                  &quot;label&quot;:&quot;Project Name&quot;,
-                  &quot;name&quot;:&quot;name&quot;,
-                  &quot;type&quot;:&quot;text&quot;
-               },
-               {
-                  &quot;label&quot;:&quot;About&quot;,
-                  &quot;name&quot;:&quot;about&quot;,
-                  &quot;type&quot;:&quot;textarea&quot;
-               },
-               {
-                  &quot;label&quot;:&quot;Country&quot;,
-                  &quot;name&quot;:&quot;country&quot;,
-                  &quot;type&quot;:&quot;country&quot;
-               },
-               {
-                  &quot;label&quot;:&quot;Thumbnail&quot;,
-                  &quot;name&quot;:&quot;thumbnail&quot;,
-                  &quot;type&quot;:&quot;image&quot;
-               },
-               {
-                  &quot;label&quot;:&quot;Owner Name&quot;,
-                  &quot;name&quot;:&quot;owner.name&quot;,
-                  &quot;type&quot;:&quot;text&quot;
-               },
-               {
-                  &quot;label&quot;:&quot;Owner email&quot;,
-                  &quot;name&quot;:&quot;owner.email&quot;,
-                  &quot;type&quot;:&quot;text&quot;
-               }
-            ]
-         }
-      }
-   }
-</code></pre>
-
-<p><strong>Gets list of projects</strong></p>
-<p>Request:</p>
-<pre><code>   ixo.project.listProjects().then((result) =&gt; {
-       console.log('Project List:  ' + result)
-   })
-
-</code></pre>
-
-<p>Response:</p>
-<pre><code>Project List:
-{
-   &quot;jsonrpc&quot;:&quot;2.0&quot;,
-   &quot;id&quot;:1,
-   &quot;result&quot;:[
-      {
-         &quot;_id&quot;:&quot;5a61abec670a09001abf0560&quot;,
-         &quot;name&quot;:&quot;Water Saving&quot;,
-         &quot;country&quot;:&quot;ZA&quot;,
-         &quot;tx&quot;:&quot;f249310d2582927fc2019a94f96ca9df9a1c069bf3826bec89a4226a8201df4e&quot;,
-         &quot;__v&quot;:0,
-         &quot;owner&quot;:{
-            &quot;email&quot;:&quot;joe@bloggs.com&quot;,
-            &quot;name&quot;:&quot;Joe Blogs&quot;,
-            &quot;did&quot;:&quot;0x92928b5135d8dbad88b1e772bf5b8f91bfe41a8d&quot;
-         },
-         &quot;created&quot;:&quot;2018-01-19T08:27:24.669Z&quot;
-      },
-      {
-         &quot;_id&quot;:&quot;5a61abeb670a09001abf055e&quot;,
-         &quot;name&quot;:&quot;Water Saving&quot;,
-         &quot;country&quot;:&quot;ZA&quot;,
-         &quot;tx&quot;:&quot;77fc5cbdc2985aab2bda1754e36f9a879c29d98c0eb49394df07d40f306c3b65&quot;,
-         &quot;__v&quot;:0,
-         &quot;owner&quot;:{
-            &quot;email&quot;:&quot;joe@bloggs.com&quot;,
-            &quot;name&quot;:&quot;Joe Blogs&quot;,
-            &quot;did&quot;:&quot;0x92928b5135d8dbad88b1e772bf5b8f91bfe41a8d&quot;
-         },
-         &quot;created&quot;:&quot;2018-01-19T08:27:23.679Z&quot;
-      },
-      {
-         &quot;_id&quot;:&quot;5a61abea670a09001abf055c&quot;,
-         &quot;name&quot;:&quot;Water Saving&quot;,
-         &quot;country&quot;:&quot;ZA&quot;,
-         &quot;tx&quot;:&quot;a843e51f7e8787a669463bb0eeda7c2f4578fb501388ab2bc0ae3493012b086e&quot;,
-         &quot;__v&quot;:0,
-         &quot;owner&quot;:{
-            &quot;email&quot;:&quot;joe@bloggs.com&quot;,
-            &quot;name&quot;:&quot;Joe Blogs&quot;,
-            &quot;did&quot;:&quot;0x92928b5135d8dbad88b1e772bf5b8f91bfe41a8d&quot;
-         },
-         &quot;created&quot;:&quot;2018-01-19T08:27:22.685Z&quot;
-      },
-      {
-         &quot;_id&quot;:&quot;5a61abe8670a09001abf055a&quot;,
-         &quot;name&quot;:&quot;Water Saving&quot;,
-         &quot;country&quot;:&quot;ZA&quot;,
-         &quot;tx&quot;:&quot;02382076c5ae1b0478d32bf48f8e8f9b39049ae98d7fb573e346e72cd4d8242e&quot;,
-         &quot;__v&quot;:0,
-         &quot;owner&quot;:{
-            &quot;email&quot;:&quot;joe@bloggs.com&quot;,
-            &quot;name&quot;:&quot;Joe Blogs&quot;,
-            &quot;did&quot;:&quot;0x92928b5135d8dbad88b1e772bf5b8f91bfe41a8d&quot;
-         },
-         &quot;created&quot;:&quot;2018-01-19T08:27:20.833Z&quot;
-      },
-      {
-         &quot;_id&quot;:&quot;5a61abe7670a09001abf0558&quot;,
-         &quot;name&quot;:&quot;Water Saving&quot;,
-         &quot;country&quot;:&quot;ZA&quot;,
-         &quot;tx&quot;:&quot;d164ffd4d18add95eea273783c4b98e3046618d3c2009b01a19f935ab9f734ca&quot;,
-         &quot;__v&quot;:0,
-         &quot;owner&quot;:{
-            &quot;email&quot;:&quot;joe@bloggs.com&quot;,
-            &quot;name&quot;:&quot;Joe Blogs&quot;,
-            &quot;did&quot;:&quot;0x92928b5135d8dbad88b1e772bf5b8f91bfe41a8d&quot;
-         },
-         &quot;created&quot;:&quot;2018-01-19T08:27:19.124Z&quot;
-      }
-   ]
-}
-
-</code></pre>
-
-<p><strong>List Project By DID</strong></p>
-<p>Request:</p>
-<pre><code>ixo.project.listProjectsByDid('did').then((response:any) =&gt; {
-            console.log('Projects by did: ' + success(JSON.stringify(response, null, '\t')));
-        }).catch((result: Error) =&gt; {
-            console.log(error(result));
-        });
-</code></pre>
-
-<p>Response:</p>
-<pre><code>Projects by did: {
-        &quot;jsonrpc&quot;: &quot;2.0&quot;,
-        &quot;id&quot;: 34773,
-        &quot;result&quot;: [
-             {
-                &quot;_id&quot;: &quot;5a86cd665989a8001ad3d6c0&quot;,
-                &quot;name&quot;: &quot;Test Project&quot;,
-                &quot;about&quot;: &quot;&quot;,
-                &quot;country&quot;: &quot;BD&quot;,
-                &quot;thumbnail&quot;: &quot;&quot;,
-                &quot;agentTemplate&quot;: &quot;default&quot;,
-                &quot;claimTemplate&quot;: &quot;default&quot;,
-                &quot;evaluationTemplate&quot;: &quot;default&quot;,
-                &quot;tx&quot;: &quot;8b630a062e38feeae73837a9da8f32cac2006b436792f905653555c24c2d83a2&quot;,
-                &quot;__v&quot;: 0,
-                &quot;owner&quot;: {
-                        &quot;name&quot;: &quot;Nicolaas&quot;,
-                        &quot;email&quot;: &quot;nicolaas.vercuiel73@gmail.com&quot;,
-                        &quot;did&quot;: &quot;0x8ce576f2cedd9cb87fe5768039f5edb4b5f9ed74&quot;
-                },
-                &quot;created&quot;: &quot;2018-02-16T12:24:06.175Z&quot;
+        },
+        &quot;signature&quot;: {
+            &quot;type&quot;: &lt;signature type ECDSA or E25519&gt;,
+            &quot;created&quot;: &lt;date of signature&gt;, 
+            &quot;creator&quot;: &lt;user did&gt;,
+            &quot;signatureValue&quot;:  &lt;signature in hex&gt;
         }
-        ]
+    }
 }
-</code></pre>
-
-<p><strong>Create Project</strong></p>
-<p>Request:</p>
-<pre><code> ixo.project.createProject(projectData, 'templateName').then((response: any) =&gt;{
-            console.log('Project create response: ' + success(JSON.stringify(response, null, '\t')));
-        }).catch((result: Error) =&gt; {
-            console.log(error(result));
-        });
-
 </code></pre>
 
 <p>Response:</p>
-<pre><code> Project create response: {
-        &quot;jsonrpc&quot;: &quot;2.0&quot;,
-        &quot;id&quot;: 11460,
-        &quot;result&quot;: {
-                &quot;__v&quot;: 0,
-                &quot;name&quot;: &quot;Reforestation&quot;,
-                &quot;country&quot;: &quot;UK&quot;,
-                &quot;tx&quot;: &quot;72a1e33c4c704e56dc497e5a7eec7367ff5bf51208a4e321e2b1d975b932a06f&quot;,
-                &quot;_id&quot;: &quot;5a8a87da79d282001a0203d2&quot;,
-                &quot;owner&quot;: {
-                        &quot;email&quot;: &quot;peter@noname.com&quot;,
-                        &quot;name&quot;: &quot;Peter Piper&quot;,
-                        &quot;did&quot;: &quot;0x1805356a35b88414e75f7df9b9fd7d9555420785&quot;
-                },
-                &quot;created&quot;: &quot;2018-02-19T08:16:26.787Z&quot;
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 3,
+    &quot;result&quot;: [
+        {
+            &lt;claim data&gt;,
+            &quot;evaluations&quot;: {
+                &lt;claim status data&gt;
+            }
         }
+    ]
 }
-
 </code></pre>
 
-<h4 id="agent_1">Agent</h4>
-<p><strong>Create Agent</strong></p>
-<p>Request:</p>
-<pre><code> ixo.agent.createAgent(agentData, 'default').then((response: any) =&gt; {
-                  console.log('Agent create: ' + success(JSON.stringify(response, null, '\t')));
-        }).catch((result: Error) =&gt; {
-            console.log(error(result));
-        });
-</code></pre>
-
-<p><strong>Get Agent template</strong></p>
-<p>Request:</p>
-<pre><code> ixo.agent.getAgentTemplate('default').then((response: any) =&gt; {
-            console.log('Agent template: ' + success(JSON.stringify(response, null, '\t')));
-        }).catch((result: Error) =&gt; {
-            console.log(error(result));
-        });
-</code></pre>
-
-<p><strong>List Agents for DID</strong></p>
-<p>Request:</p>
-<pre><code>ixo.agent.listAgentsForDID('did').then((response: any) =&gt; {
-            console.log('Agent list for DID: ' + success(JSON.stringify(response, null, '\t')));
-            expect(response.result).to.not.equal(null);
-        }).catch((result: Error) =&gt; {
-            console.log(error(result));
-        });
-</code></pre>
-
-<p><strong>List Agents for project</strong></p>
-<p>Request:</p>
-<pre><code> ixo.agent.listAgentsForProject(ixo.credentialProvider.getDid(), 'projectTx').then((response: any) =&gt; {
-            console.log('Agent list for Project: ' + success(JSON.stringify(response, null, '\t')));
-        }).catch((result: Error) =&gt; {
-            console.log(error(result));
-        });
-</code></pre>
-
-<p><strong>Update Agent status</strong></p>
-<p>Request:</p>
-<pre><code>   ixo.agent.updateAgentStatus(agentUpdate).then((response: any) =&gt; {
-            console.log('Agent status update: ' + success(JSON.stringify(response, null, '\t')));
-            expect(response.result).to.not.equal(null);
-        }).catch((result: Error) =&gt; {
-            console.log(error(result));
-        });
-</code></pre></div>
+<h2 id="ixo-blockchain-api">ixo Blockchain API</h2>
+<ul>
+<li>TODO *</li>
+</ul>
+<h2 id="ixo-explorer-api">ixo Explorer API</h2>
+<ul>
+<li>TODO *</li>
+</ul></div>
         
     </div>
 

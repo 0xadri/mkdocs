@@ -14,8 +14,11 @@ import Ixo from 'ixo-module';
 var ixo = new Ixo('ixo_node_url')
 ```
 
+* TODO *
 
 ## Keysafe Browser Extension API
+
+* Todo *
 
 ## Project Datastore API
 
