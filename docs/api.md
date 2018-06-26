@@ -176,6 +176,69 @@ ixo.agent.evaluateClaim(evaluationData, signature, PDSUrl).then((result) => {
 
 Response: [PDS: evaluateClaim](#pds-evaluateClaim)
 
+### Statistics
+Returns the global statistics for all projects
+
+Request:
+```
+ixo.stats.getGlobalStats().then((result) => {
+    console.log('Statistics: ' + result)
+})   
+```
+Response: [ixo Explorer: getGlobalStats](#explorer-getGlobalStats)
+
+### User Functions
+
+#### Register DID Doc to Blockchain
+
+Registers a new user with the supplied DID document to the blockchain
+
+Request:
+```
+ixo.user.registerUserDid().then((result) => {
+    console.log('Register DID: ' + result)
+})   
+```
+Response: [ixo Blockchain: registerUserDid](#blockchain-registerUserDid)
+
+#### Get the DID Doc from Blockchain
+
+Retrieves the DID Doc from the blockchain for the specified DID
+
+Request:
+```
+Let did = 'did:sov:2p19P17cr6XavfMJ8htYSS';
+ixo.user.getDidDoc(did).then((result) => {
+    console.log('DID Doc: ' + result)
+})   
+```
+Response: [ixo Blockchain: getDidDoc](#blockchain-getDidDoc)
+
+
+### Health Check Functions
+
+### Heath Check to Blockchain node
+
+Request:
+```
+ixo.network.pingIxoBlockchain().then((result) => {
+    console.log('Health Check: ' + result)
+})   
+```
+
+Response: [ixo Blockchain: healthCheck](#blockchain-health)
+
+### Heath Check to Explorer node
+
+Request:
+```
+ixo.network.pingIxoExplorer().then((result) => {
+    console.log('Health Check: ' + result)
+})   
+```
+
+Response: [ixo Explorer: ping](#explorer-ping)
+
 ## Keysafe Browser Extension API
 
 * Todo *
@@ -837,6 +900,83 @@ Response:
 
 * TODO *
 
+<a name="blockchain-registerUserDid"></a>
+### Register DID Doc
+Registers the DID Doc for the specified DID.  The DID Doc must contain the DID and the public key which can be used to verify signatures sign by this DID.
+
+Request:
+
+|         |       |
+| ------- | ----- |
+| Server: | Blockchain TX Server |
+| Method: | `GET` |
+| URI: | `/broadcast_tx_sync?tx=` |
+| Parameters: | *&lt;uppercase hex of the DID Doc with its signature preceded with Ox&gt;* |
+
+Example Request:
+`http://localhost:46657/broadcast_tx_sync?tx=0x7B227...355430383A34363A31372B30323030227D7D`
+
+Example Parameter (pre hex encoding):
+```
+{"payload":[10,{"didDoc":{"did":"did:sov:398fM9kMgHuNbCtRncYrwh","pubKey":"2Af4UzgUAgQk8Wt5xEkfJrjQSxWgxsuD8bzDQJSNfMSw"}}],"signature":{"signatureValue":[1,"211678D20C70292668C47D6220ED648F868DFE0CBB848EDB0E163F7EE35467F938CFB000FCCF1AD00A0AB67F6EEB6C02E4FE48D793247A7092D5B5613C87C405"],"created":"2018-06-05T08:46:17+0200"}}
+```
+
+Response:
+```
+{
+  "did": "did.sov.EvBFmtyRaBuMNMnwjHNVgn",
+  "pubKey": "8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf"
+}
+```
+<a name="blockchain-getDidDoc"></a>
+### Get Did Doc
+Returns the Did Doc for the specified DID.  This contains the public key which can be used to verify signatures sign by this DID.
+
+Request:
+
+|         |       |
+| ------- | ----- |
+| Server: | Blockchain REST Server |
+| Method: | `GET` |
+| URI: | `/did` |
+| Parameters: | *&lt;did&gt;* |
+
+Example:
+`http://localhost:1317/did/did.sov.EvBFmtyRaBuMNMnwjHNVgn`
+
+Response:
+```
+{
+  "did": "did.sov.EvBFmtyRaBuMNMnwjHNVgn",
+  "pubKey": "8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf"
+}
+```
+
+<a name="blockchain-health"></a>
+### Heath Check to Blockchain node
+
+Check whether the blockchain node is available
+
+Request:
+
+|         |       |
+| ------- | ----- |
+| Server: | Blockchain TX Server |
+| Method: | `GET` |
+| URI: | `/heath` |
+
+Example:
+`http://localhost:46657/health`
+
+Response:
+```
+{
+jsonrpc: "2.0",
+id: "",
+result: { }
+}
+```
+
 ## ixo Explorer API
 
 Returns a the publicly available data pertaining to projects
@@ -851,3 +991,12 @@ Lists all the projects
 
 Retrieves a project by project DID
 
+<a name="explorer-getGlobalStats"></a>
+### Get Global Stats
+
+Retrieves the global statistics and metrics for all projects
+
+<a name="explorer-ping"></a>
+### Heath Check to Explorer node
+
+Check that the explorer node is available
