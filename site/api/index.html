@@ -110,36 +110,29 @@
         <li class="first-level active"><a href="#api">API</a></li>
             <li class="second-level"><a href="#ixo-npm-module-api">ixo NPM module API</a></li>
                 
-                <li class="third-level"><a href="#usage">Usage</a></li>
                 <li class="third-level"><a href="#project-functions">Project Functions</a></li>
                 <li class="third-level"><a href="#agent-functions">Agent Functions</a></li>
                 <li class="third-level"><a href="#claim-functions">Claim Functions</a></li>
-                <li class="third-level"><a href="#statistics">Statistics</a></li>
                 <li class="third-level"><a href="#user-functions">User Functions</a></li>
+                <li class="third-level"><a href="#metrics">Metrics</a></li>
                 <li class="third-level"><a href="#health-check-functions">Health Check Functions</a></li>
-                <li class="third-level"><a href="#heath-check-to-blockchain-node">Heath Check to Blockchain node</a></li>
-                <li class="third-level"><a href="#heath-check-to-explorer-node">Heath Check to Explorer node</a></li>
             <li class="second-level"><a href="#keysafe-browser-extension-api">Keysafe Browser Extension API</a></li>
                 
+                <li class="third-level"><a href="#info-functions">Info Functions</a></li>
+                <li class="third-level"><a href="#signing-functions">Signing Functions</a></li>
             <li class="second-level"><a href="#project-datastore-api">Project Datastore API</a></li>
                 
-                <li class="third-level"><a href="#introduction">Introduction</a></li>
-                <li class="third-level"><a href="#health-check">Health check</a></li>
                 <li class="third-level"><a href="#public-api">Public API</a></li>
-                <li class="third-level"><a href="#structure-of-params-object">Structure of params object</a></li>
                 <li class="third-level"><a href="#private-api">Private API</a></li>
-                <li class="third-level"><a href="#structure-of-params-object_1">Structure of params object</a></li>
+                <li class="third-level"><a href="#heath-check-functions">Heath Check Functions</a></li>
             <li class="second-level"><a href="#ixo-blockchain-api">ixo Blockchain API</a></li>
                 
-                <li class="third-level"><a href="#register-did-doc">Register DID Doc</a></li>
-                <li class="third-level"><a href="#get-did-doc">Get Did Doc</a></li>
-                <li class="third-level"><a href="#heath-check-to-blockchain-node_1">Heath Check to Blockchain node</a></li>
+                <li class="third-level"><a href="#did-functions">DID Functions</a></li>
+                <li class="third-level"><a href="#health-check-functions_1">Health Check Functions</a></li>
             <li class="second-level"><a href="#ixo-explorer-api">ixo Explorer API</a></li>
                 
-                <li class="third-level"><a href="#list-projects_1">List Projects</a></li>
-                <li class="third-level"><a href="#get-project_1">Get Project</a></li>
-                <li class="third-level"><a href="#get-global-stats">Get Global Stats</a></li>
-                <li class="third-level"><a href="#heath-check-to-explorer-node_1">Heath Check to Explorer node</a></li>
+                <li class="third-level"><a href="#project-functions_1">Project Functions</a></li>
+                <li class="third-level"><a href="#health-check-functions_2">Health Check Functions</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
@@ -148,10 +141,8 @@
 <p>The ixo platform has a number of different components that each has a set of APIs</p>
 <h2 id="ixo-npm-module-api">ixo NPM module API</h2>
 <p>The ixo NPM module makes it easier to interact withthe project data stores and the ixo blockchain</p>
-<h3 id="usage">Usage</h3>
-<h4 id="install-using-npm">Install using npm</h4>
 <p><code>npm install --save ixo-module</code></p>
-<h4 id="create-new-ixo-object-without-provider">Create new Ixo Object (Without provider)</h4>
+<p>To Create new Ixo Object (Without provider)</p>
 <pre><code>import Ixo from 'ixo-module';
 var ixo = new Ixo('ixo_node_url')
 </code></pre>
@@ -306,15 +297,6 @@ ixo.project.createPublic(dataUrl, PDSUrl) {
 </code></pre>
 
 <p>Response: <a href="#pds-evaluateClaim">PDS: evaluateClaim</a></p>
-<h3 id="statistics">Statistics</h3>
-<p>Returns the global statistics for all projects</p>
-<p>Request:</p>
-<pre><code>ixo.stats.getGlobalStats().then((result) =&gt; {
-    console.log('Statistics: ' + result)
-})   
-</code></pre>
-
-<p>Response: <a href="#explorer-getGlobalStats">ixo Explorer: getGlobalStats</a></p>
 <h3 id="user-functions">User Functions</h3>
 <h4 id="register-did-doc-to-blockchain">Register DID Doc to Blockchain</h4>
 <p>Registers a new user with the supplied DID document to the blockchain</p>
@@ -335,8 +317,17 @@ ixo.user.getDidDoc(did).then((result) =&gt; {
 </code></pre>
 
 <p>Response: <a href="#blockchain-getDidDoc">ixo Blockchain: getDidDoc</a></p>
+<h3 id="metrics">Metrics</h3>
+<p>Returns the global statistics for all projects</p>
+<p>Request:</p>
+<pre><code>ixo.stats.getGlobalStats().then((result) =&gt; {
+    console.log('Statistics: ' + result)
+})   
+</code></pre>
+
+<p>Response: <a href="#explorer-getGlobalStats">ixo Explorer: getGlobalStats</a></p>
 <h3 id="health-check-functions">Health Check Functions</h3>
-<h3 id="heath-check-to-blockchain-node">Heath Check to Blockchain node</h3>
+<h4 id="heath-check-to-blockchain-node">Heath Check to Blockchain node</h4>
 <p>Request:</p>
 <pre><code>ixo.network.pingIxoBlockchain().then((result) =&gt; {
     console.log('Health Check: ' + result)
@@ -344,7 +335,7 @@ ixo.user.getDidDoc(did).then((result) =&gt; {
 </code></pre>
 
 <p>Response: <a href="#blockchain-health">ixo Blockchain: healthCheck</a></p>
-<h3 id="heath-check-to-explorer-node">Heath Check to Explorer node</h3>
+<h4 id="heath-check-to-explorer-node">Heath Check to Explorer node</h4>
 <p>Request:</p>
 <pre><code>ixo.network.pingIxoExplorer().then((result) =&gt; {
     console.log('Health Check: ' + result)
@@ -353,20 +344,69 @@ ixo.user.getDidDoc(did).then((result) =&gt; {
 
 <p>Response: <a href="#explorer-ping">ixo Explorer: ping</a></p>
 <h2 id="keysafe-browser-extension-api">Keysafe Browser Extension API</h2>
-<ul>
-<li>Todo *</li>
-</ul>
-<h2 id="project-datastore-api">Project Datastore API</h2>
-<h3 id="introduction">Introduction</h3>
-<p>The project data store holds the data relating to projects.  The API is split into a public API and a non public API. The public API requests do not require cryptographic signatures, while all other requests must be signed and adher to the capabilities that have been granted to the signer.</p>
-<h3 id="health-check">Health check</h3>
-<p>URI: <code>&lt;pds server&gt;/</code></p>
-<p>Request type: <code>GET</code></p>
-<p>Response:</p>
-<pre><code>API is running
+<p>When the keysafe extension is added to the browser it injects a globale on the the <code>window</code> object.  It can be accessed as follows:</p>
+<pre><code>const IxoInpageProvider = window['ixoKs'];
+let keysafe = new IxoInpageProvider();
 </code></pre>
 
-<p>The ixo project data store (pds) uses JSON-RPC to receive client requests.  The structure of all calls follow the same structure:</p>
+<h3 id="info-functions">Info Functions</h3>
+<h4 id="get-user-information">Get User Information</h4>
+<p>Returns a javascript object contain the user name and the DID Doc</p>
+<p>Request:</p>
+<pre><code>keysafe.getInfo().then((error, result) =&gt; {
+    if (result) {
+        console.log('User Info: ' + result)
+    } else {
+        console.log(error)
+    }
+})   
+</code></pre>
+
+<p>Response: </p>
+<pre><code>{
+    name: &quot;John&quot;,
+    didDoc: {
+        &quot;did&quot;: &quot;did.sov.EvBFmtyRaBuMNMnwjHNVgn&quot;,
+        &quot;pubKey&quot;: &quot;8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf&quot;
+    }
+}
+</code></pre>
+
+<h4 id="get-user-did-doc">Get User DID Doc</h4>
+<p>Returns a javascript object contain the user's DID Doc</p>
+<p>Request:</p>
+<pre><code>keysafe.getDidDoc().then((error, result) =&gt; {
+    if (result) {
+        console.log('User DID Doc: ' + result)
+    } else {
+        console.log(error)
+    }
+})   
+</code></pre>
+
+<p>Response: </p>
+<pre><code>{
+    &quot;did&quot;: &quot;did.sov.EvBFmtyRaBuMNMnwjHNVgn&quot;,
+    &quot;pubKey&quot;: &quot;8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf&quot;
+}
+</code></pre>
+
+<h3 id="signing-functions">Signing Functions</h3>
+<h4 id="request-signing">Request Signing</h4>
+<p>Request the user to sign some data using the keys in the keysafe</p>
+<pre><code>keysafe.requestSigning(JSON.stringify(data), (error, signature) =&gt; {    
+    if (!error) {
+        console.log(&quot;Signature: &quot; + signature);
+    } else {
+        console.log(error);
+    }
+});
+</code></pre>
+
+<p>Response: </p>
+<p><code>A011D11A2D91A9CB03ECFFB7D9AFC1001DB56B3DABF42BDD0F4D00352A9B8E0E73E85F0B4586DA2934696C0A78602EEB047EA6B3D9096C1A0C3FB144E6A51C09</code></p>
+<h2 id="project-datastore-api">Project Datastore API</h2>
+<p>The project data store holds the data relating to projects.  The API is split into a public API and a non public API. The public API requests do not require cryptographic signatures, while all other requests must be signed and adher to the capabilities that have been granted to the signer.</p>
 <h3 id="public-api">Public API</h3>
 <p>URI: <code>&lt;pds server&gt;/api/public</code></p>
 <p>Request type: <code>POST</code></p>
@@ -402,7 +442,7 @@ ixo.user.getDidDoc(did).then((result) =&gt; {
 </tr>
 </tbody>
 </table>
-<h3 id="structure-of-params-object">Structure of params object</h3>
+<h4 id="structure-of-params-object">Structure of params object</h4>
 <p>These are unsigned requests for publicly available information. A key is generated and sent back to the client, to be used in retrieval of information. 
 Data will accept any of the following encodings: "ascii" | "utf8" | "utf16le" | "ucs2" | "base64" | "latin1" | "binary" | "hex".
 contentType should reference a MIME type. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types</p>
@@ -543,7 +583,7 @@ contentType should reference a MIME type. See https://developer.mozilla.org/en-U
 </tr>
 </tbody>
 </table>
-<h3 id="structure-of-params-object_1">Structure of params object</h3>
+<h4 id="structure-of-params-object_1">Structure of params object</h4>
 <p>Everything in the payload section is signed to create a signature.  It should be packed using <code>JSON.stringify()</code> method before signing. </p>
 <pre><code>{
     &quot;jsonrpc&quot;:&quot;2.0&quot;, 
@@ -967,12 +1007,22 @@ contentType should reference a MIME type. See https://developer.mozilla.org/en-U
 }
 </code></pre>
 
+<h3 id="heath-check-functions">Heath Check Functions</h3>
+<h4 id="health-check">Health Check</h4>
+<p>URI: <code>&lt;pds server&gt;/</code></p>
+<p>Request type: <code>GET</code></p>
+<p>Response:</p>
+<pre><code>API is running
+</code></pre>
+
+<p>The ixo project data store (pds) uses JSON-RPC to receive client requests.  The structure of all calls follow the same structure:</p>
 <h2 id="ixo-blockchain-api">ixo Blockchain API</h2>
 <ul>
 <li>TODO *</li>
 </ul>
+<h3 id="did-functions">DID Functions</h3>
 <p><a name="blockchain-registerUserDid"></a></p>
-<h3 id="register-did-doc">Register DID Doc</h3>
+<h4 id="register-did-doc">Register DID Doc</h4>
 <p>Registers the DID Doc for the specified DID.  The DID Doc must contain the DID and the public key which can be used to verify signatures sign by this DID.</p>
 <p>Request:</p>
 <table>
@@ -1015,7 +1065,7 @@ contentType should reference a MIME type. See https://developer.mozilla.org/en-U
 </code></pre>
 
 <p><a name="blockchain-getDidDoc"></a></p>
-<h3 id="get-did-doc">Get Did Doc</h3>
+<h4 id="get-did-doc">Get Did Doc</h4>
 <p>Returns the Did Doc for the specified DID.  This contains the public key which can be used to verify signatures sign by this DID.</p>
 <p>Request:</p>
 <table>
@@ -1053,8 +1103,9 @@ contentType should reference a MIME type. See https://developer.mozilla.org/en-U
 }
 </code></pre>
 
+<h3 id="health-check-functions_1">Health Check Functions</h3>
 <p><a name="blockchain-health"></a></p>
-<h3 id="heath-check-to-blockchain-node_1">Heath Check to Blockchain node</h3>
+<h4 id="heath-check">Heath Check</h4>
 <p>Check whether the blockchain node is available</p>
 <p>Request:</p>
 <table>
@@ -1091,17 +1142,19 @@ result: { }
 
 <h2 id="ixo-explorer-api">ixo Explorer API</h2>
 <p>Returns a the publicly available data pertaining to projects</p>
+<h3 id="project-functions_1">Project Functions</h3>
 <p><a name="explorer-listProjects"></a></p>
-<h3 id="list-projects_1">List Projects</h3>
+<h4 id="list-projects_1">List Projects</h4>
 <p>Lists all the projects</p>
 <p><a name="explorer-getProject"></a></p>
-<h3 id="get-project_1">Get Project</h3>
+<h4 id="get-project_1">Get Project</h4>
 <p>Retrieves a project by project DID</p>
 <p><a name="explorer-getGlobalStats"></a></p>
-<h3 id="get-global-stats">Get Global Stats</h3>
+<h4 id="get-global-stats">Get Global Stats</h4>
 <p>Retrieves the global statistics and metrics for all projects</p>
+<h3 id="health-check-functions_2">Health Check Functions</h3>
 <p><a name="explorer-ping"></a></p>
-<h3 id="heath-check-to-explorer-node_1">Heath Check to Explorer node</h3>
+<h4 id="heath-check_1">Heath Check</h4>
 <p>Check that the explorer node is available</p></div>
         
     </div>

@@ -24,28 +24,35 @@ A reference implementation of the web portal of the ixo protocol
 
 The ixo-keysafe-browser-extension provides signing capabilities for the ixo web frontend. It is fork from the [MetaMask](https://metamask.io/) browser extension, but now uses Sovrin generated DID's as user credentials.
 
+[Keysafe Browser Extension API](./api/#keysafe-browser-extension-api)
+
 ##ixo NPM Module
 ![github](./img/GitHub-Mark-16px.png) [https://github.com/ixofoundation/ixo-module](https://github.com/ixofoundation/ixo-module)
 
 An npm package that wrappers the communication to the ixo backend services and provides usable services to a Javascript application.
-*TODO*
+
+[ixo NPM Module API](./api/#ixo-npm-module-api)
 
 ##Project Datastore
 ![github](./img/GitHub-Mark-16px.png) [https://github.com/ixofoundation/ixo-pds](https://github.com/ixofoundation/ixo-pds)
 
 A reference implemenation of a project data store. The ixo-pds builds a fully functional docker image to process and store claims and evaluations and then adds a record of these interactoins to the ixo Blockchain
 
-*TODO*
+[Project Datastore API](./api/#project-datastore-api)
 
 ##ixo Blockchain
 ![github](./img/GitHub-Mark-16px.png) [https://github.com/ixofoundation/ixo-cosmos](https://github.com/ixofoundation/ixo-cosmos)
 
 Built on top of Tendermint and using the cosmos SDK, the ixo blockchain records the projects, claims and evaluations that are created through using the ixo-protocol
 
+[ixo Blockchain API](./api/#ixo-blockchain-api)
+
 ##ixo Explorer
 ![github](./img/GitHub-Mark-16px.png) [https://github.com/ixofoundation/ixo-block-sync](https://github.com/ixofoundation/ixo-block-sync)
 
 The ixo Explorer provides a set of simple API's to access the publically available project documentation.  It synchronises off the ixo blockchain and stores the current state of projects.
+
+[ixo Explorer API](./api/#ixo-explorer-api)
 
 ##Schemas 
 ![github](./img/GitHub-Mark-16px.png) [https://github.com/ixofoundation/schem](https://github.com/ixofoundation/schema)
