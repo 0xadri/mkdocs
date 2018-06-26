@@ -169,6 +169,8 @@ Response:
 }
 ```
 
+### Private API
+
 URI: `<pds server>/api/request`
 
 Request type: `POST`
