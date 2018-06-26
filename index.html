@@ -114,6 +114,9 @@
                 
             <li class="second-level"><a href="#privacy-of-data">Privacy of Data</a></li>
                 
+            <li class="second-level"><a href="#security">Security</a></li>
+                
+        <li class="first-level "><a href="#pilots">Pilots</a></li>
             <li class="second-level"><a href="#amply">Amply</a></li>
                 
     </ul>
@@ -130,12 +133,16 @@ the work performed against these projects.  This work is then evaluated for accu
 <h1 id="overview-of-the-architecture">Overview of the Architecture</h1>
 <p>The ixo platform is managed by a number of components and systems that interoperate in order to provide the full services that the ixo protocol offers.</p>
 <p><img alt="Architecture Overview" src="./img/architecture-06-2018-Overview.png" /></p>
+<p>For futher information see the <a href="./documentation/">documentation on our components</a>.</p>
 <h2 id="the-ixo-blockchain">The ixo Blockchain</h2>
 <p>The ixo blockchain contains the records of evey claim that is issued against a project the the subsequent evaluation of those claims.  Each record is validated by a quorum of validator nodes before it is written to the chain and thereafter the record cannot be removed or updated.  This data is then aggegated to build out the final states of the projects.</p>
 <p>All the information on the ixo blockchain is publically avaialble through the ixo Explorer. This data includes the project information, stats regarding the project, the stakeholders of the project and the structure of data being captured against the project.  All actual claim data is stored in the Project Datastore.</p>
 <h2 id="privacy-of-data">Privacy of Data</h2>
 <p>Much of the data that is captured within a claim is highly sensive in nature.  This data might have specific regulator requirements such as GDPR or maybe the data may not reside outside certain geographical boundaries.  In order to comply with this and to also put the data into the hands of the owners of the project we have created the concept of independant data stores for each project.</p>
 <p>The ixo Blockchain keeps a link to the location of these project data stores and provides services to the project data that are goverened by cryptographic access controls.</p>
+<h2 id="security">Security</h2>
+<p>All requests to that create data or access sensitive data require cryptographic signatures and a capabilities model supports this to provide finer grained access control.</p>
+<h1 id="pilots">Pilots</h1>
 <h2 id="amply">Amply</h2>
 <p>Amply is a MVP project that we have built to prove the utility of the ixo protocol.  The code for this project can be found on our <a href="https://github.com/TrustlabTech">Amply github repository</a>.  </p></div>
         
