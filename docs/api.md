@@ -59,7 +59,8 @@ Structure:
 ### Structure of params object
 
 These are unsigned requests for publicly available information. A key is generated and sent back to the client, to be used in retrieval of information. 
-Data is stored in binary and can handle any of the following encodings: "ascii" | "utf8" | "utf16le" | "ucs2" | "base64" | "latin1" | "binary" | "hex"
+Data will accept any of the following encodings: "ascii" | "utf8" | "utf16le" | "ucs2" | "base64" | "latin1" | "binary" | "hex".
+contentType should reference a MIME type. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types
  
 
 ```
