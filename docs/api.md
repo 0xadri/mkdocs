@@ -25,6 +25,18 @@ var ixo = new Ixo('ixo_node_url')
 ### Introduction
 The project data store holds the data relating to projects.  The API is split into a public API and a non public API. The public API requests do not require cryptographic signatures, while all other requests must be signed and adher to the capabilities that have been granted to the signer.
 
+### Health check
+
+URI: `<pds server>/`
+
+Request type: `GET`
+
+Response:
+
+```
+API is running
+```
+
 The ixo project data store (pds) uses JSON-RPC to receive client requests.  The structure of all calls follow the same structure:
 
 ### Public API
@@ -168,6 +180,8 @@ Response:
     }
 }
 ```
+
+### Private API
 
 URI: `<pds server>/api/request`
 
