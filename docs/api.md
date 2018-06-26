@@ -25,20 +25,149 @@ var ixo = new Ixo('ixo_node_url')
 ### Introduction
 The project data store holds the data relating to projects.  The API is split into a public API and a non public API. The public API requests do not require cryptographic signatures, while all other requests must be signed and adher to the capabilities that have been granted to the signer.
 
-### Public API
- *Todo
-
- Upload an image
-
- Fetch image
-
- Upload a Json file
-
- Fetch Json file*
-
-### Private API
-
 The ixo project data store (pds) uses JSON-RPC to receive client requests.  The structure of all calls follow the same structure:
+
+### Public API
+
+URI: `<pds server>/api/public`
+
+Request type: `POST`
+
+Structure: 
+`{"jsonrpc": "2.0", "method": "<method name>", 	"id": <message id>, 	"params": <json data object> }`
+
+| Variable             | Description            |
+|----------------------|-----------------------|
+| `<node server>`      | The URL of the server |
+| `<entity>`           | The entity to send the method |
+| `<method name>`      | The name of the method to call defined in the config file |
+| `<message id>`       | The message ID, used to correlate asynchronous responses |
+| `<json data object>` | The parameters that are passed to the method handler |
+
+### Structure of params object
+
+These are unsigned requests for publicly available information. A key is generated and sent back to the client, to be used in retrieval of information. 
+Data is stored in binary and can handle any of the following encodings: "ascii" | "utf8" | "utf16le" | "ucs2" | "base64" | "latin1" | "binary" | "hex"
+ 
+
+```
+{
+	"jsonrpc":"2.0", 
+	"method":"createPublic",
+	"id": 123,
+	"params": {
+		"data": "bob public message", 
+		"contentType": "text"
+		}
+}
+
+```
+
+#### Upload an image
+ 
+ Request:
+
+```
+{
+	"jsonrpc": "2.0", 
+	"method": "createPublic", 
+	"id": 3, 
+	"params": 
+		{
+		"data": "<base64 encoded image>", 
+		"contentType": "image/png"
+		}
+}
+```
+
+Response:
+
+```
+{
+    "jsonrpc": "2.0",
+    "id": 3,
+    "result": "<string>"
+}
+```
+
+#### Fetch image
+ 
+Request:
+
+```
+{
+    "jsonrpc": "2.0", 
+     "method": "fetchPublic", 
+     "id": 3, 
+     "params": {"key": <string>}
+}
+```
+
+Response:
+
+```
+{
+    "jsonrpc": "2.0",
+    "id": 3,
+    "result": {
+        "data": "<base64 encoded image>",
+        "contentType": "image/png"
+    }
+}
+```
+
+#### Upload a Json file
+
+Request:
+
+```
+{
+     "jsonrpc": "2.0", 
+     "method": "createPublic", 
+     "id": 3, 
+     "params": 
+	{
+	   "data": "<JSON string>", 
+	   "contentType": "application/json"
+	}
+}
+```
+
+Response:
+
+```
+{
+    "jsonrpc": "2.0",
+    "id": 3,
+    "result": "<string>"
+}
+```
+
+#### Fetch Json file
+
+Request:
+
+```
+{
+    "jsonrpc": "2.0", 
+     "method": "fetchPublic", 
+     "id": 3, 
+     "params": {"key": <string>}
+}
+```
+
+Response:
+
+```
+{
+    "jsonrpc": "2.0",
+    "id": 3,
+    "result": {
+        "data": "<JSON string>",
+        "contentType": "application/json"
+    }
+}
+```
 
 URI: `<pds server>/api/request`
 
