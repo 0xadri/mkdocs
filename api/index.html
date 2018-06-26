@@ -114,6 +114,11 @@
                 <li class="third-level"><a href="#project-functions">Project Functions</a></li>
                 <li class="third-level"><a href="#agent-functions">Agent Functions</a></li>
                 <li class="third-level"><a href="#claim-functions">Claim Functions</a></li>
+                <li class="third-level"><a href="#statistics">Statistics</a></li>
+                <li class="third-level"><a href="#user-functions">User Functions</a></li>
+                <li class="third-level"><a href="#health-check-functions">Health Check Functions</a></li>
+                <li class="third-level"><a href="#heath-check-to-blockchain-node">Heath Check to Blockchain node</a></li>
+                <li class="third-level"><a href="#heath-check-to-explorer-node">Heath Check to Explorer node</a></li>
             <li class="second-level"><a href="#keysafe-browser-extension-api">Keysafe Browser Extension API</a></li>
                 
             <li class="second-level"><a href="#project-datastore-api">Project Datastore API</a></li>
@@ -126,10 +131,15 @@
                 <li class="third-level"><a href="#structure-of-params-object_1">Structure of params object</a></li>
             <li class="second-level"><a href="#ixo-blockchain-api">ixo Blockchain API</a></li>
                 
+                <li class="third-level"><a href="#register-did-doc">Register DID Doc</a></li>
+                <li class="third-level"><a href="#get-did-doc">Get Did Doc</a></li>
+                <li class="third-level"><a href="#heath-check-to-blockchain-node_1">Heath Check to Blockchain node</a></li>
             <li class="second-level"><a href="#ixo-explorer-api">ixo Explorer API</a></li>
                 
                 <li class="third-level"><a href="#list-projects_1">List Projects</a></li>
                 <li class="third-level"><a href="#get-project_1">Get Project</a></li>
+                <li class="third-level"><a href="#get-global-stats">Get Global Stats</a></li>
+                <li class="third-level"><a href="#heath-check-to-explorer-node_1">Heath Check to Explorer node</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
@@ -296,6 +306,52 @@ ixo.project.createPublic(dataUrl, PDSUrl) {
 </code></pre>
 
 <p>Response: <a href="#pds-evaluateClaim">PDS: evaluateClaim</a></p>
+<h3 id="statistics">Statistics</h3>
+<p>Returns the global statistics for all projects</p>
+<p>Request:</p>
+<pre><code>ixo.stats.getGlobalStats().then((result) =&gt; {
+    console.log('Statistics: ' + result)
+})   
+</code></pre>
+
+<p>Response: <a href="#explorer-getGlobalStats">ixo Explorer: getGlobalStats</a></p>
+<h3 id="user-functions">User Functions</h3>
+<h4 id="register-did-doc-to-blockchain">Register DID Doc to Blockchain</h4>
+<p>Registers a new user with the supplied DID document to the blockchain</p>
+<p>Request:</p>
+<pre><code>ixo.user.registerUserDid().then((result) =&gt; {
+    console.log('Register DID: ' + result)
+})   
+</code></pre>
+
+<p>Response: <a href="#blockchain-registerUserDid">ixo Blockchain: registerUserDid</a></p>
+<h4 id="get-the-did-doc-from-blockchain">Get the DID Doc from Blockchain</h4>
+<p>Retrieves the DID Doc from the blockchain for the specified DID</p>
+<p>Request:</p>
+<pre><code>Let did = 'did:sov:2p19P17cr6XavfMJ8htYSS';
+ixo.user.getDidDoc(did).then((result) =&gt; {
+    console.log('DID Doc: ' + result)
+})   
+</code></pre>
+
+<p>Response: <a href="#blockchain-getDidDoc">ixo Blockchain: getDidDoc</a></p>
+<h3 id="health-check-functions">Health Check Functions</h3>
+<h3 id="heath-check-to-blockchain-node">Heath Check to Blockchain node</h3>
+<p>Request:</p>
+<pre><code>ixo.network.pingIxoBlockchain().then((result) =&gt; {
+    console.log('Health Check: ' + result)
+})   
+</code></pre>
+
+<p>Response: <a href="#blockchain-health">ixo Blockchain: healthCheck</a></p>
+<h3 id="heath-check-to-explorer-node">Heath Check to Explorer node</h3>
+<p>Request:</p>
+<pre><code>ixo.network.pingIxoExplorer().then((result) =&gt; {
+    console.log('Health Check: ' + result)
+})   
+</code></pre>
+
+<p>Response: <a href="#explorer-ping">ixo Explorer: ping</a></p>
 <h2 id="keysafe-browser-extension-api">Keysafe Browser Extension API</h2>
 <ul>
 <li>Todo *</li>
@@ -915,6 +971,124 @@ contentType should reference a MIME type. See https://developer.mozilla.org/en-U
 <ul>
 <li>TODO *</li>
 </ul>
+<p><a name="blockchain-registerUserDid"></a></p>
+<h3 id="register-did-doc">Register DID Doc</h3>
+<p>Registers the DID Doc for the specified DID.  The DID Doc must contain the DID and the public key which can be used to verify signatures sign by this DID.</p>
+<p>Request:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server:</td>
+<td>Blockchain TX Server</td>
+</tr>
+<tr>
+<td>Method:</td>
+<td><code>GET</code></td>
+</tr>
+<tr>
+<td>URI:</td>
+<td><code>/broadcast_tx_sync?tx=</code></td>
+</tr>
+<tr>
+<td>Parameters:</td>
+<td><em>&lt;uppercase hex of the DID Doc with its signature preceded with Ox&gt;</em></td>
+</tr>
+</tbody>
+</table>
+<p>Example Request:
+<code>http://localhost:46657/broadcast_tx_sync?tx=0x7B227...355430383A34363A31372B30323030227D7D</code></p>
+<p>Example Parameter (pre hex encoding):</p>
+<pre><code>{&quot;payload&quot;:[10,{&quot;didDoc&quot;:{&quot;did&quot;:&quot;did:sov:398fM9kMgHuNbCtRncYrwh&quot;,&quot;pubKey&quot;:&quot;2Af4UzgUAgQk8Wt5xEkfJrjQSxWgxsuD8bzDQJSNfMSw&quot;}}],&quot;signature&quot;:{&quot;signatureValue&quot;:[1,&quot;211678D20C70292668C47D6220ED648F868DFE0CBB848EDB0E163F7EE35467F938CFB000FCCF1AD00A0AB67F6EEB6C02E4FE48D793247A7092D5B5613C87C405&quot;],&quot;created&quot;:&quot;2018-06-05T08:46:17+0200&quot;}}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+  &quot;did&quot;: &quot;did.sov.EvBFmtyRaBuMNMnwjHNVgn&quot;,
+  &quot;pubKey&quot;: &quot;8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf&quot;
+}
+</code></pre>
+
+<p><a name="blockchain-getDidDoc"></a></p>
+<h3 id="get-did-doc">Get Did Doc</h3>
+<p>Returns the Did Doc for the specified DID.  This contains the public key which can be used to verify signatures sign by this DID.</p>
+<p>Request:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server:</td>
+<td>Blockchain REST Server</td>
+</tr>
+<tr>
+<td>Method:</td>
+<td><code>GET</code></td>
+</tr>
+<tr>
+<td>URI:</td>
+<td><code>/did</code></td>
+</tr>
+<tr>
+<td>Parameters:</td>
+<td><em>&lt;did&gt;</em></td>
+</tr>
+</tbody>
+</table>
+<p>Example:
+<code>http://localhost:1317/did/did.sov.EvBFmtyRaBuMNMnwjHNVgn</code></p>
+<p>Response:</p>
+<pre><code>{
+  &quot;did&quot;: &quot;did.sov.EvBFmtyRaBuMNMnwjHNVgn&quot;,
+  &quot;pubKey&quot;: &quot;8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf&quot;
+}
+</code></pre>
+
+<p><a name="blockchain-health"></a></p>
+<h3 id="heath-check-to-blockchain-node_1">Heath Check to Blockchain node</h3>
+<p>Check whether the blockchain node is available</p>
+<p>Request:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server:</td>
+<td>Blockchain TX Server</td>
+</tr>
+<tr>
+<td>Method:</td>
+<td><code>GET</code></td>
+</tr>
+<tr>
+<td>URI:</td>
+<td><code>/heath</code></td>
+</tr>
+</tbody>
+</table>
+<p>Example:
+<code>http://localhost:46657/health</code></p>
+<p>Response:</p>
+<pre><code>{
+jsonrpc: &quot;2.0&quot;,
+id: &quot;&quot;,
+result: { }
+}
+</code></pre>
+
 <h2 id="ixo-explorer-api">ixo Explorer API</h2>
 <p>Returns a the publicly available data pertaining to projects</p>
 <p><a name="explorer-listProjects"></a></p>
@@ -922,7 +1096,13 @@ contentType should reference a MIME type. See https://developer.mozilla.org/en-U
 <p>Lists all the projects</p>
 <p><a name="explorer-getProject"></a></p>
 <h3 id="get-project_1">Get Project</h3>
-<p>Retrieves a project by project DID</p></div>
+<p>Retrieves a project by project DID</p>
+<p><a name="explorer-getGlobalStats"></a></p>
+<h3 id="get-global-stats">Get Global Stats</h3>
+<p>Retrieves the global statistics and metrics for all projects</p>
+<p><a name="explorer-ping"></a></p>
+<h3 id="heath-check-to-explorer-node_1">Heath Check to Explorer node</h3>
+<p>Check that the explorer node is available</p></div>
         
     </div>
 
