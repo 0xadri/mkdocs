@@ -6,12 +6,9 @@ The ixo platform has a number of different components that each has a set of API
 
 The ixo NPM module makes it easier to interact withthe project data stores and the ixo blockchain
 
-### Usage
-#### Install using npm
-
 `npm install --save ixo-module`
 
-#### Create new Ixo Object (Without provider)
+To Create new Ixo Object (Without provider)
 
 ```
 import Ixo from 'ixo-module';
@@ -176,17 +173,6 @@ ixo.agent.evaluateClaim(evaluationData, signature, PDSUrl).then((result) => {
 
 Response: [PDS: evaluateClaim](#pds-evaluateClaim)
 
-### Statistics
-Returns the global statistics for all projects
-
-Request:
-```
-ixo.stats.getGlobalStats().then((result) => {
-    console.log('Statistics: ' + result)
-})   
-```
-Response: [ixo Explorer: getGlobalStats](#explorer-getGlobalStats)
-
 ### User Functions
 
 #### Register DID Doc to Blockchain
@@ -214,10 +200,20 @@ ixo.user.getDidDoc(did).then((result) => {
 ```
 Response: [ixo Blockchain: getDidDoc](#blockchain-getDidDoc)
 
+### Metrics
+Returns the global statistics for all projects
+
+Request:
+```
+ixo.stats.getGlobalStats().then((result) => {
+    console.log('Statistics: ' + result)
+})   
+```
+Response: [ixo Explorer: getGlobalStats](#explorer-getGlobalStats)
 
 ### Health Check Functions
 
-### Heath Check to Blockchain node
+#### Heath Check to Blockchain node
 
 Request:
 ```
@@ -228,7 +224,7 @@ ixo.network.pingIxoBlockchain().then((result) => {
 
 Response: [ixo Blockchain: healthCheck](#blockchain-health)
 
-### Heath Check to Explorer node
+#### Heath Check to Explorer node
 
 Request:
 ```
@@ -241,26 +237,85 @@ Response: [ixo Explorer: ping](#explorer-ping)
 
 ## Keysafe Browser Extension API
 
-* Todo *
+When the keysafe extension is added to the browser it injects a globale on the the `window` object.  It can be accessed as follows:
+
+```
+const IxoInpageProvider = window['ixoKs'];
+let keysafe = new IxoInpageProvider();
+```
+
+### Info Functions
+
+#### Get User Information
+Returns a javascript object contain the user name and the DID Doc
+
+Request:
+```
+keysafe.getInfo().then((error, result) => {
+	if (result) {
+        console.log('User Info: ' + result)
+    } else {
+        console.log(error)
+    }
+})   
+```
+
+Response: 
+```
+{
+    name: "John",
+    didDoc: {
+        "did": "did.sov.EvBFmtyRaBuMNMnwjHNVgn",
+        "pubKey": "8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf"
+    }
+}
+```
+
+#### Get User DID Doc
+Returns a javascript object contain the user's DID Doc
+
+Request:
+```
+keysafe.getDidDoc().then((error, result) => {
+	if (result) {
+        console.log('User DID Doc: ' + result)
+    } else {
+        console.log(error)
+    }
+})   
+```
+
+Response: 
+```
+{
+    "did": "did.sov.EvBFmtyRaBuMNMnwjHNVgn",
+    "pubKey": "8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf"
+}
+```
+
+### Signing Functions
+
+#### Request Signing
+Request the user to sign some data using the keys in the keysafe
+
+```
+keysafe.requestSigning(JSON.stringify(data), (error, signature) => {	
+    if (!error) {
+        console.log("Signature: " + signature);
+    } else {
+        console.log(error);
+    }
+});
+```
+
+Response: 
+
+`A011D11A2D91A9CB03ECFFB7D9AFC1001DB56B3DABF42BDD0F4D00352A9B8E0E73E85F0B4586DA2934696C0A78602EEB047EA6B3D9096C1A0C3FB144E6A51C09`
+
 
 ## Project Datastore API
 
-### Introduction
 The project data store holds the data relating to projects.  The API is split into a public API and a non public API. The public API requests do not require cryptographic signatures, while all other requests must be signed and adher to the capabilities that have been granted to the signer.
-
-### Health check
-
-URI: `<pds server>/`
-
-Request type: `GET`
-
-Response:
-
-```
-API is running
-```
-
-The ixo project data store (pds) uses JSON-RPC to receive client requests.  The structure of all calls follow the same structure:
 
 ### Public API
 
@@ -279,7 +334,7 @@ Structure:
 | `<message id>`       | The message ID, used to correlate asynchronous responses |
 | `<json data object>` | The parameters that are passed to the method handler |
 
-### Structure of params object
+#### Structure of params object
 
 These are unsigned requests for publicly available information. A key is generated and sent back to the client, to be used in retrieval of information. 
 Data will accept any of the following encodings: "ascii" | "utf8" | "utf16le" | "ucs2" | "base64" | "latin1" | "binary" | "hex".
@@ -425,7 +480,7 @@ Structure:
 | `<message id>`       | The message ID, used to correlate asynchronous responses |
 | `<json data object>` | The parameters that are passed to the method handler |
 
-### Structure of params object
+#### Structure of params object
 
 Everything in the payload section is signed to create a signature.  It should be packed using `JSON.stringify()` method before signing. 
 
@@ -895,13 +950,29 @@ Response:
     ]
 }
 ```
+### Heath Check Functions
+#### Health Check
+
+URI: `<pds server>/`
+
+Request type: `GET`
+
+Response:
+
+```
+API is running
+```
+
+The ixo project data store (pds) uses JSON-RPC to receive client requests.  The structure of all calls follow the same structure:
 
 ## ixo Blockchain API
 
 * TODO *
 
+### DID Functions
+
 <a name="blockchain-registerUserDid"></a>
-### Register DID Doc
+#### Register DID Doc
 Registers the DID Doc for the specified DID.  The DID Doc must contain the DID and the public key which can be used to verify signatures sign by this DID.
 
 Request:
@@ -929,7 +1000,7 @@ Response:
 }
 ```
 <a name="blockchain-getDidDoc"></a>
-### Get Did Doc
+#### Get Did Doc
 Returns the Did Doc for the specified DID.  This contains the public key which can be used to verify signatures sign by this DID.
 
 Request:
@@ -952,8 +1023,9 @@ Response:
 }
 ```
 
+### Health Check Functions
 <a name="blockchain-health"></a>
-### Heath Check to Blockchain node
+#### Heath Check
 
 Check whether the blockchain node is available
 
@@ -981,22 +1053,25 @@ result: { }
 
 Returns a the publicly available data pertaining to projects
 
+###Project Functions
+
 <a name="explorer-listProjects"></a>
-### List Projects
+#### List Projects
 
 Lists all the projects
 
 <a name="explorer-getProject"></a>
-### Get Project
+#### Get Project
 
 Retrieves a project by project DID
 
 <a name="explorer-getGlobalStats"></a>
-### Get Global Stats
+#### Get Global Stats
 
 Retrieves the global statistics and metrics for all projects
 
+### Health Check Functions
 <a name="explorer-ping"></a>
-### Heath Check to Explorer node
+#### Heath Check
 
 Check that the explorer node is available
