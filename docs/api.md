@@ -219,7 +219,8 @@ Structure:
 ### Structure of params object
 
 These are unsigned requests for publicly available information. A key is generated and sent back to the client, to be used in retrieval of information. 
-Data is stored in binary and can handle any of the following encodings: "ascii" | "utf8" | "utf16le" | "ucs2" | "base64" | "latin1" | "binary" | "hex"
+Data will accept any of the following encodings: "ascii" | "utf8" | "utf16le" | "ucs2" | "base64" | "latin1" | "binary" | "hex".
+contentType should reference a MIME type. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types
  
 
 ```
@@ -424,6 +425,67 @@ Request:
 }
 ```
 
+Example:
+
+```
+{
+    "jsonrpc": "2.0",
+    "method": "createProject",
+    "id": 123,
+    "params": {
+        "payload": {
+            "template": {
+                "name": "create_project"
+            },
+			"data": {
+				"title": "Test Water project",
+		        "ownerName": "Don",
+		        "ownerEmail": "don@gmail.com",
+		        "shortDescription": "Project for water",
+		        "longDescription": "project to save water for areas with drought",
+		        "impactAction": "litres of water saved",
+		        "projectLocation": "ZA",
+		        "sdgs": [
+		          "12.2",
+		          "3",
+		          "2.4"
+		        ],
+		        "requiredClaims": 30,
+		        "templates": {
+		          "claim": {
+		            "schema": "af175axcn6ejiuds0sh",
+		            "form": "1v6v8a6woabjiuds3i9"
+		          }
+		        },
+		        "evaluatorPayPerClaim": "0",
+		        "socialMedia": {
+		          "facebookLink": "https://www.facebook.com/ixofoundation/",
+		          "instagramLink": "",
+		          "twitterLink": "",
+		          "webLink": "https://ixo.foundation"
+		        },
+		        "serviceEndpoint": "http://35.192.187.110:5000/",
+		        "imageLink": "pc16l7yk62ejiudrox5",
+		        "founder": {
+		          "name": "Nic",
+		          "email": "nic@test.co.za",
+		          "countryOfOrigin": "ZA",
+		          "shortDescription": "primary description for founder",
+		          "websiteURL": "www.water.com",
+		          "logoLink": ""
+		        }
+			}
+        },
+         "signature": {
+            "type": "ed25519-sha-256",
+            "created": "2018-06-05T12:35:02Z", 
+            "creator": "did:sov:2p19P17cr6XavfMJ8htYSS",
+            "signatureValue": "23EED2462B11B94C9F63A509B39F15CB9C0B2DB8C16A52A22115B755BF3F6BDF7ABB8881697AA7DB6F4AFBD7C5DE4618B403AB43B738841BB89E72C8792AC401"
+        }
+    }
+}
+```
+
 Response:
 
 ```
@@ -435,6 +497,56 @@ Response:
         <project data>
         "tx": "b51cd2665d146d0a0240fd2756beb4c9e9c1948275ac5d37a7ae405ab2d71a7a",
         "_id": "5a66e09b38f45f01d90d122a",
+    }
+}
+```
+
+Example:
+
+```
+{
+    "jsonrpc": "2.0",
+    "id": 123,
+    "result": {
+        "_id": "5b32094f05aa3f0011405957",
+        "title": "Test Water project",
+        "ownerName": "Don",
+        "ownerEmail": "don@gmail.com",
+        "shortDescription": "Project for water",
+        "longDescription": "project to save water for areas with drought",
+        "impactAction": "litres of water saved",
+        "projectLocation": "ZA",
+        "sdgs": [
+            "12.2",
+            "3",
+            "2.4"
+        ],
+        "requiredClaims": 30,
+        "templates": {
+            "claim": {
+                "schema": "af175axcn6ejiuds0sh",
+                "form": "1v6v8a6woabjiuds3i9"
+            }
+        },
+        "evaluatorPayPerClaim": "0",
+        "socialMedia": {
+            "facebookLink": "https://www.facebook.com/ixofoundation/",
+            "instagramLink": "",
+            "twitterLink": "",
+            "webLink": "https://ixo.foundation"
+        },
+        "serviceEndpoint": "http://35.192.187.110:5000/",
+        "imageLink": "pc16l7yk62ejiudrox5",
+        "founder": {
+            "name": "Nic",
+            "email": "nic@test.co.za",
+            "countryOfOrigin": "ZA",
+            "shortDescription": "primary description for founder",
+            "websiteURL": "www.water.com",
+            "logoLink": ""
+        },
+        "txHash": "a09c8bc12a3e7cc1f859f0fc98cd37880d8c894826e0f1fa7a3f824db37941f5",
+        "__v": 0
     }
 }
 ```
