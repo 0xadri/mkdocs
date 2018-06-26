@@ -108,39 +108,194 @@
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
         <li class="first-level active"><a href="#api">API</a></li>
-            <li class="second-level"><a href="#ixo-module-api">ixo module API</a></li>
+            <li class="second-level"><a href="#ixo-npm-module-api">ixo NPM module API</a></li>
                 
-                <li class="third-level"><a href="#install-using-npm">Install using npm</a></li>
-                <li class="third-level"><a href="#create-new-ixo-object-without-provider">Create new Ixo Object (Without provider)</a></li>
+                <li class="third-level"><a href="#usage">Usage</a></li>
+                <li class="third-level"><a href="#project-functions">Project Functions</a></li>
+                <li class="third-level"><a href="#agent-functions">Agent Functions</a></li>
+                <li class="third-level"><a href="#claim-functions">Claim Functions</a></li>
             <li class="second-level"><a href="#keysafe-browser-extension-api">Keysafe Browser Extension API</a></li>
                 
             <li class="second-level"><a href="#project-datastore-api">Project Datastore API</a></li>
                 
                 <li class="third-level"><a href="#introduction">Introduction</a></li>
+                <li class="third-level"><a href="#health-check">Health check</a></li>
                 <li class="third-level"><a href="#public-api">Public API</a></li>
-                <li class="third-level"><a href="#private-api">Private API</a></li>
                 <li class="third-level"><a href="#structure-of-params-object">Structure of params object</a></li>
+                <li class="third-level"><a href="#private-api">Private API</a></li>
+                <li class="third-level"><a href="#structure-of-params-object_1">Structure of params object</a></li>
             <li class="second-level"><a href="#ixo-blockchain-api">ixo Blockchain API</a></li>
                 
             <li class="second-level"><a href="#ixo-explorer-api">ixo Explorer API</a></li>
                 
+                <li class="third-level"><a href="#list-projects_1">List Projects</a></li>
+                <li class="third-level"><a href="#get-project_1">Get Project</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
 
 <h1 id="api">API</h1>
 <p>The ixo platform has a number of different components that each has a set of APIs</p>
-<h2 id="ixo-module-api">ixo module API</h2>
-<h3 id="install-using-npm">Install using npm</h3>
+<h2 id="ixo-npm-module-api">ixo NPM module API</h2>
+<p>The ixo NPM module makes it easier to interact withthe project data stores and the ixo blockchain</p>
+<h3 id="usage">Usage</h3>
+<h4 id="install-using-npm">Install using npm</h4>
 <p><code>npm install --save ixo-module</code></p>
-<h3 id="create-new-ixo-object-without-provider">Create new Ixo Object (Without provider)</h3>
+<h4 id="create-new-ixo-object-without-provider">Create new Ixo Object (Without provider)</h4>
 <pre><code>import Ixo from 'ixo-module';
 var ixo = new Ixo('ixo_node_url')
 </code></pre>
 
-<ul>
-<li>TODO *</li>
-</ul>
+<h3 id="project-functions">Project Functions</h3>
+<p>Functions pertaining to projects. These calls take the form <code>ixo.project.&lt;functionName&gt;</code></p>
+<h4 id="list-projects">List Projects</h4>
+<p>Returns a list of all projects</p>
+<p>Request:</p>
+<pre><code>ixo.project.listProjects().then((result) =&gt; {
+    console.log('Project List: ' + result)
+})   
+</code></pre>
+
+<p>Response: <a href="#explorer-listProjects">ixo Explorer: listProjects</a></p>
+<h4 id="get-project">Get Project</h4>
+<p>Retrieves public project details by DID</p>
+<pre><code>let projectDid = 'did:ixo:TknEju4pjyRQvVehivZ82x';
+ixo.project.getProjectByDid(projectDid).then((result) =&gt; {
+    console.log('Project Details: ' + result)
+})   
+</code></pre>
+
+<p>Response: <a href="#explorer-getProject">ixo Explorer: getProject</a></p>
+<h4 id="create-project">Create Project</h4>
+<pre><code>ixo.project.createProject(projectData, signature, PDSUrl).then((result) =&gt; {
+    console.log('Project Details: ' + result)
+})   
+</code></pre>
+
+<p>Response: <a href="#pds-createProject">PDS: createProject</a></p>
+<h4 id="upload-a-document">Upload a Document</h4>
+<p>Function to upload a dataUrl to the project.  It returns a unique reference to the data so it can be retrieved at a later stage. It is used for uploading images and json templates, but it could countain any other project specific public data.</p>
+<p>The <code>dataUrl</code> takes the form of <code>data:&lt;mediatype&gt;;&lt;encoding&gt;,&lt;data&gt;</code></p>
+<pre><code>// Upload an image
+let dataUrl = 'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO 9TXL0Y4OHwAAAABJRU5ErkJggg==';
+ixo.project.createPublic(dataUrl, PDSUrl) {
+    console.log('Document hash: ' + result)
+})   
+</code></pre>
+
+<p>Response: <a href="#pds-createPublic-image">PDS: createPublic</a></p>
+<h4 id="retrieve-a-document">Retrieve a Document</h4>
+<p>Retrieves a previously uploaded document using the document hash</p>
+<pre><code>ixo.project.fetchPublic(documentHash, PDSUrl) {
+    console.log('Document hash: ' + result)
+})   
+</code></pre>
+
+<p>Response: <a href="#pds-fetchPublic-image">PDS: fetchPublic</a></p>
+<h3 id="agent-functions">Agent Functions</h3>
+<p>Functions pertaining to agents on projects.  These calls take the form <code>ixo.agent.&lt;functionName&gt;</code></p>
+<h4 id="list-agents-on-a-project">List Agents on a Project</h4>
+<p>Returns a list of all agents on a project</p>
+<p>Request:</p>
+<pre><code>ixo.agent.listAgentsForProject(data, signature, PDSUrl).then((result) =&gt; {
+    console.log('Agent List: ' + result)
+})   
+</code></pre>
+
+<p>Response: <a href="#pds-listAgents">PDS: listAgents</a></p>
+<h4 id="create-an-agent-on-a-project">Create an Agent on a Project</h4>
+<p>Create an agents on a project</p>
+<p>Request:</p>
+<pre><code>ixo.agent.createAgent(agentData, signature, PDSUrl).then((result) =&gt; {
+    console.log('Create Agent: ' + result)
+})   
+</code></pre>
+
+<p>Response: <a href="#pds-createAgent">PDS: createAgent</a></p>
+<h4 id="update-agent-status">Update Agent Status</h4>
+<p>Update an agent's status on a project</p>
+<p>Valid statuses are:</p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pending</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Approved</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Revoked</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>Request:</p>
+<pre><code>ixo.agent.createAgent(agentData, signature, PDSUrl).then((result) =&gt; {
+    console.log('Update Agent Status: ' + result)
+})   
+</code></pre>
+
+<p>Response: <a href="#pds-updateAgentStatus">PDS: updateAgentStatus</a></p>
+<h3 id="claim-functions">Claim Functions</h3>
+<p>Functions pertaining to agents on projects.  These calls take the form <code>ixo.claim.&lt;functionName&gt;</code></p>
+<h4 id="list-claims-on-a-project">List Claims on a Project</h4>
+<p>Returns a list of all claims on a project</p>
+<p>Request:</p>
+<pre><code>ixo.claim.listClaimsForProject(data, signature, PDSUrl).then((result) =&gt; {
+    console.log('Claim List: ' + result)
+})   
+</code></pre>
+
+<p>Response: <a href="#pds-listClaimsForProject">PDS: listClaimsForProject</a></p>
+<h4 id="create-a-claim-on-a-project">Create a Claim on a Project</h4>
+<p>Create a claim on a project</p>
+<p>Request:</p>
+<pre><code>ixo.agent.createClaim(agentData, signature, PDSUrl).then((result) =&gt; {
+    console.log('Create Claim: ' + result)
+})   
+</code></pre>
+
+<p>Response: <a href="#pds-createClaim">PDS: createClaim</a></p>
+<h4 id="evaluate-a-claim">Evaluate a Claim</h4>
+<p>Create an evaluation for a claim</p>
+<p>Valid statuses are:</p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pending</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Approved</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Rejected</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>Request:</p>
+<pre><code>ixo.agent.evaluateClaim(evaluationData, signature, PDSUrl).then((result) =&gt; {
+    console.log('Create Evaluation: ' + result)
+})   
+</code></pre>
+
+<p>Response: <a href="#pds-evaluateClaim">PDS: evaluateClaim</a></p>
 <h2 id="keysafe-browser-extension-api">Keysafe Browser Extension API</h2>
 <ul>
 <li>Todo *</li>
@@ -148,15 +303,16 @@ var ixo = new Ixo('ixo_node_url')
 <h2 id="project-datastore-api">Project Datastore API</h2>
 <h3 id="introduction">Introduction</h3>
 <p>The project data store holds the data relating to projects.  The API is split into a public API and a non public API. The public API requests do not require cryptographic signatures, while all other requests must be signed and adher to the capabilities that have been granted to the signer.</p>
-<h3 id="public-api">Public API</h3>
-<p>*Todo</p>
-<p>Upload an image</p>
-<p>Fetch image</p>
-<p>Upload a Json file</p>
-<p>Fetch Json file*</p>
-<h3 id="private-api">Private API</h3>
+<h3 id="health-check">Health check</h3>
+<p>URI: <code>&lt;pds server&gt;/</code></p>
+<p>Request type: <code>GET</code></p>
+<p>Response:</p>
+<pre><code>API is running
+</code></pre>
+
 <p>The ixo project data store (pds) uses JSON-RPC to receive client requests.  The structure of all calls follow the same structure:</p>
-<p>URI: <code>&lt;pds server&gt;/api/request</code></p>
+<h3 id="public-api">Public API</h3>
+<p>URI: <code>&lt;pds server&gt;/api/public</code></p>
 <p>Request type: <code>POST</code></p>
 <p>Structure: 
 <code>{"jsonrpc": "2.0", "method": "&lt;method name&gt;",  "id": &lt;message id&gt;,     "params": &lt;json data object&gt; }</code></p>
@@ -191,6 +347,147 @@ var ixo = new Ixo('ixo_node_url')
 </tbody>
 </table>
 <h3 id="structure-of-params-object">Structure of params object</h3>
+<p>These are unsigned requests for publicly available information. A key is generated and sent back to the client, to be used in retrieval of information. 
+Data will accept any of the following encodings: "ascii" | "utf8" | "utf16le" | "ucs2" | "base64" | "latin1" | "binary" | "hex".
+contentType should reference a MIME type. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types</p>
+<pre><code>{
+    &quot;jsonrpc&quot;:&quot;2.0&quot;, 
+    &quot;method&quot;:&quot;createPublic&quot;,
+    &quot;id&quot;: 123,
+    &quot;params&quot;: {
+        &quot;data&quot;: &quot;bob public message&quot;, 
+        &quot;contentType&quot;: &quot;text&quot;
+        }
+}
+
+</code></pre>
+
+<p><a name="pds-createPublic-image"></a></p>
+<h4 id="upload-an-image">Upload an image</h4>
+<p>Request:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;, 
+    &quot;method&quot;: &quot;createPublic&quot;, 
+    &quot;id&quot;: 3, 
+    &quot;params&quot;: 
+        {
+        &quot;data&quot;: &quot;&lt;base64 encoded image&gt;&quot;, 
+        &quot;contentType&quot;: &quot;image/png&quot;
+        }
+}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 3,
+    &quot;result&quot;: &quot;&lt;string&gt;&quot;
+}
+</code></pre>
+
+<p><a name="pds-fetchPublic-image"></a></p>
+<h4 id="fetch-image">Fetch image</h4>
+<p>Request:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;, 
+     &quot;method&quot;: &quot;fetchPublic&quot;, 
+     &quot;id&quot;: 3, 
+     &quot;params&quot;: {&quot;key&quot;: &lt;string&gt;}
+}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 3,
+    &quot;result&quot;: {
+        &quot;data&quot;: &quot;&lt;base64 encoded image&gt;&quot;,
+        &quot;contentType&quot;: &quot;image/png&quot;
+    }
+}
+</code></pre>
+
+<p><a name="pds-createPublic-json"></a></p>
+<h4 id="upload-a-json-file">Upload a Json file</h4>
+<p>Request:</p>
+<pre><code>{
+     &quot;jsonrpc&quot;: &quot;2.0&quot;, 
+     &quot;method&quot;: &quot;createPublic&quot;, 
+     &quot;id&quot;: 3, 
+     &quot;params&quot;: 
+    {
+       &quot;data&quot;: &quot;&lt;JSON string&gt;&quot;, 
+       &quot;contentType&quot;: &quot;application/json&quot;
+    }
+}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 3,
+    &quot;result&quot;: &quot;&lt;string&gt;&quot;
+}
+</code></pre>
+
+<p><a name="pds-fetchPublic-json"></a></p>
+<h4 id="fetch-json-file">Fetch Json file</h4>
+<p>Request:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;, 
+     &quot;method&quot;: &quot;fetchPublic&quot;, 
+     &quot;id&quot;: 3, 
+     &quot;params&quot;: {&quot;key&quot;: &lt;string&gt;}
+}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 3,
+    &quot;result&quot;: {
+        &quot;data&quot;: &quot;&lt;JSON string&gt;&quot;,
+        &quot;contentType&quot;: &quot;application/json&quot;
+    }
+}
+</code></pre>
+
+<h3 id="private-api">Private API</h3>
+<p>URI: <code>&lt;pds server&gt;/api/request</code></p>
+<p>Request type: <code>POST</code></p>
+<p>Structure: 
+<code>{"jsonrpc": "2.0", "method": "&lt;method name&gt;",  "id": &lt;message id&gt;,     "params": &lt;json data object&gt; }</code></p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;node server&gt;</code></td>
+<td>The URL of the server</td>
+</tr>
+<tr>
+<td><code>&lt;entity&gt;</code></td>
+<td>The entity to send the method</td>
+</tr>
+<tr>
+<td><code>&lt;method name&gt;</code></td>
+<td>The name of the method to call defined in the config file</td>
+</tr>
+<tr>
+<td><code>&lt;message id&gt;</code></td>
+<td>The message ID, used to correlate asynchronous responses</td>
+</tr>
+<tr>
+<td><code>&lt;json data object&gt;</code></td>
+<td>The parameters that are passed to the method handler</td>
+</tr>
+</tbody>
+</table>
+<h3 id="structure-of-params-object_1">Structure of params object</h3>
 <p>Everything in the payload section is signed to create a signature.  It should be packed using <code>JSON.stringify()</code> method before signing. </p>
 <pre><code>{
     &quot;jsonrpc&quot;:&quot;2.0&quot;, 
@@ -220,7 +517,8 @@ var ixo = new Ixo('ixo_node_url')
 
 </code></pre>
 
-<h4 id="create-project">Create Project</h4>
+<p><a name="pds-createProject"></a></p>
+<h4 id="create-project_1">Create Project</h4>
 <p>Creates a new project.</p>
 <p>Request:</p>
 <pre><code>{
@@ -246,6 +544,65 @@ var ixo = new Ixo('ixo_node_url')
 }
 </code></pre>
 
+<p>Example:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;method&quot;: &quot;createProject&quot;,
+    &quot;id&quot;: 123,
+    &quot;params&quot;: {
+        &quot;payload&quot;: {
+            &quot;template&quot;: {
+                &quot;name&quot;: &quot;create_project&quot;
+            },
+            &quot;data&quot;: {
+                &quot;title&quot;: &quot;Test Water project&quot;,
+                &quot;ownerName&quot;: &quot;Don&quot;,
+                &quot;ownerEmail&quot;: &quot;don@gmail.com&quot;,
+                &quot;shortDescription&quot;: &quot;Project for water&quot;,
+                &quot;longDescription&quot;: &quot;project to save water for areas with drought&quot;,
+                &quot;impactAction&quot;: &quot;litres of water saved&quot;,
+                &quot;projectLocation&quot;: &quot;ZA&quot;,
+                &quot;sdgs&quot;: [
+                  &quot;12.2&quot;,
+                  &quot;3&quot;,
+                  &quot;2.4&quot;
+                ],
+                &quot;requiredClaims&quot;: 30,
+                &quot;templates&quot;: {
+                  &quot;claim&quot;: {
+                    &quot;schema&quot;: &quot;af175axcn6ejiuds0sh&quot;,
+                    &quot;form&quot;: &quot;1v6v8a6woabjiuds3i9&quot;
+                  }
+                },
+                &quot;evaluatorPayPerClaim&quot;: &quot;0&quot;,
+                &quot;socialMedia&quot;: {
+                  &quot;facebookLink&quot;: &quot;https://www.facebook.com/ixofoundation/&quot;,
+                  &quot;instagramLink&quot;: &quot;&quot;,
+                  &quot;twitterLink&quot;: &quot;&quot;,
+                  &quot;webLink&quot;: &quot;https://ixo.foundation&quot;
+                },
+                &quot;serviceEndpoint&quot;: &quot;http://35.192.187.110:5000/&quot;,
+                &quot;imageLink&quot;: &quot;pc16l7yk62ejiudrox5&quot;,
+                &quot;founder&quot;: {
+                  &quot;name&quot;: &quot;Nic&quot;,
+                  &quot;email&quot;: &quot;nic@test.co.za&quot;,
+                  &quot;countryOfOrigin&quot;: &quot;ZA&quot;,
+                  &quot;shortDescription&quot;: &quot;primary description for founder&quot;,
+                  &quot;websiteURL&quot;: &quot;www.water.com&quot;,
+                  &quot;logoLink&quot;: &quot;&quot;
+                }
+            }
+        },
+         &quot;signature&quot;: {
+            &quot;type&quot;: &quot;ed25519-sha-256&quot;,
+            &quot;created&quot;: &quot;2018-06-05T12:35:02Z&quot;, 
+            &quot;creator&quot;: &quot;did:sov:2p19P17cr6XavfMJ8htYSS&quot;,
+            &quot;signatureValue&quot;: &quot;23EED2462B11B94C9F63A509B39F15CB9C0B2DB8C16A52A22115B755BF3F6BDF7ABB8881697AA7DB6F4AFBD7C5DE4618B403AB43B738841BB89E72C8792AC401&quot;
+        }
+    }
+}
+</code></pre>
+
 <p>Response:</p>
 <pre><code>{
     &quot;jsonrpc&quot;: &quot;2.0&quot;,
@@ -259,6 +616,55 @@ var ixo = new Ixo('ixo_node_url')
 }
 </code></pre>
 
+<p>Example:</p>
+<pre><code>{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 123,
+    &quot;result&quot;: {
+        &quot;_id&quot;: &quot;5b32094f05aa3f0011405957&quot;,
+        &quot;title&quot;: &quot;Test Water project&quot;,
+        &quot;ownerName&quot;: &quot;Don&quot;,
+        &quot;ownerEmail&quot;: &quot;don@gmail.com&quot;,
+        &quot;shortDescription&quot;: &quot;Project for water&quot;,
+        &quot;longDescription&quot;: &quot;project to save water for areas with drought&quot;,
+        &quot;impactAction&quot;: &quot;litres of water saved&quot;,
+        &quot;projectLocation&quot;: &quot;ZA&quot;,
+        &quot;sdgs&quot;: [
+            &quot;12.2&quot;,
+            &quot;3&quot;,
+            &quot;2.4&quot;
+        ],
+        &quot;requiredClaims&quot;: 30,
+        &quot;templates&quot;: {
+            &quot;claim&quot;: {
+                &quot;schema&quot;: &quot;af175axcn6ejiuds0sh&quot;,
+                &quot;form&quot;: &quot;1v6v8a6woabjiuds3i9&quot;
+            }
+        },
+        &quot;evaluatorPayPerClaim&quot;: &quot;0&quot;,
+        &quot;socialMedia&quot;: {
+            &quot;facebookLink&quot;: &quot;https://www.facebook.com/ixofoundation/&quot;,
+            &quot;instagramLink&quot;: &quot;&quot;,
+            &quot;twitterLink&quot;: &quot;&quot;,
+            &quot;webLink&quot;: &quot;https://ixo.foundation&quot;
+        },
+        &quot;serviceEndpoint&quot;: &quot;http://35.192.187.110:5000/&quot;,
+        &quot;imageLink&quot;: &quot;pc16l7yk62ejiudrox5&quot;,
+        &quot;founder&quot;: {
+            &quot;name&quot;: &quot;Nic&quot;,
+            &quot;email&quot;: &quot;nic@test.co.za&quot;,
+            &quot;countryOfOrigin&quot;: &quot;ZA&quot;,
+            &quot;shortDescription&quot;: &quot;primary description for founder&quot;,
+            &quot;websiteURL&quot;: &quot;www.water.com&quot;,
+            &quot;logoLink&quot;: &quot;&quot;
+        },
+        &quot;txHash&quot;: &quot;a09c8bc12a3e7cc1f859f0fc98cd37880d8c894826e0f1fa7a3f824db37941f5&quot;,
+        &quot;__v&quot;: 0
+    }
+}
+</code></pre>
+
+<p><a name="pds-createAgent"></a></p>
 <h4 id="create-agent">Create Agent</h4>
 <p>Creates a new agent.</p>
 <p>Request:</p>
@@ -299,7 +705,8 @@ var ixo = new Ixo('ixo_node_url')
 }
 </code></pre>
 
-<h4 id="update-agent-status">Update Agent Status</h4>
+<p><a name="pds-updateAgentStatus"></a></p>
+<h4 id="update-agent-status_1">Update Agent Status</h4>
 <p>Update Agent Status</p>
 <p>Request:</p>
 <pre><code>{
@@ -340,6 +747,7 @@ var ixo = new Ixo('ixo_node_url')
 }
 </code></pre>
 
+<p><a name="pds-listAgents"></a></p>
 <h4 id="list-agents">List Agents</h4>
 <p>List claims and latest status.</p>
 <p>Request:</p>
@@ -381,6 +789,7 @@ var ixo = new Ixo('ixo_node_url')
 }
 </code></pre>
 
+<p><a name="pds-createClaim"></a></p>
 <h4 id="submit-claim">Submit Claim</h4>
 <p>Creates a new claim.</p>
 <p>Request:</p>
@@ -394,7 +803,7 @@ var ixo = new Ixo('ixo_node_url')
                 &quot;name&quot;: &quot;&lt;template to validate&gt;&quot;
             },
             &quot;data&quot;: {
-                &lt;usubmit claim data&gt;
+                &lt;submit claim data&gt;
             }
         },
         &quot;signature&quot;: {
@@ -420,6 +829,7 @@ var ixo = new Ixo('ixo_node_url')
 }
 </code></pre>
 
+<p><a name="pds-evaluateClaim"></a></p>
 <h4 id="evaluate-claim">Evaluate Claim</h4>
 <p>Evaluate a new claim.</p>
 <p>Request:</p>
@@ -506,9 +916,13 @@ var ixo = new Ixo('ixo_node_url')
 <li>TODO *</li>
 </ul>
 <h2 id="ixo-explorer-api">ixo Explorer API</h2>
-<ul>
-<li>TODO *</li>
-</ul></div>
+<p>Returns a the publicly available data pertaining to projects</p>
+<p><a name="explorer-listProjects"></a></p>
+<h3 id="list-projects_1">List Projects</h3>
+<p>Lists all the projects</p>
+<p><a name="explorer-getProject"></a></p>
+<h3 id="get-project_1">Get Project</h3>
+<p>Retrieves a project by project DID</p></div>
         
     </div>
 
