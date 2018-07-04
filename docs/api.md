@@ -290,13 +290,6 @@ Response:
 {
   "did": "2HQrdvfjqZwRQCapLDPZzY",
   "pubKey": "hZHiC5kPgiADRXnuiktvmsNSPH1D4c96NxMSjjNLVTY",
-  "credentials": [
-    {
-      "type": "KYC",
-      "data": "KYC Authentication Service",
-      "signer": "DHHeFW9G17McBUk45ty7Jn"
-    }
-  ]
 }
 ```
 
@@ -974,8 +967,6 @@ The ixo project data store (pds) uses JSON-RPC to receive client requests.  The 
 
 ## ixo Blockchain API
 
-* TODO *
-
 ### DID Functions
 
 <a name="blockchain-registerUserDid"></a>
@@ -1003,9 +994,47 @@ Response:
 ```
 {
   "did": "did.sov.EvBFmtyRaBuMNMnwjHNVgn",
-  "pubKey": "8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf"
+  "pubKey": "8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf",
+  "credentials": []
 }
 ```
+
+<a name="blockchain-addDidCredential"></a>
+#### Add a Credential to a DID Doc
+Adds a signed credential to the DID Doc for the specified DID.  The Credential must be signed by the DID of the credential issuer and the credential issuer's DID must already be registered.
+
+Request:
+
+|         |       |
+| ------- | ----- |
+| Server: | Blockchain TX Server |
+| Method: | `GET` |
+| URI: | `/broadcast_tx_sync?tx=` |
+| Parameters: | *&lt;uppercase hex of the Add Credential Message with its signature preceded with Ox&gt;* |
+
+Example Request:
+`http://localhost:46657/broadcast_tx_sync?tx=0x7B227...355430383A34363A31372B30323030227D7D`
+
+Example Parameter (pre hex encoding):
+```
+{"payload":[24,{"did":"2HQrdvfjqZwRQCapLDPZzY","credential":{"type":"KYC","data":"KYC Authentication Service","signer":"DHHeFW9G17McBUk45ty7Jn"}}],"signature":{"signatureValue":[1,"495B8B30640E3ECBE71C8A2D1A60D26EB54A5C566A26557171E9F7FE957D3515AA1D6CE5DA7E73DD288AD8044333A91B67F508B493EEAEF228AE6766100E7809"],"created":"2018-07-04T12:29:58.857Z"}}
+```
+
+Response:
+```
+{
+  "did": "2HQrdvfjqZwRQCapLDPZzY",
+  "pubKey": "hZHiC5kPgiADRXnuiktvmsNSPH1D4c96NxMSjjNLVTY",
+  "credentials": [
+    {
+      "type": "KYC",
+      "data": "KYC Authentication Service",
+      "signer": "DHHeFW9G17McBUk45ty7Jn"
+    }
+  ]
+}
+```
+
 <a name="blockchain-getDidDoc"></a>
 #### Get Did Doc
 Returns the Did Doc for the specified DID.  This contains the public key which can be used to verify signatures sign by this DID.
@@ -1027,6 +1056,13 @@ Response:
 {
   "did": "did.sov.EvBFmtyRaBuMNMnwjHNVgn",
   "pubKey": "8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf"
+  "credentials": [
+    {
+      "type": "KYC",
+      "data": "KYC Authentication Service",
+      "signer": "DHHeFW9G17McBUk45ty7Jn"
+    }
+  ]
 }
 ```
 
