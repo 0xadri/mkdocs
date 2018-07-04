@@ -386,8 +386,8 @@ let keysafe = new IxoInpageProvider();
 
 <p>Response: </p>
 <pre><code>{
-    &quot;did&quot;: &quot;did.sov.EvBFmtyRaBuMNMnwjHNVgn&quot;,
-    &quot;pubKey&quot;: &quot;8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf&quot;
+  &quot;did&quot;: &quot;2HQrdvfjqZwRQCapLDPZzY&quot;,
+  &quot;pubKey&quot;: &quot;hZHiC5kPgiADRXnuiktvmsNSPH1D4c96NxMSjjNLVTY&quot;,
 }
 </code></pre>
 
@@ -1017,9 +1017,6 @@ contentType should reference a MIME type. See https://developer.mozilla.org/en-U
 
 <p>The ixo project data store (pds) uses JSON-RPC to receive client requests.  The structure of all calls follow the same structure:</p>
 <h2 id="ixo-blockchain-api">ixo Blockchain API</h2>
-<ul>
-<li>TODO *</li>
-</ul>
 <h3 id="did-functions">DID Functions</h3>
 <p><a name="blockchain-registerUserDid"></a></p>
 <h4 id="register-did-doc">Register DID Doc</h4>
@@ -1060,7 +1057,58 @@ contentType should reference a MIME type. See https://developer.mozilla.org/en-U
 <p>Response:</p>
 <pre><code>{
   &quot;did&quot;: &quot;did.sov.EvBFmtyRaBuMNMnwjHNVgn&quot;,
-  &quot;pubKey&quot;: &quot;8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf&quot;
+  &quot;pubKey&quot;: &quot;8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf&quot;,
+  &quot;credentials&quot;: []
+}
+</code></pre>
+
+<p><a name="blockchain-addDidCredential"></a></p>
+<h4 id="add-a-credential-to-a-did-doc">Add a Credential to a DID Doc</h4>
+<p>Adds a signed credential to the DID Doc for the specified DID.  The Credential must be signed by the DID of the credential issuer and the credential issuer's DID must already be registered.</p>
+<p>Request:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server:</td>
+<td>Blockchain TX Server</td>
+</tr>
+<tr>
+<td>Method:</td>
+<td><code>GET</code></td>
+</tr>
+<tr>
+<td>URI:</td>
+<td><code>/broadcast_tx_sync?tx=</code></td>
+</tr>
+<tr>
+<td>Parameters:</td>
+<td><em>&lt;uppercase hex of the Add Credential Message with its signature preceded with Ox&gt;</em></td>
+</tr>
+</tbody>
+</table>
+<p>Example Request:
+<code>http://localhost:46657/broadcast_tx_sync?tx=0x7B227...355430383A34363A31372B30323030227D7D</code></p>
+<p>Example Parameter (pre hex encoding):</p>
+<pre><code>{&quot;payload&quot;:[24,{&quot;did&quot;:&quot;2HQrdvfjqZwRQCapLDPZzY&quot;,&quot;credential&quot;:{&quot;type&quot;:&quot;KYC&quot;,&quot;data&quot;:&quot;KYC Authentication Service&quot;,&quot;signer&quot;:&quot;DHHeFW9G17McBUk45ty7Jn&quot;}}],&quot;signature&quot;:{&quot;signatureValue&quot;:[1,&quot;495B8B30640E3ECBE71C8A2D1A60D26EB54A5C566A26557171E9F7FE957D3515AA1D6CE5DA7E73DD288AD8044333A91B67F508B493EEAEF228AE6766100E7809&quot;],&quot;created&quot;:&quot;2018-07-04T12:29:58.857Z&quot;}}
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+  &quot;did&quot;: &quot;2HQrdvfjqZwRQCapLDPZzY&quot;,
+  &quot;pubKey&quot;: &quot;hZHiC5kPgiADRXnuiktvmsNSPH1D4c96NxMSjjNLVTY&quot;,
+  &quot;credentials&quot;: [
+    {
+      &quot;type&quot;: &quot;KYC&quot;,
+      &quot;data&quot;: &quot;KYC Authentication Service&quot;,
+      &quot;signer&quot;: &quot;DHHeFW9G17McBUk45ty7Jn&quot;
+    }
+  ]
 }
 </code></pre>
 
@@ -1100,6 +1148,13 @@ contentType should reference a MIME type. See https://developer.mozilla.org/en-U
 <pre><code>{
   &quot;did&quot;: &quot;did.sov.EvBFmtyRaBuMNMnwjHNVgn&quot;,
   &quot;pubKey&quot;: &quot;8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf&quot;
+  &quot;credentials&quot;: [
+    {
+      &quot;type&quot;: &quot;KYC&quot;,
+      &quot;data&quot;: &quot;KYC Authentication Service&quot;,
+      &quot;signer&quot;: &quot;DHHeFW9G17McBUk45ty7Jn&quot;
+    }
+  ]
 }
 </code></pre>
 
