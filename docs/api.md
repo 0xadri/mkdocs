@@ -288,8 +288,15 @@ keysafe.getDidDoc().then((error, result) => {
 Response: 
 ```
 {
-    "did": "did.sov.EvBFmtyRaBuMNMnwjHNVgn",
-    "pubKey": "8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf"
+  "did": "2HQrdvfjqZwRQCapLDPZzY",
+  "pubKey": "hZHiC5kPgiADRXnuiktvmsNSPH1D4c96NxMSjjNLVTY",
+  "credentials": [
+    {
+      "type": "KYC",
+      "data": "KYC Authentication Service",
+      "signer": "DHHeFW9G17McBUk45ty7Jn"
+    }
+  ]
 }
 ```
 
