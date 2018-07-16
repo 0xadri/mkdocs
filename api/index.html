@@ -1058,7 +1058,19 @@ contentType should reference a MIME type. See https://developer.mozilla.org/en-U
 <pre><code>{
   &quot;did&quot;: &quot;did.sov.EvBFmtyRaBuMNMnwjHNVgn&quot;,
   &quot;pubKey&quot;: &quot;8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf&quot;,
-  &quot;credentials&quot;: []
+  &quot;credentials&quot;: [
+    {   
+        &quot;credential&quot;:{
+            &quot;type&quot;: [&quot;Credential&quot;,&quot;ProofOfKYC&quot;],
+            &quot;issuer&quot;: &quot;DHHeFW9G17McBUk45ty7Jn&quot;,
+            &quot;issued&quot;: &quot;2018-07-16T15:51:44+02:00&quot;,
+            &quot;claim&quot;: {
+                &quot;id&quot;: &quot;did.sov.EvBFmtyRaBuMNMnwjHNVgn&quot;,
+                &quot;KYCValidated&quot;: true
+            }
+        }
+    }
+  ]
 }
 </code></pre>
 
@@ -1095,20 +1107,19 @@ contentType should reference a MIME type. See https://developer.mozilla.org/en-U
 <p>Example Request:
 <code>http://localhost:46657/broadcast_tx_sync?tx=0x7B227...355430383A34363A31372B30323030227D7D</code></p>
 <p>Example Parameter (pre hex encoding):</p>
-<pre><code>{&quot;payload&quot;:[24,{&quot;did&quot;:&quot;2HQrdvfjqZwRQCapLDPZzY&quot;,&quot;credential&quot;:{&quot;type&quot;:&quot;KYC&quot;,&quot;data&quot;:&quot;KYC Authentication Service&quot;,&quot;signer&quot;:&quot;DHHeFW9G17McBUk45ty7Jn&quot;}}],&quot;signature&quot;:{&quot;signatureValue&quot;:[1,&quot;495B8B30640E3ECBE71C8A2D1A60D26EB54A5C566A26557171E9F7FE957D3515AA1D6CE5DA7E73DD288AD8044333A91B67F508B493EEAEF228AE6766100E7809&quot;],&quot;created&quot;:&quot;2018-07-04T12:29:58.857Z&quot;}}
+<pre><code>{&quot;payload&quot;:[24,{&quot;credential&quot;:{&quot;type&quot;:[&quot;Credential&quot;,&quot;ProofOfKYC&quot;],&quot;issuer&quot;:&quot;DHHeFW9G17McBUk45ty7Jn&quot;,&quot;issued&quot;: &quot;2018-07-16T15:51:44+02:00&quot;,&quot;claim&quot;:{&quot;id&quot;:&quot;DHHeFW9G17McBUk45ty7Jn&quot;,&quot;KYCValidated&quot;:true}}}],&quot;signature&quot;:{&quot;signatureValue&quot;:[1,&quot;8EA7D3D45C95863E5C7CD1A4043D5F618E32F41CA72FAE75B7C09377D2B6AFC9AE8844AF0B621216339F025C67428B1838C8A1BBCD48E761655EBA9CCF114502&quot;],&quot;created&quot;:&quot;2018-07-16T14:39:31Z&quot;}}
 </code></pre>
 
 <p>Response:</p>
 <pre><code>{
-  &quot;did&quot;: &quot;2HQrdvfjqZwRQCapLDPZzY&quot;,
-  &quot;pubKey&quot;: &quot;hZHiC5kPgiADRXnuiktvmsNSPH1D4c96NxMSjjNLVTY&quot;,
-  &quot;credentials&quot;: [
-    {
-      &quot;type&quot;: &quot;KYC&quot;,
-      &quot;data&quot;: &quot;KYC Authentication Service&quot;,
-      &quot;signer&quot;: &quot;DHHeFW9G17McBUk45ty7Jn&quot;
+    jsonrpc: &quot;2.0&quot;,
+    id: &quot;&quot;,
+    result: {
+        code: 0,
+        data: &quot;0116444848654657394731374D6342556B34357479374A6E012C3768446F346A724675713846727566666164595A6A7971374C39534E4536327765616E74534D7A466A78585801030102010A43726564656E7469616C010A50726F6F664F664B59430116444848654657394731374D6342556B34357479374A6E0119323031382D30372D31365431353A33393A34302B30323A30300116444848654657394731374D6342556B34357479374A6E010102010A43726564656E7469616C010A50726F6F664F664B59430116444848654657394731374D6342556B34357479374A6E0119323031382D30372D31365431353A35313A34342B30323A30300116444848654657394731374D6342556B34357479374A6E010102010A43726564656E7469616C010A50726F6F664F664B59430116444848654657394731374D6342556B34357479374A6E0119323031382D30372D31365431353A35313A34342B30323A30300116444848654657394731374D6342556B34357479374A6E01&quot;,
+        log: &quot;&quot;,
+        hash: &quot;91C033E74E27E7778BD0FE3481F82F839C92C5BC&quot;
     }
-  ]
 }
 </code></pre>
 
