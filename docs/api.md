@@ -987,7 +987,7 @@ Example Request:
 
 Example Parameter (pre hex encoding):
 ```
-{"payload":[10,{"didDoc":{"did":"did:sov:398fM9kMgHuNbCtRncYrwh","pubKey":"2Af4UzgUAgQk8Wt5xEkfJrjQSxWgxsuD8bzDQJSNfMSw","credentials":[]}}],"signature":{"signatureValue":[1,"211678D20C70292668C47D6220ED648F868DFE0CBB848EDB0E163F7EE35467F938CFB000FCCF1AD00A0AB67F6EEB6C02E4FE48D793247A7092D5B5613C87C405"],"created":"2018-06-05T08:46:17+0200"}}
+{"payload":[10,{"didDoc":{"did":"did:sov:398fM9kMgHuNbCtRncYrwh","pubKey":"2Af4UzgUAgQk8Wt5xEkfJrjQSxWgxsuD8bzDQJSNfMSw","credentials":[]}}],"signature":{"signatureValue":[1,"211678D20C70292668C47D6220ED648F868DFE0CBB848EDB0E163F7EE35467F938CFB000FCCF1AD00A0AB67F6EEB6C02E4FE48D793247A7092D5B5613C87C405"],"created":"2018-06-05T08:46:17Z"}}
 ```
 
 Response:
@@ -1000,7 +1000,7 @@ Response:
         "credential":{
             "type": ["Credential","ProofOfKYC"],
             "issuer": "DHHeFW9G17McBUk45ty7Jn",
-            "issued": "2018-07-16T15:51:44+02:00",
+            "issued": "2018-07-16T15:51:44Z",
             "claim": {
                 "id": "did.sov.EvBFmtyRaBuMNMnwjHNVgn",
                 "KYCValidated": true
