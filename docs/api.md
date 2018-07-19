@@ -1029,7 +1029,7 @@ Example Request:
 
 Example Parameter (pre hex encoding):
 ```
-{"payload":[24,{"credential":{"type":["Credential","ProofOfKYC"],"issuer":"DHHeFW9G17McBUk45ty7Jn","issued": "2018-07-16T15:51:44+02:00","claim":{"id":"DHHeFW9G17McBUk45ty7Jn","KYCValidated":true}}}],"signature":{"signatureValue":[1,"8EA7D3D45C95863E5C7CD1A4043D5F618E32F41CA72FAE75B7C09377D2B6AFC9AE8844AF0B621216339F025C67428B1838C8A1BBCD48E761655EBA9CCF114502"],"created":"2018-07-16T14:39:31Z"}}
+{"payload":[24,{"credential":{"type":["Credential","ProofOfKYC"],"issuer":"DHHeFW9G17McBUk45ty7Jn","issued":"2018-07-16T15:51:44Z","claim":{"id":"DHHeFW9G17McBUk45ty7Jn","KYCValidated":true}}}],"signature":{"signatureValue":[1,"8EA7D3D45C95863E5C7CD1A4043D5F618E32F41CA72FAE75B7C09377D2B6AFC9AE8844AF0B621216339F025C67428B1838C8A1BBCD48E761655EBA9CCF114502"],"created":"2018-07-16T14:39:31Z"}}
 ```
 
 Response:
