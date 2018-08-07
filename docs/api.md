@@ -213,7 +213,7 @@ Response: [ixo Explorer: getGlobalStats](#explorer-getGlobalStats)
 
 ### Health Check Functions
 
-#### Heath Check to Blockchain node
+#### Health Check to Blockchain node
 
 Request:
 ```
@@ -224,7 +224,7 @@ ixo.network.pingIxoBlockchain().then((result) => {
 
 Response: [ixo Blockchain: healthCheck](#blockchain-health)
 
-#### Heath Check to Explorer node
+#### Health Check to Explorer node
 
 Request:
 ```
@@ -950,7 +950,7 @@ Response:
     ]
 }
 ```
-### Heath Check Functions
+### Health Check Functions
 #### Health Check
 
 URI: `<pds server>/`
@@ -1157,6 +1157,6 @@ Retrieves the global statistics and metrics for all projects
 
 ### Health Check Functions
 <a name="explorer-ping"></a>
-#### Heath Check
+#### Health Check
 
 Check that the explorer node is available
