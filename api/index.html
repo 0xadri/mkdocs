@@ -124,16 +124,16 @@
                 
                 <li class="third-level"><a href="#public-api">Public API</a></li>
                 <li class="third-level"><a href="#private-api">Private API</a></li>
-                <li class="third-level"><a href="#heath-check-functions">Heath Check Functions</a></li>
+                <li class="third-level"><a href="#health-check-functions_1">Health Check Functions</a></li>
             <li class="second-level"><a href="#ixo-blockchain-api">ixo Blockchain API</a></li>
                 
                 <li class="third-level"><a href="#did-functions">DID Functions</a></li>
-                <li class="third-level"><a href="#health-check-functions_1">Health Check Functions</a></li>
+                <li class="third-level"><a href="#health-check-functions_2">Health Check Functions</a></li>
             <li class="second-level"><a href="#ixo-explorer-api">ixo Explorer API</a></li>
                 
                 <li class="third-level"><a href="#did-functions_1">DID Functions</a></li>
                 <li class="third-level"><a href="#project-functions_1">Project Functions</a></li>
-                <li class="third-level"><a href="#health-check-functions_2">Health Check Functions</a></li>
+                <li class="third-level"><a href="#health-check-functions_3">Health Check Functions</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
@@ -328,7 +328,7 @@ ixo.user.getDidDoc(did).then((result) =&gt; {
 
 <p>Response: <a href="#explorer-getGlobalStats">ixo Explorer: getGlobalStats</a></p>
 <h3 id="health-check-functions">Health Check Functions</h3>
-<h4 id="heath-check-to-blockchain-node">Heath Check to Blockchain node</h4>
+<h4 id="health-check-to-blockchain-node">Health Check to Blockchain node</h4>
 <p>Request:</p>
 <pre><code>ixo.network.pingIxoBlockchain().then((result) =&gt; {
     console.log('Health Check: ' + result)
@@ -336,7 +336,7 @@ ixo.user.getDidDoc(did).then((result) =&gt; {
 </code></pre>
 
 <p>Response: <a href="#blockchain-health">ixo Blockchain: healthCheck</a></p>
-<h4 id="heath-check-to-explorer-node">Heath Check to Explorer node</h4>
+<h4 id="health-check-to-explorer-node">Health Check to Explorer node</h4>
 <p>Request:</p>
 <pre><code>ixo.network.pingIxoExplorer().then((result) =&gt; {
     console.log('Health Check: ' + result)
@@ -1008,7 +1008,7 @@ contentType should reference a MIME type. See https://developer.mozilla.org/en-U
 }
 </code></pre>
 
-<h3 id="heath-check-functions">Heath Check Functions</h3>
+<h3 id="health-check-functions_1">Health Check Functions</h3>
 <h4 id="health-check">Health Check</h4>
 <p>URI: <code>&lt;pds server&gt;/</code></p>
 <p>Request type: <code>GET</code></p>
@@ -1164,7 +1164,7 @@ contentType should reference a MIME type. See https://developer.mozilla.org/en-U
 }
 </code></pre>
 
-<h3 id="health-check-functions_1">Health Check Functions</h3>
+<h3 id="health-check-functions_2">Health Check Functions</h3>
 <p><a name="blockchain-health"></a></p>
 <h4 id="health-check_1">Health Check</h4>
 <p>Check whether the blockchain node is available</p>
@@ -1265,9 +1265,9 @@ result: { }
 <p><a name="explorer-getGlobalStats"></a></p>
 <h4 id="get-global-stats">Get Global Stats</h4>
 <p>Retrieves the global statistics and metrics for all projects</p>
-<h3 id="health-check-functions_2">Health Check Functions</h3>
+<h3 id="health-check-functions_3">Health Check Functions</h3>
 <p><a name="explorer-ping"></a></p>
-<h4 id="heath-check">Heath Check</h4>
+<h4 id="health-check_2">Health Check</h4>
 <p>Check that the explorer node is available</p></div>
         
     </div>
