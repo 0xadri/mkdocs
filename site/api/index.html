@@ -131,6 +131,7 @@
                 <li class="third-level"><a href="#health-check-functions_1">Health Check Functions</a></li>
             <li class="second-level"><a href="#ixo-explorer-api">ixo Explorer API</a></li>
                 
+                <li class="third-level"><a href="#did-functions_1">DID Functions</a></li>
                 <li class="third-level"><a href="#project-functions_1">Project Functions</a></li>
                 <li class="third-level"><a href="#health-check-functions_2">Health Check Functions</a></li>
     </ul>
@@ -1058,19 +1059,7 @@ contentType should reference a MIME type. See https://developer.mozilla.org/en-U
 <pre><code>{
   &quot;did&quot;: &quot;did.sov.EvBFmtyRaBuMNMnwjHNVgn&quot;,
   &quot;pubKey&quot;: &quot;8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf&quot;,
-  &quot;credentials&quot;: [
-    {   
-        &quot;credential&quot;:{
-            &quot;type&quot;: [&quot;Credential&quot;,&quot;ProofOfKYC&quot;],
-            &quot;issuer&quot;: &quot;DHHeFW9G17McBUk45ty7Jn&quot;,
-            &quot;issued&quot;: &quot;2018-07-16T15:51:44Z&quot;,
-            &quot;claim&quot;: {
-                &quot;id&quot;: &quot;did.sov.EvBFmtyRaBuMNMnwjHNVgn&quot;,
-                &quot;KYCValidated&quot;: true
-            }
-        }
-    }
-  ]
+  &quot;credentials&quot;: []
 }
 </code></pre>
 
@@ -1107,7 +1096,7 @@ contentType should reference a MIME type. See https://developer.mozilla.org/en-U
 <p>Example Request:
 <code>http://localhost:46657/broadcast_tx_sync?tx=0x7B227...355430383A34363A31372B30323030227D7D</code></p>
 <p>Example Parameter (pre hex encoding):</p>
-<pre><code>{&quot;payload&quot;:[24,{&quot;credential&quot;:{&quot;type&quot;:[&quot;Credential&quot;,&quot;ProofOfKYC&quot;],&quot;issuer&quot;:&quot;DHHeFW9G17McBUk45ty7Jn&quot;,&quot;issued&quot;: &quot;2018-07-16T15:51:44+02:00&quot;,&quot;claim&quot;:{&quot;id&quot;:&quot;DHHeFW9G17McBUk45ty7Jn&quot;,&quot;KYCValidated&quot;:true}}}],&quot;signature&quot;:{&quot;signatureValue&quot;:[1,&quot;8EA7D3D45C95863E5C7CD1A4043D5F618E32F41CA72FAE75B7C09377D2B6AFC9AE8844AF0B621216339F025C67428B1838C8A1BBCD48E761655EBA9CCF114502&quot;],&quot;created&quot;:&quot;2018-07-16T14:39:31Z&quot;}}
+<pre><code>{&quot;payload&quot;:[24,{&quot;credential&quot;:{&quot;type&quot;:[&quot;Credential&quot;,&quot;ProofOfKYC&quot;],&quot;issuer&quot;:&quot;DHHeFW9G17McBUk45ty7Jn&quot;,&quot;issued&quot;:&quot;2018-07-16T15:51:44Z&quot;,&quot;claim&quot;:{&quot;id&quot;:&quot;DHHeFW9G17McBUk45ty7Jn&quot;,&quot;KYCValidated&quot;:true}}}],&quot;signature&quot;:{&quot;signatureValue&quot;:[1,&quot;8EA7D3D45C95863E5C7CD1A4043D5F618E32F41CA72FAE75B7C09377D2B6AFC9AE8844AF0B621216339F025C67428B1838C8A1BBCD48E761655EBA9CCF114502&quot;],&quot;created&quot;:&quot;2018-07-16T14:39:31Z&quot;}}
 </code></pre>
 
 <p>Response:</p>
@@ -1158,12 +1147,18 @@ contentType should reference a MIME type. See https://developer.mozilla.org/en-U
 <p>Response:</p>
 <pre><code>{
   &quot;did&quot;: &quot;did.sov.EvBFmtyRaBuMNMnwjHNVgn&quot;,
-  &quot;pubKey&quot;: &quot;8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf&quot;
+  &quot;pubKey&quot;: &quot;8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf&quot;,
   &quot;credentials&quot;: [
-    {
-      &quot;type&quot;: &quot;KYC&quot;,
-      &quot;data&quot;: &quot;KYC Authentication Service&quot;,
-      &quot;signer&quot;: &quot;DHHeFW9G17McBUk45ty7Jn&quot;
+    {   
+        &quot;credential&quot;:{
+            &quot;type&quot;: [&quot;Credential&quot;,&quot;ProofOfKYC&quot;],
+            &quot;issuer&quot;: &quot;DHHeFW9G17McBUk45ty7Jn&quot;,
+            &quot;issued&quot;: &quot;2018-07-16T15:51:44Z&quot;,
+            &quot;claim&quot;: {
+                &quot;id&quot;: &quot;did.sov.EvBFmtyRaBuMNMnwjHNVgn&quot;,
+                &quot;KYCValidated&quot;: true
+            }
+        }
     }
   ]
 }
@@ -1171,7 +1166,7 @@ contentType should reference a MIME type. See https://developer.mozilla.org/en-U
 
 <h3 id="health-check-functions_1">Health Check Functions</h3>
 <p><a name="blockchain-health"></a></p>
-<h4 id="heath-check">Heath Check</h4>
+<h4 id="health-check_1">Health Check</h4>
 <p>Check whether the blockchain node is available</p>
 <p>Request:</p>
 <table>
@@ -1208,6 +1203,58 @@ result: { }
 
 <h2 id="ixo-explorer-api">ixo Explorer API</h2>
 <p>Returns a the publicly available data pertaining to projects</p>
+<h3 id="did-functions_1">DID Functions</h3>
+<h4 id="get-did-doc_1">Get Did Doc</h4>
+<p>Returns the Did Doc for the specified DID.  This contains the public key which can be used to verify signatures sign by this DID.</p>
+<p>Request:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server:</td>
+<td>ixo Explorer</td>
+</tr>
+<tr>
+<td>Method:</td>
+<td><code>GET</code></td>
+</tr>
+<tr>
+<td>URI:</td>
+<td><code>/api/did/getByDid/</code></td>
+</tr>
+<tr>
+<td>Parameters:</td>
+<td><em>&lt;did&gt;</em></td>
+</tr>
+</tbody>
+</table>
+<p>Example:
+<code>http://beta.cosmos.ixo.world:8080/api/did/getByDid/did.sov.EvBFmtyRaBuMNMnwjHNVgn</code></p>
+<p>Response:</p>
+<pre><code>{
+  &quot;did&quot;: &quot;did.sov.EvBFmtyRaBuMNMnwjHNVgn&quot;,
+  &quot;publicKey&quot;: &quot;8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf&quot;,
+  &quot;credentials&quot;: [
+    {   
+        &quot;credential&quot;:{
+            &quot;type&quot;: [&quot;Credential&quot;,&quot;ProofOfKYC&quot;],
+            &quot;issuer&quot;: &quot;DHHeFW9G17McBUk45ty7Jn&quot;,
+            &quot;issued&quot;: &quot;2018-07-16T15:51:44Z&quot;,
+            &quot;claim&quot;: {
+                &quot;id&quot;: &quot;did.sov.EvBFmtyRaBuMNMnwjHNVgn&quot;,
+                &quot;KYCValidated&quot;: true
+            }
+        }
+    }
+  ]
+}
+</code></pre>
+
 <h3 id="project-functions_1">Project Functions</h3>
 <p><a name="explorer-listProjects"></a></p>
 <h4 id="list-projects_1">List Projects</h4>
@@ -1220,7 +1267,7 @@ result: { }
 <p>Retrieves the global statistics and metrics for all projects</p>
 <h3 id="health-check-functions_2">Health Check Functions</h3>
 <p><a name="explorer-ping"></a></p>
-<h4 id="heath-check_1">Heath Check</h4>
+<h4 id="heath-check">Heath Check</h4>
 <p>Check that the explorer node is available</p></div>
         
     </div>

@@ -995,19 +995,7 @@ Response:
 {
   "did": "did.sov.EvBFmtyRaBuMNMnwjHNVgn",
   "pubKey": "8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf",
-  "credentials": [
-    {   
-        "credential":{
-            "type": ["Credential","ProofOfKYC"],
-            "issuer": "DHHeFW9G17McBUk45ty7Jn",
-            "issued": "2018-07-16T15:51:44Z",
-            "claim": {
-                "id": "did.sov.EvBFmtyRaBuMNMnwjHNVgn",
-                "KYCValidated": true
-            }
-        }
-    }
-  ]
+  "credentials": []
 }
 ```
 
@@ -1066,12 +1054,18 @@ Response:
 ```
 {
   "did": "did.sov.EvBFmtyRaBuMNMnwjHNVgn",
-  "pubKey": "8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf"
+  "pubKey": "8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf",
   "credentials": [
-    {
-      "type": "KYC",
-      "data": "KYC Authentication Service",
-      "signer": "DHHeFW9G17McBUk45ty7Jn"
+    {   
+        "credential":{
+            "type": ["Credential","ProofOfKYC"],
+            "issuer": "DHHeFW9G17McBUk45ty7Jn",
+            "issued": "2018-07-16T15:51:44Z",
+            "claim": {
+                "id": "did.sov.EvBFmtyRaBuMNMnwjHNVgn",
+                "KYCValidated": true
+            }
+        }
     }
   ]
 }
@@ -1079,7 +1073,7 @@ Response:
 
 ### Health Check Functions
 <a name="blockchain-health"></a>
-#### Heath Check
+#### Health Check
 
 Check whether the blockchain node is available
 
@@ -1106,6 +1100,43 @@ result: { }
 ## ixo Explorer API
 
 Returns a the publicly available data pertaining to projects
+
+###DID Functions
+#### Get Did Doc
+Returns the Did Doc for the specified DID.  This contains the public key which can be used to verify signatures sign by this DID.
+
+Request:
+
+|         |       |
+| ------- | ----- |
+| Server: | ixo Explorer |
+| Method: | `GET` |
+| URI: | `/api/did/getByDid/` |
+| Parameters: | *&lt;did&gt;* |
+
+Example:
+`http://beta.cosmos.ixo.world:8080/api/did/getByDid/did.sov.EvBFmtyRaBuMNMnwjHNVgn`
+
+Response:
+```
+{
+  "did": "did.sov.EvBFmtyRaBuMNMnwjHNVgn",
+  "publicKey": "8awT75ZgZttei45J52bcXC2q8isMRATLcdgbmx4FHyFf",
+  "credentials": [
+    {   
+        "credential":{
+            "type": ["Credential","ProofOfKYC"],
+            "issuer": "DHHeFW9G17McBUk45ty7Jn",
+            "issued": "2018-07-16T15:51:44Z",
+            "claim": {
+                "id": "did.sov.EvBFmtyRaBuMNMnwjHNVgn",
+                "KYCValidated": true
+            }
+        }
+    }
+  ]
+}
+```
 
 ###Project Functions
 
