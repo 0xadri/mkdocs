@@ -987,7 +987,7 @@ Example Request:
 
 Example Parameter (pre hex encoding):
 ```
-{"payload":[10,{"didDoc":{"did":"did:sov:398fM9kMgHuNbCtRncYrwh","pubKey":"2Af4UzgUAgQk8Wt5xEkfJrjQSxWgxsuD8bzDQJSNfMSw","credentials":[]}}],"signature":{"signatureValue":[1,"211678D20C70292668C47D6220ED648F868DFE0CBB848EDB0E163F7EE35467F938CFB000FCCF1AD00A0AB67F6EEB6C02E4FE48D793247A7092D5B5613C87C405"],"created":"2018-06-05T08:46:17Z"}}
+{"payload":[{"type":"did/AddDid","value":{"didDoc":{"did":"Auw1mQ9UtdHUj88NAJFUu6","pubKey":"6QMiDUXvshwbjHhUmpv6GkRn7D1iuFms5mUoYvX6hpRT","credentials":[]}}}],"signatures":[{"signatureValue":"lpb8jlhZc4i7CU30MucZSEujrHEfKPwh6mrladE4Pus4Z5fr2vP2sDc3XF1IW8Rk+8jcXW67G9EA20NlKVRAAg==","created":"2018-10-24T12:38:23.020Z"}]}
 ```
 
 Response:
@@ -1017,7 +1017,7 @@ Example Request:
 
 Example Parameter (pre hex encoding):
 ```
-{"payload":[24,{"credential":{"type":["Credential","ProofOfKYC"],"issuer":"DHHeFW9G17McBUk45ty7Jn","issued":"2018-07-16T15:51:44Z","claim":{"id":"DHHeFW9G17McBUk45ty7Jn","KYCValidated":true}}}],"signature":{"signatureValue":[1,"8EA7D3D45C95863E5C7CD1A4043D5F618E32F41CA72FAE75B7C09377D2B6AFC9AE8844AF0B621216339F025C67428B1838C8A1BBCD48E761655EBA9CCF114502"],"created":"2018-07-16T14:39:31Z"}}
+{"payload":[{"type":"did/AddCredential","value":{"credential":{"type":["Credential","ProofOfKYC"],"issuer":"CDpBVRcnWEdvdkWJvNsj3y","issued":"2018-10-24T12:38:23.045Z","claim":{"id":"U66E8fQMKQgdkicNCuWdMU","KYCValidated":true}}}}],"signatures":[{"signatureValue":"+70QwmONskyWdsSewdoIX6a52TZWDtY9+MLIjy0pHKww+HO6QeLdxPEZ1S6o9m5EjNJz+H6P7mWStx6dUx51DA==","created":"2018-10-24T12:38:23.052Z"}]}
 ```
 
 Response:
