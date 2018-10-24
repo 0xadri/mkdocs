@@ -1052,7 +1052,7 @@ contentType should reference a MIME type. See https://developer.mozilla.org/en-U
 <p>Example Request:
 <code>http://localhost:46657/broadcast_tx_sync?tx=0x7B227...355430383A34363A31372B30323030227D7D</code></p>
 <p>Example Parameter (pre hex encoding):</p>
-<pre><code>{&quot;payload&quot;:[10,{&quot;didDoc&quot;:{&quot;did&quot;:&quot;did:sov:398fM9kMgHuNbCtRncYrwh&quot;,&quot;pubKey&quot;:&quot;2Af4UzgUAgQk8Wt5xEkfJrjQSxWgxsuD8bzDQJSNfMSw&quot;,&quot;credentials&quot;:[]}}],&quot;signature&quot;:{&quot;signatureValue&quot;:[1,&quot;211678D20C70292668C47D6220ED648F868DFE0CBB848EDB0E163F7EE35467F938CFB000FCCF1AD00A0AB67F6EEB6C02E4FE48D793247A7092D5B5613C87C405&quot;],&quot;created&quot;:&quot;2018-06-05T08:46:17Z&quot;}}
+<pre><code>{&quot;payload&quot;:[{&quot;type&quot;:&quot;did/AddDid&quot;,&quot;value&quot;:{&quot;didDoc&quot;:{&quot;did&quot;:&quot;Auw1mQ9UtdHUj88NAJFUu6&quot;,&quot;pubKey&quot;:&quot;6QMiDUXvshwbjHhUmpv6GkRn7D1iuFms5mUoYvX6hpRT&quot;,&quot;credentials&quot;:[]}}}],&quot;signatures&quot;:[{&quot;signatureValue&quot;:&quot;lpb8jlhZc4i7CU30MucZSEujrHEfKPwh6mrladE4Pus4Z5fr2vP2sDc3XF1IW8Rk+8jcXW67G9EA20NlKVRAAg==&quot;,&quot;created&quot;:&quot;2018-10-24T12:38:23.020Z&quot;}]}
 </code></pre>
 
 <p>Response:</p>
@@ -1096,7 +1096,7 @@ contentType should reference a MIME type. See https://developer.mozilla.org/en-U
 <p>Example Request:
 <code>http://localhost:46657/broadcast_tx_sync?tx=0x7B227...355430383A34363A31372B30323030227D7D</code></p>
 <p>Example Parameter (pre hex encoding):</p>
-<pre><code>{&quot;payload&quot;:[24,{&quot;credential&quot;:{&quot;type&quot;:[&quot;Credential&quot;,&quot;ProofOfKYC&quot;],&quot;issuer&quot;:&quot;DHHeFW9G17McBUk45ty7Jn&quot;,&quot;issued&quot;:&quot;2018-07-16T15:51:44Z&quot;,&quot;claim&quot;:{&quot;id&quot;:&quot;DHHeFW9G17McBUk45ty7Jn&quot;,&quot;KYCValidated&quot;:true}}}],&quot;signature&quot;:{&quot;signatureValue&quot;:[1,&quot;8EA7D3D45C95863E5C7CD1A4043D5F618E32F41CA72FAE75B7C09377D2B6AFC9AE8844AF0B621216339F025C67428B1838C8A1BBCD48E761655EBA9CCF114502&quot;],&quot;created&quot;:&quot;2018-07-16T14:39:31Z&quot;}}
+<pre><code>{&quot;payload&quot;:[{&quot;type&quot;:&quot;did/AddCredential&quot;,&quot;value&quot;:{&quot;credential&quot;:{&quot;type&quot;:[&quot;Credential&quot;,&quot;ProofOfKYC&quot;],&quot;issuer&quot;:&quot;CDpBVRcnWEdvdkWJvNsj3y&quot;,&quot;issued&quot;:&quot;2018-10-24T12:38:23.045Z&quot;,&quot;claim&quot;:{&quot;id&quot;:&quot;U66E8fQMKQgdkicNCuWdMU&quot;,&quot;KYCValidated&quot;:true}}}}],&quot;signatures&quot;:[{&quot;signatureValue&quot;:&quot;+70QwmONskyWdsSewdoIX6a52TZWDtY9+MLIjy0pHKww+HO6QeLdxPEZ1S6o9m5EjNJz+H6P7mWStx6dUx51DA==&quot;,&quot;created&quot;:&quot;2018-10-24T12:38:23.052Z&quot;}]}
 </code></pre>
 
 <p>Response:</p>
