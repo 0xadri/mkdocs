@@ -4,15 +4,15 @@ The ixo platform has a number of different components that each has a set of API
 
 ## ixo NPM module API
 
-The ixo NPM module makes it easier to interact withthe project data stores and the ixo blockchain
+The ixo NPM module makes it easier to interact with project data stores and the ixo blockchain
 
 `npm install --save ixo-module`
 
-To Create new Ixo Object (Without provider)
+To Create a new ixo Object (Without provider)
 
 ```
-import Ixo from 'ixo-module';
-var ixo = new Ixo('ixo_node_url')
+import ixo from 'ixo-module';
+var ixo = new ixo('ixo_node_url')
 ```
 
 ### Project Functions
@@ -175,9 +175,9 @@ Response: [PDS: evaluateClaim](#pds-evaluateClaim)
 
 ### User Functions
 
-#### Register DID Doc to Blockchain
+#### Register DID Document to the ixo Blockchain
 
-Registers a new user with the supplied DID document to the blockchain
+Registers a new user with the supplied DID document to the ixo blockchain
 
 Request:
 ```
@@ -315,7 +315,7 @@ Response:
 
 ## Project Datastore API
 
-The project data store holds the data relating to projects.  The API is split into a public API and a non public API. The public API requests do not require cryptographic signatures, while all other requests must be signed and adher to the capabilities that have been granted to the signer.
+The project data store holds the data relating to projects.  The API is split into a public API and a non public API. The public API requests do not require cryptographic signatures, while all other requests must be signed and adhere to the capabilities that have been granted to the signer.
 
 ### Public API
 
@@ -1036,7 +1036,7 @@ Response:
 
 <a name="blockchain-getDidDoc"></a>
 #### Get Did Doc
-Returns the Did Doc for the specified DID.  This contains the public key which can be used to verify signatures sign by this DID.
+Returns the Did Doc for the specified DID.  This contains the public key which can be used to verify signatures signed by this DID.
 
 Request:
 
@@ -1103,7 +1103,7 @@ Returns a the publicly available data pertaining to projects
 
 ###DID Functions
 #### Get Did Doc
-Returns the Did Doc for the specified DID.  This contains the public key which can be used to verify signatures sign by this DID.
+Returns the Did Doc for the specified DID.  This contains the public key which can be used to verify signatures signed by this DID.
 
 Request:
 
@@ -1115,7 +1115,7 @@ Request:
 | Parameters: | *&lt;did&gt;* |
 
 Example:
-`http://beta.cosmos.ixo.world:8080/api/did/getByDid/did.sov.EvBFmtyRaBuMNMnwjHNVgn`
+`http://cosmos.ixo.world:8080/api/did/getByDid/did.sov.EvBFmtyRaBuMNMnwjHNVgn`
 
 Response:
 ```
