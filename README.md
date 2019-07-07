@@ -1,4 +1,4 @@
-# Welcome to the ixo Protocols mkdocs
+# Welcome to the ixo Protocol Documentation (mkdocs)
 
 For full documentation visit [mkdocs.org](http://mkdocs.org).
 
